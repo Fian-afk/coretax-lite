@@ -216,7 +216,7 @@
             </nav>
             
             <div class="flex items-center">
-                <a href="#" class="text-blue-700 border border-blue-700 px-4 py-2 rounded-md transition-all duration-300 text-sm font-medium whitespace-nowrap">Masuk / Daftar</a>
+                <a href="#" class="text-blue-700 border border-blue-700 hover:border-none hover:bg-blue-700 hover:text-white px-4 py-2 rounded-md transition-all duration-300 text-sm font-medium whitespace-nowrap">Masuk / Daftar</a>
             </div>
         </div>
     </header>
@@ -260,7 +260,7 @@
                         <h4 class="font-medium text-gray-700 mb-3">Topik/Kategori</h4>
                         <div class="space-y-2">
                             <label class="custom-checkbox">
-                                <input type="checkbox" checked>
+                                <input type="checkbox">
                                 <span class="checkmark mr-2"></span>
                                 <span class="text-sm text-gray-700">Makroekonomi</span>
                             </label>
@@ -275,7 +275,7 @@
                                 <span class="text-sm text-gray-700">Pasar Saham</span>
                             </label>
                             <label class="custom-checkbox">
-                                <input type="checkbox" checked>
+                                <input type="checkbox">
                                 <span class="checkmark mr-2"></span>
                                 <span class="text-sm text-gray-700">Ekonomi Digital</span>
                             </label>
@@ -296,7 +296,7 @@
                         <h4 class="font-medium text-gray-700 mb-3">Institusi Pengunggah</h4>
                         <div class="space-y-2">
                             <label class="custom-checkbox">
-                                <input type="checkbox" checked>
+                                <input type="checkbox">
                                 <span class="checkmark mr-2"></span>
                                 <span class="text-sm text-gray-700">Bank Indonesia</span>
                             </label>
@@ -327,7 +327,7 @@
                         <h4 class="font-medium text-gray-700 mb-3">Format File</h4>
                         <div class="space-y-2">
                             <label class="custom-checkbox">
-                                <input type="checkbox" checked>
+                                <input type="checkbox">
                                 <span class="checkmark mr-2"></span>
                                 <span class="text-sm text-gray-700">PDF</span>
                             </label>
@@ -545,7 +545,7 @@
                     </div>
                     
                     <!-- Pagination -->
-                    <div class="flex justify-center mt-8">
+                     <div class="flex justify-center mt-8">
                         <nav class="flex items-center space-x-1">
                             <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:bg-gray-100">
                                 <i class="ri-arrow-left-s-line"></i>
@@ -574,19 +574,22 @@
                 <h5 class="text-lg mt-0 mb-2 text-gray-600">
                     Platform repository dokumen ekonomi terlengkap di Indonesia. Akses ribuan dokumen untuk kebutuhan akademis dan profesional.
                 </h5>
-                <div class="mt-6 lg:mb-0 mb-6 flex justify-center lg:justify-start space-x-3">
+                <div class="mt-6 mb-6 flex justify-center space-x-3">
                     <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                        <i class="ri-facebook-circle-fill text-3xl"></i>                    
                     </a>
                     <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.738 9.499.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.942.359.308.678.92.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
+                        <i class="ri-twitter-fill text-3xl"></i>
                     </a>
-                     <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c1.352 0 2.64-.274 3.824-.763l.001-.001L17.5 20.5l1.207-1.207-1.686-1.686a8 8 0 10-5.02-5.02L10.314 14l-1.207 1.207L7.5 13.5l-.001.001A9.954 9.954 0 012 12zm8.5 0a.5.5 0 000-1H12.34l1.293-1.293a.5.5 0 00-.708-.708L9.5 3.414V5.5a.5.5 0 001 0V2.5a.5.5 0 00-.5-.5h-3a.5.5 0 000 1h2.086L5.293 6.293a.5.5 0 00.708.708L9.5 3.707V5.5a.5.5 0 001 0V3a.5.5 0 00-.5-.5H6.5a.5.5 0 000 1h2.086l-3.25 3.25A7.96 7.96 0 004 12c0 4.411 3.589 8 8 8s8-3.589 8-8c0-.23-.01-.458-.029-.683l-.006-.098a.5.5 0 00-.465-.419z" clip-rule="evenodd" /></svg> </a>
                     <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2.014a.828.828 0 01.13.019c.09.014.183.029.277.045l.098.018c.094.018.187.039.278.062l.09.022c.094.024.188.05.278.078l.088.028c.086.027.17.057.252.088l.079.03c.084.032.166.067.246.104l.018.008.05.026.046.024c.079.042.156.087.23.134l.04.025.038.024.037.024c.067.044.133.09.196.138l.03.023.028.023.028.022c.058.047.115.097.17.148l.02.02.02.02c.05.048.098.098.144.15l.017.018.016.017c.044.05.086.102.127.155l.013.017.012.016c.038.05.075.102.11.155l.01.014.008.013.008.012c.03.05.058.1.084.153l.005.008.004.007c.022.048.043.097.062.147l.002.005c.016.045.03.09.042.135l.001.003c.01.04.018.082.024.124v.002c.004.03.006.06.007.09v.004c0 .025.001.05.001.074v.012c0 .018 0 .035-.001.053l-.001.04c-.002.06-.006.12-.01.18l-.002.03c-.005.06-.012.12-.02.18l-.003.03c-.008.06-.02.12-.03.18l-.004.03c-.01.06-.024.12-.038.18l-.005.03c-.014.06-.03.118-.048.176l-.006.03c-.018.058-.04.115-.063.17l-.008.03c-.023.055-.05.11-.078.163l-.01.03c-.028.054-.06.106-.092.158l-.01.03c-.033.05-.07.1-.107.148l-.012.03c-.038.048-.078.095-.12.14l-.014.03c-.042.045-.087.09-.133.133l-.015.03c-.047.043-.096.085-.146.125l-.017.03c-.05.04-.102.08-.156.117l-.018.03c-.054.037-.11.072-.166.105l-.02.03c-.056.033-.113.064-.17.093l-.02.03c-.058.03-.118.058-.178.084l-.022.03c-.06.026-.12.05-.183.072l-.023.03c-.062.022-.126.043-.19.062l-.024.03c-.064.02-.13.038-.196.054l-.025.03c-.066.017-.132.032-.2.045l-.026.03c-.068.013-.136.025-.205.036l-.028.03c-.07.01-.14.02-.21.028h-.03c-.07.007-.14.013-.21.018l-.03.003c-.07.004-.14.006-.21.007l-.03.001h-.03c-.07 0-.14-.001-.21-.003l-.03-.001c-.07-.002-.14-.004-.21-.007l-.03-.001c-.07-.004-.14-.006-.21-.007l-.03-.003c-.07-.005-.14-.01-.21-.018l-.03-.003c-.07-.007-.14-.013-.21-.018h-.03c-.07-.008-.14-.016-.21-.028l-.028-.003c-.07-.008-.138-.017-.205-.036l-.026-.003c-.068-.012-.135-.025-.2-.045l-.025-.003c-.065-.015-.13-.03-.196-.054l-.024-.003c-.063-.018-.126-.038-.19-.062l-.023-.003c-.062-.02-.123-.043-.183-.072l-.022-.003c-.06-.025-.12-.05-.178-.084l-.02-.003c-.058-.03-.115-.06-.17-.093l-.02-.003c-.056-.032-.112-.065-.166-.105l-.018-.003c-.054-.036-.108-.075-.156-.117l-.017-.003c-.05-.038-.098-.08-.146-.125l-.015-.003c-.046-.042-.09-.087-.133-.133l-.014-.003C3.01 20.988 2 19.868 2 17.71c0-1.01.333-1.926.977-2.672H2.5C2.224 15.038 2 14.776 2 14.5v-5C2 9.224 2.224 9 2.5 9h.477A3.61 3.61 0 012 6.29C2 4.132 3.01 3.012 4.558 2.117A.828.828 0 014.688 2H12v.014a.828.828 0 01.315.000zM12 4H4.938c-1.26 0-2.188.776-2.188 2.29 0 1.242.777 2.21 1.938 2.21h.812v5h-.812c-1.16 0-1.938.968-1.938 2.21 0 1.514.928 2.29 2.188 2.29H12c1.26 0 2.188-.776 2.188-2.29v-.075a.828.828 0 00-1.656 0v.075c0 .542-.36.825-.531.825H4.938c-.172 0-.531-.283-.531-.825V6.79c0-.542.36-.825.531-.825H12c.172 0 .531.283.531.825V16.5a.828.828 0 001.656 0V6.79c0-1.514-.928-2.29-2.188-2.29H12zm2.828 10.237a.828.828 0 10-1.172 1.172l1.672 1.671a.828.828 0 101.172-1.172l-1.672-1.671zm-5.011-5.011a.828.828 0 10-1.172 1.172l3.344 3.344a.828.828 0 001.172-1.172L9.817 9.226z" clip-rule="evenodd" /></svg> </a>
+                        <i class="ri-instagram-line text-3xl"></i>            
+                    </a>        
                     <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
-                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0011.944 0zm5.002 7.035l-1.43 6.835c-.205.976-.76 1.221-1.609.755l-2.24-1.653-1.085 1.037c-.12.12-.223.222-.466.222l.16-2.293 4.227-3.827c.18-.18-.037-.278-.27-.097l-5.21 3.28-2.212-.69C5.698 11.86.63 11.616.953 10.99c.045-.09.308-.182.813-.182h.01L15.79 6.52c.618-.204 1.042.13 1.002.813l-.126.51.374-.008z"/></svg> </a>
+                        <i class="ri-linkedin-box-fill text-3xl"></i>
+                    </a>
+                    <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
+                        <i class="ri-github-fill text-3xl"></i>
+                    </a>
                 </div>
             </div>
             

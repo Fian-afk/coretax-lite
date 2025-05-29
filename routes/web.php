@@ -20,3 +20,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('index');
 });
+
+Route::get('/upload', function () {
+    return view('upload');
+});
