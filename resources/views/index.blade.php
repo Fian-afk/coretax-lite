@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EconoDocs - Repository Dokumen Ekonomi Terlengkap</title>
+    <link rel="stylesheet" href="css/app.css">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#3b82f6',secondary:'#64748b'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .notification-badge::after {
+            content: attr(data-count);
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .custom-checkbox {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .custom-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        .checkmark {
+            height: 18px;
+            width: 18px;
+            background-color: #fff;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .custom-checkbox input:checked ~ .checkmark {
+            background-color: #3b82f6;
+            border-color: #3b82f6;
+        }
+        .checkmark:after {
+            content: "";
+            display: none;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        .custom-checkbox input:checked ~ .checkmark:after {
+            display: block;
+        }
+        .custom-range {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 5px;
+            outline: none;
+        }
+        .custom-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #3b82f6;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .custom-range::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: #3b82f6;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .custom-select {
+            position: relative;
+        }
+        .custom-select select {
+            display: none;
+        }
+        .select-selected {
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+        .select-selected:after {
+            position: absolute;
+            content: "";
+            top: 14px;
+            right: 10px;
+            width: 8px;
+            height: 8px;
+            border: solid #6b7280;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        .select-selected.select-arrow-active:after {
+            transform: rotate(-135deg);
+            top: 18px;
+        }
+        .select-items {
+            position: absolute;
+            background-color: white;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 99;
+            border: 1px solid #e5e7eb;
+            border-radius: 0 0 8px 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+        .select-items div {
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+        .select-items div:hover {
+            background-color: #f3f4f6;
+        }
+        .select-hide {
+            display: none;
+        }
+        .same-as-selected {
+            background-color: #f3f4f6;
+        }
+        .category-card {
+            transition: all 0.3s ease;
+        }
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .notification-panel {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 320px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            z-index: 50;
+        }
+        .notification-item.unread {
+            background-color: #f0f7ff;
+        }
+        .notification-item.unread::before {
+            content: "";
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header & Navigation -->
+    <header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center">
+                <a href="#" class="text-3xl font-['Pacifico'] text-blue-700">EconoDocs</a>
+            </div>
+            
+            <div class="relative mx-4 flex-grow max-w-xl">
+                <div class="relative">
+                    <input type="text" placeholder="Cari dokumen ekonomi..." class="w-full pl-10 pr-10 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+                    <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-400">
+                        <i class="ri-search-line"></i>
+                    </div>
+                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-400 cursor-pointer">
+                        <i class="ri-filter-3-line"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="#" class="text-gray-900 hover:text-blue-700 font-medium text-sm">Beranda</a>
+                <a href="#" class="text-gray-600 hover:text-blue-700 font-medium text-sm">Dokumen</a>
+                <a href="#" class="text-gray-600 hover:text-blue-700 font-medium text-sm">Upload</a>
+                
+                <div class="relative">
+                    <button class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                        <i class="ri-user-line text-xl text-gray-600"></i>
+                    </button>
+                </div>
+            </nav>
+            
+            <div class="flex items-center">
+                <a href="#" class="text-blue-700 border border-blue-700 px-4 py-2 rounded-md transition-all duration-300 text-sm font-medium whitespace-nowrap">Masuk / Daftar</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+        <!-- Hero Section -->
+        <section class="relative w-full h-[600px] flex items-center overflow-hidden z-0 bg-white" style="background-image: url('/img/financial-items.jpg'); background-size: cover; background-position: center;">
+            <div class="absolute inset-0 bg-gradient-to-r from-gray-50 via-gray-50/90 to-transparent z-10"></div>
+            <div class="container mx-auto px-4  relative z-20 w-full">
+                <div class="max-w-2xl">
+                    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Repository Dokumen Ekonomi Terlengkap</h1>
+                    <p class="text-xl text-gray-700 mb-8">Akses ribuan dokumen riset, laporan keuangan, dan e-book ekonomi digital untuk kebutuhan akademis dan profesional Anda.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#" class="bg-blue-700 text-white px-6 py-3 font-medium hover:bg-blue-600 transition-all duration-300 rounded-md whitespace-nowrap">Mulai Eksplorasi</a>
+                        <a href="#" class="bg-gray-50 border border-secondary text-secondary px-6 py-3 font-medium hover:bg-secondary hover:text-gray-300 transition-all duration-300 rounded-md whitespace-nowrap">Upload Dokumen</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
+            <!-- Sidebar Filter -->
+            <aside class="w-full md:w-72 shrink-0">
+                <div class="bg-white rounded-lg shadow-sm p-5 sticky top-24">
+                    <h3 class="font-semibold text-lg text-gray-900 mb-4">Filter Pencarian</h3>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-medium text-gray-700 mb-3">Tahun Publikasi</h4>
+                        <div class="mb-2 flex justify-between">
+                            <span class="text-sm text-gray-500">2015</span>
+                            <span class="text-sm text-gray-500">2025</span>
+                        </div>
+                        <input type="range" min="2015" max="2025" value="2023" class="custom-range" id="yearRange">
+                        <div class="text-center mt-2">
+                            <span class="text-sm font-medium text-gray-700" id="selectedYear">2023</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-medium text-gray-700 mb-3">Topik/Kategori</h4>
+                        <div class="space-y-2">
+                            <label class="custom-checkbox">
+                                <input type="checkbox" checked>
+                                <span class="checkmark mr-2"></span>
+                                <span class="text-sm text-gray-700">Makroekonomi</span>
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                                <span class="checkmark mr-2"></span>
+                                <span class="text-sm text-gray-700">Mikroekonomi</span>
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                                <span class="checkmark mr-2"></span>
+                                <span class="text-sm text-gray-700">Pasar Saham</span>
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" checked>
+                                <span class="checkmark mr-2"></span>
+                                <span class="text-sm text-gray-700">Ekonomi Digital</span>
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                                <span class="checkmark mr-2"></span>
+                                <span class="text-sm text-gray-700">Laporan Keuangan</span>
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                                <span class="checkmark mr-2"></span>
+                                <span class="text-sm text-gray-700">Riset Ekonomi</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-medium text-gray-700 mb-3">Institusi Pengunggah</h4>
+                        <div class="space-y-2">
+                            <label class="custom-checkbox">
+                                <input type="checkbox" checked>
+                                <span class="checkmark mr-2"></span>
+                                <span class="text-sm text-gray-700">Bank Indonesia</span>
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                                <span class="checkmark mr-2"></span>
+                                <span class="text-sm text-gray-700">Kementerian Keuangan</span>
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                                <span class="checkmark mr-2"></span>
+                                <span class="text-sm text-gray-700">Universitas Indonesia</span>
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                                <span class="checkmark mr-2"></span>
+                                <span class="text-sm text-gray-700">Bappenas</span>
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                                <span class="checkmark mr-2"></span>
+                                <span class="text-sm text-gray-700">Lainnya</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-medium text-gray-700 mb-3">Format File</h4>
+                        <div class="space-y-2">
+                            <label class="custom-checkbox">
+                                <input type="checkbox" checked>
+                                <span class="checkmark mr-2"></span>
+                                <span class="text-sm text-gray-700">PDF</span>
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                                <span class="checkmark mr-2"></span>
+                                <span class="text-sm text-gray-700">DOCX</span>
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                                <span class="checkmark mr-2"></span>
+                                <span class="text-sm text-gray-700">XLSX</span>
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                                <span class="checkmark mr-2"></span>
+                                <span class="text-sm text-gray-700">PPT</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-3">
+                        <button class="bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium flex-1 !rounded-button whitespace-nowrap">Terapkan Filter</button>
+                        <button class="border border-gray-300 text-gray-600 px-4 py-2 rounded-md text-sm font-medium !rounded-button whitespace-nowrap">Reset</button>
+                    </div>
+                </div>
+            </aside>
+
+            <div class="flex-1">
+                <!-- Kategori Dokumen -->
+                <section class="mb-10">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Kategori Dokumen</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                        <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
+                            <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-4">
+                                <i class="ri-line-chart-line text-3xl text-blue-700"></i>
+                            </div>
+                            <h3 class="font-semibold text-gray-900 mb-1">Makroekonomi</h3>
+                            <span class="text-sm text-gray-500">1,245 dokumen</span>
+                        </div>
+                        
+                        <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
+                            <div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mb-4">
+                                <i class="ri-store-2-line text-3xl text-green-500"></i>
+                            </div>
+                            <h3 class="font-semibold text-gray-900 mb-1">Mikroekonomi</h3>
+                            <span class="text-sm text-gray-500">876 dokumen</span>
+                        </div>
+                        
+                        <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
+                            <div class="w-16 h-16 bg-orange-50 rounded-full flex items-center justify-center mb-4">
+                                <i class="ri-stock-line text-3xl text-orange-500"></i>
+                            </div>
+                            <h3 class="font-semibold text-gray-900 mb-1">Pasar Saham</h3>
+                            <span class="text-sm text-gray-500">1,532 dokumen</span>
+                        </div>
+                        
+                        <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
+                            <div class="w-16 h-16 bg-purple-50 rounded-full flex items-center justify-center mb-4">
+                                <i class="ri-global-line text-3xl text-purple-500"></i>
+                            </div>
+                            <h3 class="font-semibold text-gray-900 mb-1">Ekonomi Digital</h3>
+                            <span class="text-sm text-gray-500">943 dokumen</span>
+                        </div>
+                        
+                        <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
+                            <div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-4">
+                                <i class="ri-file-chart-line text-3xl text-red-500"></i>
+                            </div>
+                            <h3 class="font-semibold text-gray-900 mb-1">Laporan Keuangan</h3>
+                            <span class="text-sm text-gray-500">2,187 dokumen</span>
+                        </div>
+                        
+                        <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
+                            <div class="w-16 h-16 bg-indigo-50 rounded-full flex items-center justify-center mb-4">
+                                <i class="ri-book-read-line text-3xl text-indigo-500"></i>
+                            </div>
+                            <h3 class="font-semibold text-gray-900 mb-1">Riset Ekonomi</h3>
+                            <span class="text-sm text-gray-500">1,078 dokumen</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Daftar Dokumen Terbaru -->
+                <section>
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">Dokumen Terbaru</h2>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <!-- Document Item 1 -->
+                        <div class="bg-white rounded-lg shadow-sm p-4 flex">
+                            <div class="w-24 h-32 bg-gray-100 rounded overflow-hidden shrink-0 mr-4">
+                                <img src="https://readdy.ai/api/search-image?query=A%20professional%20cover%20of%20an%20economic%20report%20with%20blue%20and%20white%20color%20scheme%2C%20showing%20charts%20and%20graphs%20related%20to%20Indonesian%20economy.%20The%20image%20has%20a%20clean%2C%20corporate%20design%20with%20subtle%20financial%20elements%20and%20data%20visualization.&width=240&height=320&seq=doc1&orientation=portrait" alt="Dokumen" class="w-full h-full object-cover object-top">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-semibold text-lg text-gray-900 mb-1">Laporan Ekonomi Digital Indonesia 2025</h3>
+                                    <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">PDF</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mb-2">Bank Indonesia</p>
+                                <p class="text-sm text-gray-600 mb-3 line-clamp-2">Laporan komprehensif tentang perkembangan ekonomi digital di Indonesia, termasuk e-commerce, fintech, dan startup digital.</p>
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">Ekonomi Digital</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-xs text-gray-500">Diunggah: 22 Mei 2025</div>
+                                    <div class="flex items-center text-xs text-gray-500">
+                                        <span class="flex items-center mr-3"><i class="ri-download-line mr-1"></i> 1,245</span>
+                                        <span class="flex items-center"><i class="ri-eye-line mr-1"></i> 3,782</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Document Item 2 -->
+                        <div class="bg-white rounded-lg shadow-sm p-4 flex">
+                            <div class="w-24 h-32 bg-gray-100 rounded overflow-hidden shrink-0 mr-4">
+                                <img src="https://readdy.ai/api/search-image?query=A%20professional%20cover%20of%20a%20financial%20report%20with%20green%20and%20white%20color%20scheme%2C%20showing%20stock%20market%20charts%20and%20financial%20data%20visualization.%20The%20image%20has%20a%20clean%2C%20corporate%20design%20focused%20on%20investment%20and%20stock%20market%20analysis.&width=240&height=320&seq=doc2&orientation=portrait" alt="Dokumen" class="w-full h-full object-cover object-top">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-semibold text-lg text-gray-900 mb-1">Analisis Pasar Saham Indonesia Q2 2025</h3>
+                                    <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">XLSX</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mb-2">Otoritas Jasa Keuangan</p>
+                                <p class="text-sm text-gray-600 mb-3 line-clamp-2">Analisis mendalam tentang performa pasar saham Indonesia pada kuartal kedua 2025, termasuk tren, proyeksi, dan rekomendasi investasi.</p>
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">Pasar Saham</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-xs text-gray-500">Diunggah: 20 Mei 2025</div>
+                                    <div class="flex items-center text-xs text-gray-500">
+                                        <span class="flex items-center mr-3"><i class="ri-download-line mr-1"></i> 876</span>
+                                        <span class="flex items-center"><i class="ri-eye-line mr-1"></i> 2,143</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Document Item 3 -->
+                        <div class="bg-white rounded-lg shadow-sm p-4 flex">
+                            <div class="w-24 h-32 bg-gray-100 rounded overflow-hidden shrink-0 mr-4">
+                                <img src="https://readdy.ai/api/search-image?query=A%20professional%20cover%20of%20a%20macroeconomic%20research%20report%20with%20red%20and%20white%20color%20scheme%2C%20showing%20economic%20indicators%20and%20GDP%20growth%20charts%20for%20Indonesia.%20The%20image%20has%20a%20clean%2C%20academic%20design%20suitable%20for%20government%20publications.&width=240&height=320&seq=doc3&orientation=portrait" alt="Dokumen" class="w-full h-full object-cover object-top">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-semibold text-lg text-gray-900 mb-1">Proyeksi Pertumbuhan Ekonomi Indonesia 2025-2030</h3>
+                                    <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">PDF</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mb-2">Kementerian Keuangan RI</p>
+                                <p class="text-sm text-gray-600 mb-3 line-clamp-2">Laporan proyeksi pertumbuhan ekonomi Indonesia untuk periode 2025-2030, termasuk faktor-faktor pendorong dan tantangan yang dihadapi.</p>
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">Makroekonomi</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-xs text-gray-500">Diunggah: 18 Mei 2025</div>
+                                    <div class="flex items-center text-xs text-gray-500">
+                                        <span class="flex items-center mr-3"><i class="ri-download-line mr-1"></i> 1,532</span>
+                                        <span class="flex items-center"><i class="ri-eye-line mr-1"></i> 4,267</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Document Item 4 -->
+                        <div class="bg-white rounded-lg shadow-sm p-4 flex">
+                            <div class="w-24 h-32 bg-gray-100 rounded overflow-hidden shrink-0 mr-4">
+                                <img src="https://readdy.ai/api/search-image?query=A%20professional%20cover%20of%20a%20fintech%20research%20report%20with%20purple%20and%20white%20color%20scheme%2C%20showing%20mobile%20payment%20and%20digital%20banking%20illustrations.%20The%20image%20has%20a%20modern%20tech-focused%20design%20with%20financial%20technology%20elements.&width=240&height=320&seq=doc4&orientation=portrait" alt="Dokumen" class="w-full h-full object-cover object-top">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-semibold text-lg text-gray-900 mb-1">Perkembangan Fintech di Indonesia: Tren dan Regulasi</h3>
+                                    <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">PDF</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mb-2">Universitas Indonesia</p>
+                                <p class="text-sm text-gray-600 mb-3 line-clamp-2">Studi komprehensif tentang perkembangan fintech di Indonesia, termasuk tren terkini, tantangan regulasi, dan dampaknya terhadap inklusi keuangan.</p>
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">Riset Ekonomi</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-xs text-gray-500">Diunggah: 15 Mei 2025</div>
+                                    <div class="flex items-center text-xs text-gray-500">
+                                        <span class="flex items-center mr-3"><i class="ri-download-line mr-1"></i> 943</span>
+                                        <span class="flex items-center"><i class="ri-eye-line mr-1"></i> 2,876</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Document Item 5 -->
+                        <div class="bg-white rounded-lg shadow-sm p-4 flex">
+                            <div class="w-24 h-32 bg-gray-100 rounded overflow-hidden shrink-0 mr-4">
+                                <img src="https://readdy.ai/api/search-image?query=A%20professional%20cover%20of%20a%20microeconomic%20research%20report%20with%20orange%20and%20white%20color%20scheme%2C%20showing%20supply%20and%20demand%20curves%20and%20market%20analysis%20charts.%20The%20image%20has%20a%20clean%20academic%20design%20suitable%20for%20university%20publications.&width=240&height=320&seq=doc5&orientation=portrait" alt="Dokumen" class="w-full h-full object-cover object-top">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-semibold text-lg text-gray-900 mb-1">Dampak Ekonomi dari Transisi Energi di Indonesia</h3>
+                                    <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full">PPT</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mb-2">Bappenas</p>
+                                <p class="text-sm text-gray-600 mb-3 line-clamp-2">Analisis tentang dampak ekonomi dari transisi energi di Indonesia, termasuk peluang investasi, dampak lapangan kerja, dan tantangan implementasi.</p>
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">Ekonomi Digital</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-xs text-gray-500">Diunggah: 12 Mei 2025</div>
+                                    <div class="flex items-center text-xs text-gray-500">
+                                        <span class="flex items-center mr-3"><i class="ri-download-line mr-1"></i> 765</span>
+                                        <span class="flex items-center"><i class="ri-eye-line mr-1"></i> 1,987</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="flex justify-center mt-8">
+                        <nav class="flex items-center space-x-1">
+                            <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:bg-gray-100">
+                                <i class="ri-arrow-left-s-line"></i>
+                            </a>
+                            <a href="#" class="px-3 py-2 rounded-md text-sm font-medium bg-blue-700 text-white">1</a>
+                            <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100">2</a>
+                            <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100">3</a>
+                            <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100">4</a>
+                            <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100">5</a>
+                            <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:bg-gray-100">
+                                <i class="ri-arrow-right-s-line"></i>
+                            </a>
+                        </nav>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative bg-white pt-16 pb-6 text-gray-700">
+    <div class="container mx-auto px-4 relative z-10 w-full">
+        <div class="flex flex-wrap flex-col text-center pb-4 lg:text-center w-1/2 items-center mx-auto">
+            <div class="w-full px-4">
+                <h4 class="text-3xl mb-2 font-['Pacifico'] text-blue-700 text-center">EconoDocs</h4>
+                <h5 class="text-lg mt-0 mb-2 text-gray-600">
+                    Platform repository dokumen ekonomi terlengkap di Indonesia. Akses ribuan dokumen untuk kebutuhan akademis dan profesional.
+                </h5>
+                <div class="mt-6 lg:mb-0 mb-6 flex justify-center lg:justify-start space-x-3">
+                    <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                    </a>
+                    <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.738 9.499.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.942.359.308.678.92.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
+                    </a>
+                     <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c1.352 0 2.64-.274 3.824-.763l.001-.001L17.5 20.5l1.207-1.207-1.686-1.686a8 8 0 10-5.02-5.02L10.314 14l-1.207 1.207L7.5 13.5l-.001.001A9.954 9.954 0 012 12zm8.5 0a.5.5 0 000-1H12.34l1.293-1.293a.5.5 0 00-.708-.708L9.5 3.414V5.5a.5.5 0 001 0V2.5a.5.5 0 00-.5-.5h-3a.5.5 0 000 1h2.086L5.293 6.293a.5.5 0 00.708.708L9.5 3.707V5.5a.5.5 0 001 0V3a.5.5 0 00-.5-.5H6.5a.5.5 0 000 1h2.086l-3.25 3.25A7.96 7.96 0 004 12c0 4.411 3.589 8 8 8s8-3.589 8-8c0-.23-.01-.458-.029-.683l-.006-.098a.5.5 0 00-.465-.419z" clip-rule="evenodd" /></svg> </a>
+                    <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2.014a.828.828 0 01.13.019c.09.014.183.029.277.045l.098.018c.094.018.187.039.278.062l.09.022c.094.024.188.05.278.078l.088.028c.086.027.17.057.252.088l.079.03c.084.032.166.067.246.104l.018.008.05.026.046.024c.079.042.156.087.23.134l.04.025.038.024.037.024c.067.044.133.09.196.138l.03.023.028.023.028.022c.058.047.115.097.17.148l.02.02.02.02c.05.048.098.098.144.15l.017.018.016.017c.044.05.086.102.127.155l.013.017.012.016c.038.05.075.102.11.155l.01.014.008.013.008.012c.03.05.058.1.084.153l.005.008.004.007c.022.048.043.097.062.147l.002.005c.016.045.03.09.042.135l.001.003c.01.04.018.082.024.124v.002c.004.03.006.06.007.09v.004c0 .025.001.05.001.074v.012c0 .018 0 .035-.001.053l-.001.04c-.002.06-.006.12-.01.18l-.002.03c-.005.06-.012.12-.02.18l-.003.03c-.008.06-.02.12-.03.18l-.004.03c-.01.06-.024.12-.038.18l-.005.03c-.014.06-.03.118-.048.176l-.006.03c-.018.058-.04.115-.063.17l-.008.03c-.023.055-.05.11-.078.163l-.01.03c-.028.054-.06.106-.092.158l-.01.03c-.033.05-.07.1-.107.148l-.012.03c-.038.048-.078.095-.12.14l-.014.03c-.042.045-.087.09-.133.133l-.015.03c-.047.043-.096.085-.146.125l-.017.03c-.05.04-.102.08-.156.117l-.018.03c-.054.037-.11.072-.166.105l-.02.03c-.056.033-.113.064-.17.093l-.02.03c-.058.03-.118.058-.178.084l-.022.03c-.06.026-.12.05-.183.072l-.023.03c-.062.022-.126.043-.19.062l-.024.03c-.064.02-.13.038-.196.054l-.025.03c-.066.017-.132.032-.2.045l-.026.03c-.068.013-.136.025-.205.036l-.028.03c-.07.01-.14.02-.21.028h-.03c-.07.007-.14.013-.21.018l-.03.003c-.07.004-.14.006-.21.007l-.03.001h-.03c-.07 0-.14-.001-.21-.003l-.03-.001c-.07-.002-.14-.004-.21-.007l-.03-.001c-.07-.004-.14-.006-.21-.007l-.03-.003c-.07-.005-.14-.01-.21-.018l-.03-.003c-.07-.007-.14-.013-.21-.018h-.03c-.07-.008-.14-.016-.21-.028l-.028-.003c-.07-.008-.138-.017-.205-.036l-.026-.003c-.068-.012-.135-.025-.2-.045l-.025-.003c-.065-.015-.13-.03-.196-.054l-.024-.003c-.063-.018-.126-.038-.19-.062l-.023-.003c-.062-.02-.123-.043-.183-.072l-.022-.003c-.06-.025-.12-.05-.178-.084l-.02-.003c-.058-.03-.115-.06-.17-.093l-.02-.003c-.056-.032-.112-.065-.166-.105l-.018-.003c-.054-.036-.108-.075-.156-.117l-.017-.003c-.05-.038-.098-.08-.146-.125l-.015-.003c-.046-.042-.09-.087-.133-.133l-.014-.003C3.01 20.988 2 19.868 2 17.71c0-1.01.333-1.926.977-2.672H2.5C2.224 15.038 2 14.776 2 14.5v-5C2 9.224 2.224 9 2.5 9h.477A3.61 3.61 0 012 6.29C2 4.132 3.01 3.012 4.558 2.117A.828.828 0 014.688 2H12v.014a.828.828 0 01.315.000zM12 4H4.938c-1.26 0-2.188.776-2.188 2.29 0 1.242.777 2.21 1.938 2.21h.812v5h-.812c-1.16 0-1.938.968-1.938 2.21 0 1.514.928 2.29 2.188 2.29H12c1.26 0 2.188-.776 2.188-2.29v-.075a.828.828 0 00-1.656 0v.075c0 .542-.36.825-.531.825H4.938c-.172 0-.531-.283-.531-.825V6.79c0-.542.36-.825.531-.825H12c.172 0 .531.283.531.825V16.5a.828.828 0 001.656 0V6.79c0-1.514-.928-2.29-2.188-2.29H12zm2.828 10.237a.828.828 0 10-1.172 1.172l1.672 1.671a.828.828 0 101.172-1.172l-1.672-1.671zm-5.011-5.011a.828.828 0 10-1.172 1.172l3.344 3.344a.828.828 0 001.172-1.172L9.817 9.226z" clip-rule="evenodd" /></svg> </a>
+                    <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
+                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0011.944 0zm5.002 7.035l-1.43 6.835c-.205.976-.76 1.221-1.609.755l-2.24-1.653-1.085 1.037c-.12.12-.223.222-.466.222l.16-2.293 4.227-3.827c.18-.18-.037-.278-.27-.097l-5.21 3.28-2.212-.69C5.698 11.86.63 11.616.953 10.99c.045-.09.308-.182.813-.182h.01L15.79 6.52c.618-.204 1.042.13 1.002.813l-.126.51.374-.008z"/></svg> </a>
+                </div>
+            </div>
+            
+        </div>
+        <div class="flex flex-wrap items-center md:justify-between justify-center mt-4">
+            <div class="w-full md:w-4/12 px-4 mx-auto text-center">
+                <div class="text-sm text-white font-semibold py-1">
+                    © <span id="get-current-year">2025</span> All Rights Reserved.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="absolute bottom-0 left-0 w-full h-20 md:h-32 lg:h-40 overflow-hidden z-0">
+        <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-16 md:h-24 text-blue-500 opacity-80"
+             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="wave-animation-1">
+                <use xlink:href="#gentle-wave" x="48" y="0" fill="currentColor"/>
+            </g>
+        </svg>
+
+        <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-20 md:h-28 text-blue-600 opacity-60"
+             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+                <path id="gentle-wave-2" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="wave-animation-2">
+                <use xlink:href="#gentle-wave-2" x="48" y="3" fill="currentColor"/>
+            </g>
+        </svg>
+
+        <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-24 md:h-32 text-blue-700 opacity-40"
+             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+                <path id="gentle-wave-3" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="wave-animation-3">
+                <use xlink:href="#gentle-wave-3" x="48" y="5" fill="currentColor"/>
+            </g>
+        </svg>
+
+         <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-28 md:h-40 text-blue-800 opacity-90"
+             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+                <path id="gentle-wave-4" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="wave-animation-4">
+                <use xlink:href="#gentle-wave-4" x="48" y="7" fill="currentColor"/>
+            </g>
+        </svg>
+    </div>
+</footer>
+
+    <script id="notification-toggle">
+        document.addEventListener('DOMContentLoaded', function() {
+            const notificationBtn = document.getElementById('notification-btn');
+            const notificationPanel = document.getElementById('notification-panel');
+            
+            notificationBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                notificationPanel.style.display = notificationPanel.style.display === 'block' ? 'none' : 'block';
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!notificationPanel.contains(e.target) && e.target !== notificationBtn) {
+                    notificationPanel.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+    <script id="custom-select">
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectElements = document.querySelectorAll('.custom-select');
+            
+            selectElements.forEach(function(selectElement) {
+                const selectSelected = selectElement.querySelector('.select-selected');
+                const selectItems = selectElement.querySelector('.select-items');
+                const selectOptions = selectElement.querySelectorAll('.select-items div');
+                
+                selectSelected.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    closeAllSelect(this);
+                    selectItems.classList.toggle('select-hide');
+                    this.classList.toggle('select-arrow-active');
+                });
+                
+                selectOptions.forEach(function(option) {
+                    option.addEventListener('click', function() {
+                        const selectElement = this.parentNode.parentNode;
+                        const selectSelected = selectElement.querySelector('.select-selected');
+                        const selectOptions = selectElement.querySelectorAll('.select-items div');
+                        
+                        selectSelected.textContent = this.textContent;
+                        selectSelected.classList.remove('select-arrow-active');
+                        selectItems.classList.add('select-hide');
+                        
+                        selectOptions.forEach(function(opt) {
+                            opt.classList.remove('same-as-selected');
+                        });
+                        
+                        this.classList.add('same-as-selected');
+                    });
+                });
+                
+                function closeAllSelect(elmnt) {
+                    const selectItems = document.querySelectorAll('.select-items');
+                    const selectSelected = document.querySelectorAll('.select-selected');
+                    
+                    selectItems.forEach(function(item, idx) {
+                        if (elmnt !== selectSelected[idx]) {
+                            selectSelected[idx].classList.remove('select-arrow-active');
+                            item.classList.add('select-hide');
+                        }
+                    });
+                }
+                
+                document.addEventListener('click', closeAllSelect);
+            });
+        });
+    </script>
+
+    <script id="year-range">
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearRange = document.getElementById('yearRange');
+            const selectedYear = document.getElementById('selectedYear');
+            
+            yearRange.addEventListener('input', function() {
+                selectedYear.textContent = this.value;
+            });
+        });
+    </script>
+</body>
+</html>
