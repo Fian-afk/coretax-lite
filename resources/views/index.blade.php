@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EconoDocs - Repository Dokumen Ekonomi Terlengkap</title>
+    <title>EconoDocs - Repositori Dokumen Ekonomi Terlengkap</title>
     <link rel="stylesheet" href="css/app.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script>tailwind.config={theme:{extend:{colors:{primary:'#3b82f6',secondary:'#64748b'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>

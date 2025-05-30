@@ -24,3 +24,7 @@ Route::get('/dashboard', function () {
 Route::get('/upload', function () {
     return view('upload');
 });
+
+Route::get('/dokumen', function () {
+    return view('document');
+});
