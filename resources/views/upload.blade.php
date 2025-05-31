@@ -34,7 +34,7 @@
     <header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
         <div class="container mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center">
-                <a href="#" class="text-3xl font-['Pacifico'] text-blue-700">EconoDocs</a>
+                <a href="#" class="text-3xl font-['Pacifico'] text-primary">EconoDocs</a>
             </div>
             
             <div class="relative mx-4 flex-grow max-w-xl">
@@ -50,9 +50,9 @@
             </div>
             
             <nav class="hidden md:flex items-center space-x-6">
-                <a href="#" class="text-gray-900 hover:text-blue-700 font-medium text-sm">Beranda</a>
-                <a href="#" class="text-gray-600 hover:text-blue-700 font-medium text-sm">Dokumen</a>
-                <a href="#" class="text-gray-600 hover:text-blue-700 font-medium text-sm">Upload</a>
+                <a href="#" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
+                <a href="#" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
+                <a href="#" class="text-gray-600 hover:text-primary font-medium text-sm">Upload</a>
                 
                 <div class="relative">
                     <button class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
@@ -62,7 +62,7 @@
             </nav>
             
             <div class="flex items-center">
-                <a href="#" class="text-blue-700 border border-blue-700 hover:border-none hover:bg-blue-700 hover:text-white px-4 py-2 rounded-md transition-all duration-300 text-sm font-medium whitespace-nowrap">Masuk / Daftar</a>
+                <a href="#" class="text-primary border border-primary hover:border-none hover:bg-primary hover:text-white px-4 py-2 rounded-md transition-all duration-300 text-sm font-medium whitespace-nowrap">Masuk / Daftar</a>
             </div>
         </div>
     </header>
@@ -126,11 +126,11 @@
                     <label class="block text-sm font-medium text-gray-700 mb-1">File (PDF, DOCX, XLSX, CSV, ZIP) <span class="text-red-500">*</span></label>
                     
                     <div id="uploadArea" class="upload-area rounded-lg p-6 bg-gray-50 text-center cursor-pointer">
-                        <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center text-blue-700">
+                        <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center text-primary">
                             <i class="ri-upload-cloud-line ri-3x"></i>
                         </div>
                         <p class="text-gray-700 font-medium">Tarik dan lepas file di sini atau</p>
-                        <button type="button" id="browseButton" class="mt-3 px-4 py-2 bg-blue-700 text-white font-medium rounded-lg hover:bg-opacity-90 transition-all whitespace-nowrap">Pilih File</button>
+                        <button type="button" id="browseButton" class="mt-3 px-4 py-2 bg-primary text-white font-medium rounded-lg hover:bg-opacity-90 transition-all whitespace-nowrap">Pilih File</button>
                         <input type="file" id="fileInput" name="document" accept=".pdf,.docx,.xlsx,.pptx" class="hidden" required>
                         <p class="text-sm text-gray-500 mt-3">Ukuran maksimal: 10MB</p>
                     </div>
@@ -138,7 +138,7 @@
                     <div id="filePreview" class="file-preview mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center">
-                                <div class="w-10 h-10 flex items-center justify-center text-blue-700 mr-3">
+                                <div class="w-10 h-10 flex items-center justify-center text-primary mr-3">
                                     <i class="ri-file-line ri-2x"></i>
                                 </div>
                                 <div>
@@ -158,7 +158,7 @@
                             <span id="progressPercentage">0%</span>
                         </div>
                         <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div id="progressBar" class="bg-blue-700 h-2 rounded-lg" style="width: 0%"></div>
+                            <div id="progressBar" class="bg-primary h-2 rounded-lg" style="width: 0%"></div>
                         </div>
                     </div>
                     
@@ -167,7 +167,7 @@
 
                 <!-- Submit Button -->
                 <div class="pt-4">
-                    <button type="submit" id="submitButton" class="w-full py-3 bg-blue-700 text-white font-medium rounded-lg hover:bg-opacity-90 transition-all whitespace-nowrap">
+                    <button type="submit" id="submitButton" class="w-full py-3 bg-primary text-white font-medium rounded-lg hover:bg-opacity-90 transition-all whitespace-nowrap">
                         Upload Dokumen
                     </button>
                     <button type="button" id="cancelButton" class=" w-full mt-3 px-4 py-2 bg-gray-300 text-gray-800 font-medium rounded-lg hover:bg-gray-400 transition-all whitespace-nowrap">
@@ -182,7 +182,7 @@
     <div class="container mx-auto px-4 relative z-10 w-full">
         <div class="flex flex-wrap flex-col text-center pb-4 lg:text-center w-1/2 items-center mx-auto">
             <div class="w-full px-4">
-                <h4 class="text-3xl mb-2 font-['Pacifico'] text-blue-700 text-center">EconoDocs</h4>
+                <h4 class="text-3xl mb-2 font-['Pacifico'] text-primary text-center">EconoDocs</h4>
                 <h5 class="text-lg mt-0 mb-2 text-gray-600">
                     Platform repository dokumen ekonomi terlengkap di Indonesia. Akses ribuan dokumen untuk kebutuhan akademis dan profesional.
                 </h5>
@@ -238,7 +238,7 @@
             </g>
         </svg>
 
-        <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-24 md:h-32 text-blue-700 opacity-40"
+        <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-24 md:h-32 text-primary opacity-40"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
              viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>

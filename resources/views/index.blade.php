@@ -188,7 +188,7 @@
     <header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
         <div class="container mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center">
-                <a href="#" class="text-3xl font-['Pacifico'] text-blue-700">EconoDocs</a>
+                <a href="#" class="text-3xl font-['Pacifico'] text-primary">EconoDocs</a>
             </div>
             
             <div class="relative mx-4 flex-grow max-w-xl">
@@ -204,9 +204,9 @@
             </div>
             
             <nav class="hidden md:flex items-center space-x-6">
-                <a href="#" class="text-gray-900 hover:text-blue-700 font-medium text-sm">Beranda</a>
-                <a href="#" class="text-gray-600 hover:text-blue-700 font-medium text-sm">Dokumen</a>
-                <a href="#" class="text-gray-600 hover:text-blue-700 font-medium text-sm">Upload</a>
+                <a href="#" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
+                <a href="#" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
+                <a href="#" class="text-gray-600 hover:text-primary font-medium text-sm">Upload</a>
                 
                 <div class="relative">
                     <button class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
@@ -216,7 +216,7 @@
             </nav>
             
             <div class="flex items-center">
-                <a href="#" class="text-blue-700 border border-blue-700 hover:border-none hover:bg-blue-700 hover:text-white px-4 py-2 rounded-md transition-all duration-300 text-sm font-medium whitespace-nowrap">Masuk / Daftar</a>
+                <a href="#" class="text-primary border border-primary hover:border-none hover:bg-primary hover:text-white px-4 py-2 rounded-md transition-all duration-300 text-sm font-medium whitespace-nowrap">Masuk / Daftar</a>
             </div>
         </div>
     </header>
@@ -231,7 +231,7 @@
                     <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Repository Dokumen Ekonomi Terlengkap</h1>
                     <p class="text-xl text-gray-700 mb-8">Akses ribuan dokumen riset, laporan keuangan, dan e-book ekonomi digital untuk kebutuhan akademis dan profesional Anda.</p>
                     <div class="flex flex-wrap gap-4">
-                        <a href="#" class="bg-blue-700 text-white px-6 py-3 font-medium hover:bg-blue-600 transition-all duration-300 rounded-md whitespace-nowrap">Mulai Eksplorasi</a>
+                        <a href="#" class="bg-primary text-white px-6 py-3 font-medium hover:bg-blue-600 transition-all duration-300 rounded-md whitespace-nowrap">Mulai Eksplorasi</a>
                         <a href="#" class="bg-gray-50 border border-secondary text-secondary px-6 py-3 font-medium hover:bg-secondary hover:text-gray-300 transition-all duration-300 rounded-md whitespace-nowrap">Upload Dokumen</a>
                     </div>
                 </div>
@@ -350,7 +350,7 @@
                     </div>
                     
                     <div class="flex gap-3">
-                        <button class="bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium flex-1 !rounded-button whitespace-nowrap">Terapkan Filter</button>
+                        <button class="bg-primary text-white px-4 py-2 rounded-md text-sm font-medium flex-1 !rounded-button whitespace-nowrap">Terapkan Filter</button>
                         <button class="border border-gray-300 text-gray-600 px-4 py-2 rounded-md text-sm font-medium !rounded-button whitespace-nowrap">Reset</button>
                     </div>
                 </div>
@@ -363,7 +363,7 @@
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
                         <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
                             <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-4">
-                                <i class="ri-line-chart-line text-3xl text-blue-700"></i>
+                                <i class="ri-line-chart-line text-3xl text-primary"></i>
                             </div>
                             <h3 class="font-semibold text-gray-900 mb-1">Makroekonomi</h3>
                             <span class="text-sm text-gray-500">1,245 dokumen</span>
@@ -426,7 +426,7 @@
                             <div class="flex-1">
                                 <div class="flex justify-between items-start">
                                     <h3 class="font-semibold text-lg text-gray-900 mb-1">Laporan Ekonomi Digital Indonesia 2025</h3>
-                                    <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">PDF</span>
+                                    <span class="text-xs bg-blue-100 text-primary px-2 py-1 rounded-full">PDF</span>
                                 </div>
                                 <p class="text-sm text-gray-500 mb-2">Bank Indonesia</p>
                                 <p class="text-sm text-gray-600 mb-3 line-clamp-2">Laporan komprehensif tentang perkembangan ekonomi digital di Indonesia, termasuk e-commerce, fintech, dan startup digital.</p>
@@ -476,7 +476,7 @@
                             <div class="flex-1">
                                 <div class="flex justify-between items-start">
                                     <h3 class="font-semibold text-lg text-gray-900 mb-1">Proyeksi Pertumbuhan Ekonomi Indonesia 2025-2030</h3>
-                                    <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">PDF</span>
+                                    <span class="text-xs bg-blue-100 text-primary px-2 py-1 rounded-full">PDF</span>
                                 </div>
                                 <p class="text-sm text-gray-500 mb-2">Kementerian Keuangan RI</p>
                                 <p class="text-sm text-gray-600 mb-3 line-clamp-2">Laporan proyeksi pertumbuhan ekonomi Indonesia untuk periode 2025-2030, termasuk faktor-faktor pendorong dan tantangan yang dihadapi.</p>
@@ -501,7 +501,7 @@
                             <div class="flex-1">
                                 <div class="flex justify-between items-start">
                                     <h3 class="font-semibold text-lg text-gray-900 mb-1">Perkembangan Fintech di Indonesia: Tren dan Regulasi</h3>
-                                    <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">PDF</span>
+                                    <span class="text-xs bg-blue-100 text-primary px-2 py-1 rounded-full">PDF</span>
                                 </div>
                                 <p class="text-sm text-gray-500 mb-2">Universitas Indonesia</p>
                                 <p class="text-sm text-gray-600 mb-3 line-clamp-2">Studi komprehensif tentang perkembangan fintech di Indonesia, termasuk tren terkini, tantangan regulasi, dan dampaknya terhadap inklusi keuangan.</p>
@@ -550,7 +550,7 @@
                             <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:bg-gray-100">
                                 <i class="ri-arrow-left-s-line"></i>
                             </a>
-                            <a href="#" class="px-3 py-2 rounded-md text-sm font-medium bg-blue-700 text-white">1</a>
+                            <a href="#" class="px-3 py-2 rounded-md text-sm font-medium bg-primary text-white">1</a>
                             <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100">2</a>
                             <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100">3</a>
                             <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100">4</a>
@@ -570,7 +570,7 @@
     <div class="container mx-auto px-4 relative z-10 w-full">
         <div class="flex flex-wrap flex-col text-center pb-4 lg:text-center w-1/2 items-center mx-auto">
             <div class="w-full px-4">
-                <h4 class="text-3xl mb-2 font-['Pacifico'] text-blue-700 text-center">EconoDocs</h4>
+                <h4 class="text-3xl mb-2 font-['Pacifico'] text-primary text-center">EconoDocs</h4>
                 <h5 class="text-lg mt-0 mb-2 text-gray-600">
                     Platform repository dokumen ekonomi terlengkap di Indonesia. Akses ribuan dokumen untuk kebutuhan akademis dan profesional.
                 </h5>
@@ -626,7 +626,7 @@
             </g>
         </svg>
 
-        <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-24 md:h-32 text-blue-700 opacity-40"
+        <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-24 md:h-32 text-primary opacity-40"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
              viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>

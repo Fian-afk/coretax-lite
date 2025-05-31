@@ -28,3 +28,7 @@ Route::get('/upload', function () {
 Route::get('/dokumen', function () {
     return view('document');
 });
+
+Route::get('/profil', function () {
+    return view('profil');
+});
