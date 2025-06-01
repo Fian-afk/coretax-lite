@@ -22,20 +22,30 @@ class EventServiceProvider extends ServiceProvider
 
     /**
      * Register any events for your application.
+<<<<<<< HEAD
      *
      * @return void
      */
     public function boot()
+=======
+     */
+    public function boot(): void
+>>>>>>> 68f77847fbb0ee6791645980157172509f5ecb5c
     {
         //
     }
 
     /**
      * Determine if events and listeners should be automatically discovered.
+<<<<<<< HEAD
      *
      * @return bool
      */
     public function shouldDiscoverEvents()
+=======
+     */
+    public function shouldDiscoverEvents(): bool
+>>>>>>> 68f77847fbb0ee6791645980157172509f5ecb5c
     {
         return false;
     }

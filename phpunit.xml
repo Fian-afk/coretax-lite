@@ -12,7 +12,11 @@
             <directory suffix="Test.php">./tests/Feature</directory>
         </testsuite>
     </testsuites>
+<<<<<<< HEAD
     <coverage processUncoveredFiles="true">
+=======
+    <coverage>
+>>>>>>> 68f77847fbb0ee6791645980157172509f5ecb5c
         <include>
             <directory suffix=".php">./app</directory>
         </include>

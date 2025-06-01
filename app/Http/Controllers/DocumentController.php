@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+<<<<<<< HEAD
 use App\Models\Document;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -125,5 +126,13 @@ class DocumentController extends Controller
         }
 
         return redirect()->back()->with('error', 'Aksi tidak dikenal.');
+=======
+
+class DocumentController extends Controller
+{
+    public function document()
+    {
+        return view('document');
+>>>>>>> 68f77847fbb0ee6791645980157172509f5ecb5c
     }
 }

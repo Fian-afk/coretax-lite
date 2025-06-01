@@ -51,10 +51,22 @@ return [
 
         'mailgun' => [
             'transport' => 'mailgun',
+<<<<<<< HEAD
+=======
+            // 'client' => [
+            //     'timeout' => 5,
+            // ],
+>>>>>>> 68f77847fbb0ee6791645980157172509f5ecb5c
         ],
 
         'postmark' => [
             'transport' => 'postmark',
+<<<<<<< HEAD
+=======
+            // 'client' => [
+            //     'timeout' => 5,
+            // ],
+>>>>>>> 68f77847fbb0ee6791645980157172509f5ecb5c
         ],
 
         'sendmail' => [

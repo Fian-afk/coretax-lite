@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+/.phpunit.cache
+>>>>>>> 68f77847fbb0ee6791645980157172509f5ecb5c
 /node_modules
 /public/build
 /public/hot
@@ -7,7 +11,10 @@
 .env
 .env.backup
 .env.production
+<<<<<<< HEAD
 .phpunit.result.cache
+=======
+>>>>>>> 68f77847fbb0ee6791645980157172509f5ecb5c
 Homestead.json
 Homestead.yaml
 auth.json
