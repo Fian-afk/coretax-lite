@@ -21,9 +21,9 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('index');
     
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('dashboard');
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/review', [AdminController::class, 'review'])->name('admin.review');
