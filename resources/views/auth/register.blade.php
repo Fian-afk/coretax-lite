@@ -111,11 +111,11 @@
                         <input type="email" name="email" value="{{old('email')}}" placeholder="Alamat email" class="input-field w-full {{ $errors->has('email') ? 'input-error' : '' }}" required>
                         <x-input-error :messages="$errors->get('email')" class="mt-1 text-red-500 text-sm" />
                     </div>
-                    <!-- Name -->
+                    <!-- Username -->
                     <div>
-                        <label for="name" class="block text-sm text-gray-600 mb-2">Username</label>
-                        <input id="name" class="input-field w-full" type="text" name="name" value="{{ old('name') }}" placeholder="Username" required />
-                        <x-input-error :messages="$errors->get('name')" class="mt-1 text-red-500 text-sm" />
+                        <label for="username" class="block text-sm text-gray-600 mb-2">Username</label>
+                        <input id="username" class="input-field w-full" type="text" name="username" value="{{ old('username') }}" placeholder="Username" required />
+                        <x-input-error :messages="$errors->get('username')" class="mt-1 text-red-500 text-sm" />
                     </div>
                     <!-- Phone -->
                     <div>
@@ -143,7 +143,7 @@
                         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-1 text-red-500 text-sm" />
                     </div>
 
-                    <button type="submit" class="col-span-2 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-medium text-sm">
+                    <button type="submit" class="col-span-2 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-medium text-sm flex items-center justify-center">
                         Sign up
                     </button>
 
@@ -161,19 +161,6 @@
             initialCountry: "id", 
             separateDialCode: true,
             autoPlaceholder: "polite", 
-        });
-
-        const phoneForm = document.querySelector("#Form");
-        phoneForm.addEventListener("submit", function(event) {
-            event.preventDefault(); 
-
-            if (phoneInput.isValidNumber()) {
-                const fullNumber = phoneInput.getNumber();
-                console.log("Nomor telepon valid:", fullNumber);
-
-            } else {
-                console.log("Nomor telepon tidak valid.");
-            }
         });
 
         // Password
