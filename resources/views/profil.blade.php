@@ -210,7 +210,7 @@
                     <h2 class="text-xl font-semibold text-gray-800">Riwayat Unggahan</h2>
                     <div class="flex items-center space-x-2 mt-4 md:mt-0">
                         <div class="relative">
-                            <input type="search" placeholder="Cari file..." class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 w-full md:w-64">
+                            <input type="search" placeholder="Cari file..." id="search" class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 w-full md:w-64">
                             <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-400">
                                 <i class="ri-search-line"></i>
                             </div>
@@ -225,7 +225,7 @@
                 </div>
 
                 <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
+                    <table id="table" class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama File</th>
@@ -235,7 +235,7 @@
                                 <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
+                        <tbody id="tbody1" class="bg-white divide-y divide-gray-200">
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
@@ -424,7 +424,7 @@
                     <h2 class="text-xl font-semibold text-gray-800">Riwayat Unduhan</h2>
                     <div class="flex items-center space-x-2 mt-4 md:mt-0">
                         <div class="relative">
-                            <input type="search" placeholder="Cari file..." class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 w-full md:w-64">
+                            <input type="search" placeholder="Cari file..." id="search2" class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 w-full md:w-64">
                             <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-400">
                                 <i class="ri-search-line"></i>
                             </div>
@@ -449,7 +449,7 @@
                                 <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
+                        <tbody id="tbody2" class="bg-white divide-y divide-gray-200">
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
@@ -776,6 +776,41 @@
                 });
             });
         });
+    </script>
+    <script src="js/script.js"></script>
+    {{-- search unggahan--}}
+    <script>
+            const filter = document.getElementById('search');
+            const items = document.querySelectorAll('#tbody1 tr');
+
+            filter.addEventListener('input', (e) => filterData(e.target.value));
+
+            function filterData(search) {
+                items.forEach((item) => {
+                    if (item.innerText.toLowerCase().includes(search.toLowerCase())) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            }
+    </script>
+    {{-- search unduhan --}}
+    <script>
+        const filters = document.getElementById('search2');
+        const items = document.querySelectorAll('#tbody2 tr');
+
+        filters.addEventListener('input', (e) => filterData(e.target.value));
+
+        function filterData(search) {
+            items.forEach((item) => {
+                if (item.innerText.toLowerCase().includes(search.toLowerCase())) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
     </script>
 </body>
 </html>
