@@ -23,26 +23,27 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('index');
-    
+})->name('dashboard');
+
+Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
+    return view('index');
 })->name('dashboard');
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/review', [AdminController::class, 'review'])->name('admin.review');
 });
 Route::middleware('auth')->group(function () {
+    Route::get('/dokumen', function () {
+        return view('document');
+    })->name('dokumen.index');
+    Route::get('/upload', [UploadController::class, 'upload'])->name('dokumen.upload');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+
 Route::get('/auth/login-admin', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/auth/login-admin', [AdminLoginController::class, 'login'])->name('admin.login.submit');
 require __DIR__.'/auth.php';
-
-Route::get('profile', function () {
-    return view('profil');
-})->name('profile');
-
-Route::get('/profile/edit', function () {
-    return view('/profile/edit');
-})->name('profile.edit');
