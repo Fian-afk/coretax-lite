@@ -35,8 +35,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-
 Route::get('/auth/login-admin', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/auth/login-admin', [AdminLoginController::class, 'login'])->name('admin.login.submit');
 require __DIR__.'/auth.php';
+
+Route::get('profile', function () {
+    return view('profil');
+})->name('profile');
+
+Route::get('/profile/edit', function () {
+    return view('/profile/edit');
+})->name('profile.edit');

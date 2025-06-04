@@ -124,10 +124,12 @@
                         <span class=" text-sm text-gray-500">Bergabung sejak 26 Mei 2025</span>
                     </div>
                 </div>
-                <button class="px-4 py-2 bg-primary text-white rounded-md whitespace-nowrap flex items-center gap-2">
-                    <i class="ri-edit-line"></i>
-                    Edit Profil
-                </button>
+                <a href="{{ route('profile.edit') }}">
+                    <button class="px-4 py-2 bg-primary text-white rounded-md whitespace-nowrap flex items-center gap-2">
+                        <i class="ri-edit-line"></i>
+                        Edit Profil
+                    </button>
+                </a>
             </div>
         </div>
 
