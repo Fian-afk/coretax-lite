@@ -170,11 +170,9 @@
             if (phoneInput.isValidNumber()) {
                 const fullNumber = phoneInput.getNumber();
                 console.log("Nomor telepon valid:", fullNumber);
-                alert("Nomor Telepon Valid: " + fullNumber);
 
             } else {
                 console.log("Nomor telepon tidak valid.");
-                alert("Nomor Telepon Tidak Valid.");
             }
         });
 
