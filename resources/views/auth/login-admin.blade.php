@@ -2,18 +2,16 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Login | EconoDocs</title>
+    <title>Login Admin | EconoDocs</title>
     <link rel="stylesheet" href="css/app.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f8fafc;
+            background-color: #f8fafc; 
         }
         .split-container {
             display: flex;
@@ -29,12 +27,12 @@
         }
         .blue-side {
             width: 50%;
-            background: #6FB1FC;
+            background: #6FB1FC; 
             position: relative;
         }
-        .login-container {
+        .admin-login-container { 
             position: absolute;
-            width: 400px;
+            width: 350px; 
             background: white;
             border-radius: 20px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -45,19 +43,18 @@
             z-index: 2;
         }
         .input-field {
-            border: 1px solid #D1D5DB;
+            border: 1px solid #D1D5DB; 
             border-radius: 8px;
             padding: 12px 14px;
-            font-size: 12px;
         }
         .input-field:focus {
             outline: none;
-            border-color: #3B82F6;
+            border-color: #3B82F6; 
             box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
         }
         .econodocs-text {
             font-family: 'Pacifico', cursive;
-            color: #3B82F6;
+            color: #3B82F6; 
         }
         .character-img {
             position: absolute;
@@ -74,56 +71,84 @@
             height: 270px;
             z-index: 1;
         }
+        .admin-login-container label {
+            font-size: 12px !important;
+        }
+        .admin-login-container .input-field {
+            font-size: 12px !important;
+        }
+        .admin-login-container .text-right a.text-blue-600 {
+            font-size: 12px !important;
+        }
+        .admin-login-container button[type="submit"] {
+            font-size: 12px !important;
+            padding-top: 8px !important;
+            padding-bottom: 8px !important;
+        }
+        .admin-login-container h2 { 
+            font-size: 12px;
+        }
+        .admin-login-container h1 { 
+            font-size: 26px; 
+        }
+        .admin-login-container span.px-3.text-gray-400 { 
+            font-size: 12px;
+        }
+        .admin-login-container a.block.text-center.border {
+            font-size: 12px !important;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background-color: #EBF5FF; 
+            border-color: #EBF5FF; 
+            color: #3B82F6; 
+        }
+        .admin-login-container a.block.text-center.border:hover {
+            background-color: #DDEBFB; 
+            border-color: #DDEBFB;
+        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center">
 
     <div class="split-container">
         <div class="white-side">
-            <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="h-4 ml-6 mt-6">
-            <img src="{{ asset('img/Man1.png') }}" alt="Character" class="character-img mx-auto">
+            <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="h-4 ml-6 mt-6"> 
+            <img src="{{ asset('img/Man1.png') }}" alt="Character" class="character-img">
         </div>
-
+        
         <div class="blue-side">
-            <img src="{{ asset('img/Building.png') }}" alt="Building" class="building-img mx-auto">
+            <img src="{{ asset('img/Building.png') }}" alt="Building" class="building-img">
         </div>
-
-        <div class="login-container">
+        
+        <div class="admin-login-container">
             <div class="mb-6">
-                <div class="flex justify-between items-start mb-2">
-                    <h2 class="text-sm text-gray-600">Welcome to <span class="econodocs-text">EconoDocs</span></h2>
-                    <div class="text-right grid grid-row-2">
-                        <p class="text-sm text-gray-500">Belum punya akun?</p>
-                        <a href="{{ route('register') }}" class="text-blue-600 font-medium hover:underline text-sm">Sign up</a>
-                    </div>
-                </div>
-                
-                <div class="flex justify-between items-center">
-                    <h1 class="text-3xl font-bold text-gray-800">Sign in</h1>
-                </div>
+                <h2 class="text-sm text-gray-600 mb-2">Welcome to <span class="econodocs-text">EconoDocs</span></h2>
+                <h1 class="text-3xl font-bold text-gray-800">Sign in Admin</h1>
             </div>
 
-            <form method="POST" action="{{ route('login') }}" class="space-y-4">
+            <form action="{{ route('admin.login.submit') }}" method="POST" class="space-y-4">
                 @csrf
+                
                 <div>
-                    <label class="block text-sm text-gray-600 mb-1">Masukkan username atau email anda</label>
-                    <input type="text" name="email" placeholder="Username atau alamat email" class="input-field w-full" required>
+                    <label class="block text-sm text-gray-600 mb-1">Masukkan ID Perusahaan</label>
+                    <input type="text" name="company_id" placeholder="123xxxx"
+                           class="input-field w-full" required>
                 </div>
-
+                
                 <div>
-                    <label class="block text-sm text-gray-600 mb-1">Masukkan password anda</label>
+                    <label class="block text-sm text-gray-600 mb-1">Masukkan Password</label>
                     <div class="relative">
-                        <input type="password" name="password" id="password" placeholder="Password" class="input-field w-full" required>
-                        <span class="absolute inset-y-0 right-0 flex items-center pr-3 text-sm leading-5">
+                        <input type="password" name="password" id="password" placeholder="Password" class="input-field w-full pr-10" required>
+                        <span class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
                             <i class="ri-eye-line text-gray-400"></i>
                         </span>
                     </div>
                     <div class="text-right mt-1">
-                        <a href="{{ route('password.request') }}" class="text-blue-600 hover:underline text-xs">Lupa password?</a>
+                        <a href="#" class="text-blue-600 hover:underline text-xs">Lupa password?</a> 
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-blue-600 text-white  py-3 rounded-lg hover:bg-blue-700 transition font-medium text-sm">
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-medium text-sm">
                     Sign in
                 </button>
             </form>
@@ -134,8 +159,8 @@
                 <div class="flex-1 border-t border-gray-300"></div>
             </div>
 
-            <a href="{{ route('admin.login') }}" class="block text-center py-3 rounded-lg text-blue-600 bg-blue-50 hover:bg-blue-600 hover:text-white transition font-medium text-sm">
-                Sign in sebagai Admin
+            <a href="{{route('login')}}" class="block text-center bg-blue-50 py-3 rounded-lg text-blue-600 hover:bg-blue-600 hover:text-white transition font-medium text-sm">
+                Sign in sebagai User
             </a>
         </div>
     </div>

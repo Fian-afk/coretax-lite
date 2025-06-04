@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminLoginController;
 use App\Http\Middleware\AdminMiddleware;  
 
 /*
@@ -34,4 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+
+Route::get('/auth/login-admin', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/auth/login-admin', [AdminLoginController::class, 'login'])->name('admin.login.submit');
 require __DIR__.'/auth.php';
