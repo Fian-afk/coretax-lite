@@ -51,8 +51,8 @@
             
             <nav class="hidden md:flex items-center space-x-6">
                 <a href="#" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
-                <a href="#" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
-                <a href="#" class="text-gray-600 hover:text-primary font-medium text-sm">Upload</a>
+                <a href="{{ route('dokumen.index') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
+                <a href="{{ route('dokumen.upload') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Upload</a>
                 
                 <div class="relative">
                     <button class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
@@ -74,7 +74,7 @@
                 <p class="text-gray-600 mt-2">Silakan isi informasi dokumen dan unggah file Anda</p>
             </div>
 
-            <form id="documentForm" class="space-y-6" method="POST">
+            <form id="documentForm" class="space-y-6" method="POST" action="{{ route('dokumen.upload.store') }}" enctype="multipart/form-data">
                 <!-- Judul -->
                 <div>
                     <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Judul <span class="text-red-500">*</span></label>
@@ -167,6 +167,7 @@
 
                 <!-- Submit Button -->
                 <div class="pt-4">
+                    @csrf
                     <button type="submit" id="submitButton" class="w-full py-3 bg-primary text-white font-medium rounded-lg hover:bg-opacity-90 transition-all whitespace-nowrap">
                         Upload Dokumen
                     </button>
@@ -405,7 +406,11 @@
             const requiredFields = form.querySelectorAll('[required]');
             
             form.addEventListener('submit', function(e) {
-                e.preventDefault();
+                if (isValid) {
+                    form.submit(); // Kirim ke backend
+                } else {
+                    e.preventDefault(); // Hanya cegah submit jika tidak valid
+                }
                 
                 let isValid = true;
                 

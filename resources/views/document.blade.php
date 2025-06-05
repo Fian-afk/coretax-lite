@@ -70,7 +70,7 @@
                     <h1 class="text-2xl font-['Pacifico'] text-primary">EconoDocs</h1>
                 </div>
                 <nav class="hidden md:flex items-center space-x-6">
-                    <a href="#" class="text-gray-600 hover:text-primary">Beranda</a>
+                    <a href="{{route('dashboard')}}" class="text-gray-600 hover:text-primary">Beranda</a>
                     <a href="#" class="text-primary font-medium">Repository</a>
                     <a href="#" class="text-gray-600 hover:text-primary">Tentang Kami</a>
                     <a href="#" class="text-gray-600 hover:text-primary">Kontak</a>
