@@ -5,7 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Middleware\AdminMiddleware;  
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\UploadController;
+use App\Http\Controllers\AuthController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,10 +37,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/review', [AdminController::class, 'review'])->name('admin.review');
 });
 Route::middleware('auth')->group(function () {
-    Route::get('/dokumen', function () {
-        return view('document');
-    })->name('dokumen.index');
-    Route::get('/upload', [UploadController::class, 'upload'])->name('dokumen.upload');
+    Route::get('/dokumen', [\App\Http\Controllers\DocumentController::class, 'document'])->name('dokumen.index');
+    Route::get('/upload', [\App\Http\Controllers\UploadController::class, 'upload'])->name('dokumen.upload');
+    Route::post('/upload', [\App\Http\Controllers\UploadController::class, 'store'])->name('dokumen.upload.store');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
