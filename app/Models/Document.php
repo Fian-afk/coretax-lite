@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Document extends Model
 {
     protected $fillable = [
-        'title', 'description', 'category', 'instansi', 'file_path'
+        'user_id','title', 'description', 'category', 'instansi', 'file_path'
     ];
 }
