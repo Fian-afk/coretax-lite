@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Middleware\AdminMiddleware;  
+use App\Http\Controllers\UploadController;
 
 /*
 |--------------------------------------------------------------------------
