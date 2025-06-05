@@ -27,6 +27,7 @@ class UploadController extends Controller
 
         // Simpan data ke database
         Document::create([
+            'user_id' => auth()->id(), // Ambil ID user yang sedang login
             'title' => $validated['title'],
             'description' => $validated['description'],
             'category' => $validated['category'],
