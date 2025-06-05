@@ -48,3 +48,4 @@ Route::middleware('auth')->group(function () {
 Route::get('/auth/login-admin', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/auth/login-admin', [AdminLoginController::class, 'login'])->name('admin.login.submit');
 require __DIR__.'/auth.php';
+
