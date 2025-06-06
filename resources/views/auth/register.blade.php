@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Register | EconoDocs</title>
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="js/app.js" defer></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/19.5.7/css/intlTelInput.css" />
@@ -111,7 +112,7 @@
                         <input type="email" name="email" value="{{old('email')}}" placeholder="Alamat email" class="input-field w-full {{ $errors->has('email') ? 'input-error' : '' }}" required>
                         <x-input-error :messages="$errors->get('email')" class="mt-1 text-red-500 text-sm" />
                     </div>
-                    <!-- Username -->
+                    <!-- Name -->
                     <div>
                         <label for="username" class="block text-sm text-gray-600 mb-2">Username</label>
                         <input id="username" class="input-field w-full" type="text" name="username" value="{{ old('username') }}" placeholder="Username" required />

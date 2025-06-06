@@ -1,0 +1,42 @@
+iti {
+    width: 100%;
+}
+
+#telp {
+    padding-left: 50px;
+    height: 50px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* Animasi untuk ombak */
+.wave-animation-1 use {
+  animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+.wave-animation-2 use {
+  animation: move-forever 20s cubic-bezier(.55,.5,.45,.5) infinite;
+  animation-delay: -3s; /* Memberikan perbedaan fase */
+}
+.wave-animation-3 use {
+  animation: move-forever 15s cubic-bezier(.55,.5,.45,.5) infinite;
+  animation-delay: -4s;
+}
+.wave-animation-4 use {
+  animation: move-forever 10s cubic-bezier(.55,.5,.45,.5) infinite;
+  animation-delay: -5s;
+}
+
+@keyframes move-forever {
+  0% {
+   transform: translate3d(-90px,0,0);
+  }
+  100% {
+    transform: translate3d(85px,0,0);
+  }
+}
+
+/* Styling untuk membuat SVG ombak memenuhi lebar dan tetap di bawah */
+.waves-svg {
+    display: block; /* Menghilangkan spasi ekstra di bawah SVG */
+}
