@@ -460,7 +460,7 @@
                     <div>
                         <h4 class="text-lg font-semibold mb-4">Tautan</h4>
                         <ul class="space-y-2">
-                            <li><a href="#" class="text-gray-400 hover:text-white">Beranda</a></li>
+                            <li><a href="{{ route('dashboard')}}" class="text-gray-400 hover:text-white">Beranda</a></li>
                             <li><a href="#" class="text-gray-400 hover:text-white">Repository</a></li>
                             <li><a href="#" class="text-gray-400 hover:text-white">Tentang Kami</a></li>
                             <li><a href="#" class="text-gray-400 hover:text-white">Kontak</a></li>
