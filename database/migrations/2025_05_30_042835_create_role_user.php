@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('role_user', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('role_id')->unsigned();
+            $table->bigInteger('user_id')->constrained()->onDelete('cascade');
+            $table->bigInteger('role_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
