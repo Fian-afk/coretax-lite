@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Dokumen;
+use App\Models\Document;
 
 class ManajemenController extends Controller
 {
     public function index(Request $request)
     {
-        $documents = Dokumen::query();
+        $documents = Document::query();
 
         if ($request->filled('q')) {
             $documents->where('name', 'like', '%' . $request->q . '%');
@@ -24,7 +24,7 @@ class ManajemenController extends Controller
         $total = $documents->count();
         $results = $documents->latest()->skip(($page - 1) * $perPage)->take($perPage)->get();
 
-        return view('manajemen.index', [
+        return view('manajemen', [
             'documents' => $results,
             'page' => $page,
             'totalPages' => ceil($total / $perPage),
@@ -33,32 +33,32 @@ class ManajemenController extends Controller
 
     public function show($id)
     {
-        $dokumen = Dokumen::findOrFail($id);
-        return view('manajemen.show', compact('dokumen'));
+        $document = Document::findOrFail($id);
+        return view('manajemen.show', compact('document'));
     }
 
     public function approve($id)
     {
-        $dokumen = Dokumen::findOrFail($id);
-        $dokumen->status = 'Disetujui';
-        $dokumen->save();
+        $document = Document::findOrFail($id);
+        $document->status = 'Disetujui';
+        $document->save();
 
         return back()->with('success', 'Dokumen disetujui.');
     }
 
     public function reject($id)
     {
-        $dokumen = Dokumen::findOrFail($id);
-        $dokumen->status = 'Ditolak';
-        $dokumen->save();
+        $document = Document::findOrFail($id);
+        $document->status = 'Ditolak';
+        $document->save();
 
         return back()->with('success', 'Dokumen ditolak.');
     }
 
     public function destroy($id)
     {
-        $dokumen = Dokumen::findOrFail($id);
-        $dokumen->delete();
+        $document = Document::findOrFail($id);
+        $document->delete();
 
         return back()->with('success', 'Dokumen dihapus.');
     }
@@ -73,7 +73,7 @@ class ManajemenController extends Controller
         }
 
         if ($action === 'delete') {
-            Dokumen::whereIn('id', $ids)->delete();
+            Document::whereIn('id', $ids)->delete();
             return back()->with('success', 'Dokumen terpilih berhasil dihapus.');
         }
 

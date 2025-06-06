@@ -146,11 +146,11 @@
                   <input type="checkbox" name="selected[]" value="{{ $doc->id }}" />
                 </td>
                 <td class="p-3 text-blue-600 font-medium">
-                  {{ $doc->name }}
-                  <span class="text-gray-400 block text-xs">{{ $doc->size ?? '-' }}</span>
+                  {{ $doc->title }}
+                  <span class="text-gray-400 block text-xs">-</span>
                 </td>
-                <td class="p-3">{{ $doc->uploader ?? '-' }}</td>
-                <td class="p-3">{{ $doc->date ?? $doc->created_at->format('d-m-Y') }}</td>
+                <td class="p-3">{{ $doc->user->username ?? '-' }}</td>
+                <td class="p-3">{{ $doc->created_at->format('d-m-Y') }}</td>
                 <td class="p-3">
                   @php
                     $statusColors = [
@@ -158,9 +158,9 @@
                       'Disetujui' => 'bg-green-100 text-green-600',
                       'Ditolak' => 'bg-red-100 text-red-600',
                     ];
-                    $colorClass = $statusColors[$doc->status] ?? 'bg-gray-100 text-gray-600';
+                    $colorClass = $statusColors[$doc->status ?? ''] ?? 'bg-gray-100 text-gray-600';
                   @endphp
-                  <span class="{{ $colorClass }} px-2 py-1 rounded-full text-xs">{{ $doc->status }}</span>
+                  <span class="{{ $colorClass }} px-2 py-1 rounded-full text-xs">{{ $doc->status ?? '-' }}</span>
                 </td>
                 <td class="p-3 flex gap-2">
                   <a href="{{ url('/manajemen/' . $doc->id) }}" title="Lihat">
@@ -284,7 +284,7 @@
     <div class="absolute bottom-0 left-0 w-full h-20 md:h-32 lg:h-40 overflow-hidden z-0">
         <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-16 md:h-24 text-blue-500 opacity-80"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+             viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
@@ -295,7 +295,7 @@
 
         <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-20 md:h-28 text-blue-600 opacity-60"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+             viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave-2" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
@@ -306,7 +306,7 @@
 
         <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-24 md:h-32 text-primary opacity-40"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+             viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave-3" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
@@ -317,7 +317,8 @@
 
          <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-28 md:h-40 text-blue-800 opacity-90"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+             viewBox="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave-4" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>

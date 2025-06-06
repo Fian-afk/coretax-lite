@@ -10,6 +10,7 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ManajemenController;
 
 
 /*
@@ -44,13 +45,14 @@ Route::middleware(['auth:admin'])->group(function () {
         return view('index-admin');
     })->name('admin.dashboard');
     Route::get('admin/review', [AdminController::class, 'review'])->name('admin.review');
-    Route::get('admin/dokumen', [AdminController::class, 'dokumen'])->name('admin.dokumen');
-    Route::get('admin/dokumen/{id}', [AdminController::class, 'showDokumen'])->name('admin.dokumen.show');
+    Route::get('admin/dokumen', [AdminController::class, 'dokumen'])->name('admin.dokumen.index');
+    Route::get('admin/dokumen/{id}', [AdminController::class, 'show'])->name('admin.dokumen.show');
+    Route::get('admin/manajemen', [ManajemenController::class, 'index'])->name('manajemen');
 });
+
 Route::middleware('auth')->group(function () {//ini untuk middleware user biasa
-    Route::get('/document', function () {
-        return view('document');
-    })->name('document');
+    // Route::get('/dokumen', [DokumenController::class, 'documentAuth'])->name('document.auth');
+    Route::get('/document', [DokumenController::class, 'index'])->name('document');
     Route::get('/dokumen', [DocumentController::class, 'document'])->name('dokumen.index'); 
     Route::get('/dokumen', [DokumenController::class, 'index'])->name('dokumen.index');
     Route::get('/upload', [UploadController::class, 'upload'])->name('dokumen.upload');
@@ -63,4 +65,8 @@ Route::middleware('auth')->group(function () {//ini untuk middleware user biasa
 Route::get('/auth/login-admin', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/auth/login-admin', [AdminLoginController::class, 'login'])->name('admin.login.submit');
 require __DIR__.'/auth.php';
+
+Route::get('/econodocs', function () {
+    return view('index');
+})->name('econodocs');
 

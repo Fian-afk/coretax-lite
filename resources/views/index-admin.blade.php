@@ -206,7 +206,7 @@
             <nav class="hidden md:flex items-center space-x-6">
                 <a href="#" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
                 <a href="{{ route('admin.dokumen.show', ['id' => 1]) }}" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
-                <a href="{{ route('dokumen.upload') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Manajemen</a>
+                <a href="{{ route('manajemen') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Manajemen</a>
                 
                 <div class="relative">
                     <button class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
