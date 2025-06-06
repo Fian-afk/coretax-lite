@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; 
 use Illuminate\Support\Facades\Session; 
+use App\Http\Requests\AdminLoginRequest;
+
 
 class AdminLoginController extends Controller
 {
@@ -25,27 +27,13 @@ class AdminLoginController extends Controller
      * @param  Request  
      * @return RedirectResponse
      */
-    public function login(Request $request)
+        public function login(AdminLoginRequest $request)
     {
-        $request->validate([
-            'company_id' => 'required|string',
-            'password' => 'required|string',
-        ]);
-
-        $credentials = [
-            'company_id' => $request->company_id, 
-            'password' => $request->password,
-        ];
-
-        if (Auth::guard('admin')->attempt($credentials, $request->remember)) { 
-            $request->session()->regenerate(); 
-
-            return redirect()->intended('/admin/dashboard'); 
-        }
-
-        return back()->withErrors([
-            'company_id' => 'ID Perusahaan atau Password salah.', 
-        ])->onlyInput('company_id');
+        $request->authenticate();
+        $request->session()->regenerate();
+        // Clear intended URL to avoid cross-guard redirect issues
+        $request->session()->forget('url.intended');
+        return redirect()->intended('/admin/dashboard');
     }
 
     /**

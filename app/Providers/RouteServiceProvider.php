@@ -37,4 +37,12 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
     }
+
+    public static function homeByGuard($guard = null)
+    {
+        if ($guard === 'admin') {
+            return '/admin/dashboard';
+        }
+        return self::HOME;
+    }
 }

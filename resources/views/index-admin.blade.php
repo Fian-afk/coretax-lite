@@ -205,7 +205,7 @@
             
             <nav class="hidden md:flex items-center space-x-6">
                 <a href="#" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
-                <a href="{{ route('dokumen.index') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
+                <a href="{{ route('admin.dokumen.show', ['id' => 1]) }}" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
                 <a href="{{ route('dokumen.upload') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Manajemen</a>
                 
                 <div class="relative">
@@ -215,9 +215,15 @@
                 </div>
             </nav>
             
+            @php
+                $admin = auth('admin')->check() ? auth('admin')->user() : null;
+            @endphp
+
+            @if(!$admin)
             <div class="flex items-center">
                 <a href="{{route('login')}}" class="text-primary border border-primary hover:border-none hover:bg-primary hover:text-white px-4 py-2 rounded-md transition-all duration-300 text-sm font-medium whitespace-nowrap">Masuk / Daftar</a>
             </div>
+            @endif
         </div>
     </header>
 
@@ -617,9 +623,7 @@
 
         <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-20 md:h-28 text-blue-600 opacity-60"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-            <defs>
-                <path id="gentle-wave-2" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+             viewBox="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
             <g class="wave-animation-2">
                 <use xlink:href="#gentle-wave-2" x="48" y="3" fill="currentColor"/>
@@ -628,9 +632,9 @@
 
         <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-24 md:h-32 text-primary opacity-40"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-            <defs>
-                <path id="gentle-wave-3" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+             viewBox="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             viewBox="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             viewBox="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
             <g class="wave-animation-3">
                 <use xlink:href="#gentle-wave-3" x="48" y="5" fill="currentColor"/>
@@ -639,9 +643,8 @@
 
          <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-28 md:h-40 text-blue-800 opacity-90"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-            <defs>
-                <path id="gentle-wave-4" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+             viewBox="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             viewBox="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
             <g class="wave-animation-4">
                 <use xlink:href="#gentle-wave-4" x="48" y="7" fill="currentColor"/>

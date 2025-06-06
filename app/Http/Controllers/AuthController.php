@@ -21,9 +21,21 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+        $request->session()->regenerate();
+        $user = Auth::user();
+
+        // Cek role user
+        if ($user->roles->contains('name', 'admin')) {
+            return redirect()->intended('/admin/dashboard');
+        } elseif ($user->roles->contains('name', 'user')) {
             return redirect()->intended('/dashboard');
+        } else {
+            Auth::logout();
+            return back()->withErrors([
+                'email' => 'Role tidak dikenali.',
+            ]);
         }
+    }
 
         return back()->withErrors([
             'email' => 'Email atau password salah.',
@@ -53,6 +65,9 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
+
+        // Tambahkan role default (misal: user)
+        $user->roles()->attach(\App\Models\Role::where('name', 'user')->first());
 
         return redirect('/login')->with('success', 'Akun berhasil dibuat, silakan login.');
     }

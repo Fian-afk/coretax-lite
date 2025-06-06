@@ -209,24 +209,13 @@
                 <a href="{{ route('dokumen.upload') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Upload</a>
                 
                 <div class="relative">
-                    <button id="popupBtn" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                    <button class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
                         <i class="ri-user-line text-xl text-gray-600"></i>
                     </button>
                 </div>
             </nav>
         </div>
     </header>
-    <div id="popupProfil" class="bg-white p-4 rounded-lg shadow-md fixed hidden top-[72px] right-16 z-50 w-xl content-start">
-        <div id="profil" class="mb-4">
-            <i class="ri-user-3-fill text-lg text-gray-600 hover:text-primary"></i>
-            <a href="#" class="text-sm text-gray-600 hover:text-primary px-4">Profil</a>
-        </div>
-        <hr class="border-gray-200 my-2">
-        <div id="logout" class="mt-4">
-            <i class="ri-logout-box-r-line text-lg text-gray-600 hover:text-primary"></i>
-            <a href="#" class="text-sm text-gray-600 hover:text-primary px-4">Logout</a>
-        </div>
-    </div>
 
     <!-- Main Content -->
     <main class="pt-16">
@@ -734,21 +723,6 @@
             yearRange.addEventListener('input', function() {
                 selectedYear.textContent = this.value;
             });
-        });
-    </script>
-
-    <script id="profil">
-        const popupBtn = document.getElementById('popupBtn');
-        const popupProfil = document.getElementById('popupProfil');
-
-        popupBtn.addEventListener('click', function(e) {
-            popupProfil.classList.toggle('hidden');
-        });
-
-        document.addEventListener('click', function (e) {
-            if (!popupProfil.contains(e.target) && !popupBtn.contains(e.target)) {
-                popupProfil.classList.add('hidden');
-            }
         });
     </script>
 </body>
