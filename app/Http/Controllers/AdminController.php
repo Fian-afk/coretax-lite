@@ -18,7 +18,7 @@ class AdminController extends Controller
     public function show($id)
     {
         $document = Document::findOrFail($id);
-        return view('admin.review.show', compact('document'));
+        return view('document-admin', compact('document'));
     }
 
     // Admin menyetujui dokumen
@@ -40,5 +40,21 @@ class AdminController extends Controller
 
         return redirect()->route('admin.review')->with('error', 'Dokumen ditolak.');
     }
+
+    // Fungsi untuk memeriksa koneksi dan tabel documents di database
+    public function checkDocumentsTable()
+    {
+        try {
+            $count = Document::count();
+            return response()->json([
+                'success' => true,
+                'message' => "Tabel 'documents' ditemukan. Jumlah data: $count"
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => "Tabel 'documents' tidak ditemukan atau terjadi error: " . $e->getMessage()
+            ]);
+        }
+    }
 }
- 
