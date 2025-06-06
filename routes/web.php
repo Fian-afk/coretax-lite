@@ -27,19 +27,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// ngetest doang, nek wis iso dihapus ae
-Route::get('/coba', function () {
-    return view('index-auth');
-})->name('coba');
+Route::get('/dashboard', function () {
+    return view('index');
+})->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
     return view('index');
 })->name('dashboard');
 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth:admin'])->group(function () {
+    Route::get('admin/dashboard', function () {
+        return view('index-admin');
+    })->name('admin.dashboard');
     Route::get('admin/review', [AdminController::class, 'review'])->name('admin.review');
+    Route::get('admin/dokumen', [AdminController::class, 'dokumen'])->name('admin.dokumen');
+    Route::get('admin/dokumen/{id}', [AdminController::class, 'showDokumen'])->name('admin.dokumen.show');
 });
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {//ini untuk middleware user biasa
     Route::get('/document', function () {
         return view('document');
     })->name('document');
