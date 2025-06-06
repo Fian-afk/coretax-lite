@@ -27,9 +27,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('index');
-})->name('dashboard');
+// ngetest doang, nek wis iso dihapus ae
+Route::get('/coba', function () {
+    return view('index-auth');
+})->name('coba');
 
 Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
     return view('index');
