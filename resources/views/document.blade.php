@@ -438,89 +438,90 @@
         </main>
 
         <!-- Footer -->
-    <footer class="relative bg-white pt-16 pb-6 text-gray-700">
-    <div class="container mx-auto px-4 relative z-10 w-full">
-        <div class="flex flex-wrap flex-col text-center pb-4 lg:text-center w-1/2 items-center mx-auto">
-            <div class="w-full px-4">
-                <h4 class="text-3xl mb-2 font-['Pacifico'] text-primary text-center">EconoDocs</h4>
-                <h5 class="text-lg mt-0 mb-2 text-gray-600">
-                    Platform repository dokumen ekonomi terlengkap di Indonesia. Akses ribuan dokumen untuk kebutuhan akademis dan profesional.
-                </h5>
-                <div class="mt-6 mb-6 flex justify-center space-x-3">
-                    <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
-                        <i class="ri-facebook-circle-fill text-3xl"></i>                    
-                    </a>
-                    <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
-                        <i class="ri-twitter-fill text-3xl"></i>
-                    </a>
-                    <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
-                        <i class="ri-instagram-line text-3xl"></i>            
-                    </a>        
-                    <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
-                        <i class="ri-linkedin-box-fill text-3xl"></i>
-                    </a>
-                    <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
-                        <i class="ri-github-fill text-3xl"></i>
-                    </a>
+        <footer class="relative bg-white pt-16 pb-6 text-gray-700">
+            <div class="container mx-auto px-4 relative z-10 w-full">
+                <div class="flex flex-wrap flex-col text-center pb-4 lg:text-center w-1/2 items-center mx-auto">
+                    <div class="w-full px-4">
+                        <h4 class="text-3xl mb-2 font-['Pacifico'] text-primary text-center">EconoDocs</h4>
+                        <h5 class="text-lg mt-0 mb-2 text-gray-600">
+                            Platform repository dokumen ekonomi terlengkap di Indonesia. Akses ribuan dokumen untuk kebutuhan akademis dan profesional.
+                        </h5>
+                        <div class="mt-6 mb-6 flex justify-center space-x-3">
+                            <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
+                                <i class="ri-facebook-circle-fill text-3xl"></i>                    
+                            </a>
+                            <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
+                                <i class="ri-twitter-fill text-3xl"></i>
+                            </a>
+                            <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
+                                <i class="ri-instagram-line text-3xl"></i>            
+                            </a>        
+                            <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
+                                <i class="ri-linkedin-box-fill text-3xl"></i>
+                            </a>
+                            <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-300 transform hover:scale-110 p-2 rounded-full hover:bg-blue-100">
+                                <i class="ri-github-fill text-3xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="flex flex-wrap items-center md:justify-between justify-center mt-4">
+                    <div class="w-full md:w-4/12 px-4 mx-auto text-center">
+                        <div class="text-sm text-white font-semibold py-1">
+                            © <span id="get-current-year">2025</span> All Rights Reserved.
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-        </div>
-        <div class="flex flex-wrap items-center md:justify-between justify-center mt-4">
-            <div class="w-full md:w-4/12 px-4 mx-auto text-center">
-                <div class="text-sm text-white font-semibold py-1">
-                    © <span id="get-current-year">2025</span> All Rights Reserved.
-                </div>
+
+            <div class="absolute bottom-0 left-0 w-full h-20 md:h-32 lg:h-40 overflow-hidden z-0">
+                <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-16 md:h-24 text-blue-500 opacity-80"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                    <defs>
+                        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                    </defs>
+                    <g class="wave-animation-1">
+                        <use xlink:href="#gentle-wave" x="48" y="0" fill="currentColor"/>
+                    </g>
+                </svg>
+
+                <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-20 md:h-28 text-blue-600 opacity-60"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                    <defs>
+                        <path id="gentle-wave-2" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                    </defs>
+                    <g class="wave-animation-2">
+                        <use xlink:href="#gentle-wave-2" x="48" y="3" fill="currentColor"/>
+                    </g>
+                </svg>
+
+                <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-24 md:h-32 text-primary opacity-40"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                    <defs>
+                        <path id="gentle-wave-3" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                    </defs>
+                    <g class="wave-animation-3">
+                        <use xlink:href="#gentle-wave-3" x="48" y="5" fill="currentColor"/>
+                    </g>
+                </svg>
+
+                <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-28 md:h-40 text-blue-800 opacity-90"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                    <defs>
+                        <path id="gentle-wave-4" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                    </defs>
+                    <g class="wave-animation-4">
+                        <use xlink:href="#gentle-wave-4" x="48" y="7" fill="currentColor"/>
+                    </g>
+                </svg>
             </div>
-        </div>
-    </div>
+        </footer>
 
-    <div class="absolute bottom-0 left-0 w-full h-20 md:h-32 lg:h-40 overflow-hidden z-0">
-        <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-16 md:h-24 text-blue-500 opacity-80"
-             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-            <defs>
-                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-            </defs>
-            <g class="wave-animation-1">
-                <use xlink:href="#gentle-wave" x="48" y="0" fill="currentColor"/>
-            </g>
-        </svg>
-
-        <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-20 md:h-28 text-blue-600 opacity-60"
-             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-            <defs>
-                <path id="gentle-wave-2" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-            </defs>
-            <g class="wave-animation-2">
-                <use xlink:href="#gentle-wave-2" x="48" y="3" fill="currentColor"/>
-            </g>
-        </svg>
-
-        <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-24 md:h-32 text-primary opacity-40"
-             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-            <defs>
-                <path id="gentle-wave-3" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-            </defs>
-            <g class="wave-animation-3">
-                <use xlink:href="#gentle-wave-3" x="48" y="5" fill="currentColor"/>
-            </g>
-        </svg>
-
-         <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-28 md:h-40 text-blue-800 opacity-90"
-             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-            <defs>
-                <path id="gentle-wave-4" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-            </defs>
-            <g class="wave-animation-4">
-                <use xlink:href="#gentle-wave-4" x="48" y="7" fill="currentColor"/>
-            </g>
-        </svg>
-    </div>
-</footer>
 
     </div>
 
