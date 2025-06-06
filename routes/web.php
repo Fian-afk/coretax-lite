@@ -27,6 +27,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/profil', function () {
+    return view('profil');
+})-> name('profil');
+
+Route::get('/profil/edit', function () {
+    return view('/profile/edit');
+})-> name('profil.edit');
+
 Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
     return view('index');
 })->name('dashboard');

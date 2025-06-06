@@ -108,7 +108,7 @@
                     </button>
                 </div>
             </nav>
-        </div>
+        </div> 
     </header>
 
     <main class="container mx-auto px-4 py-6 pt-16">
