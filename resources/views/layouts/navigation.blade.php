@@ -75,8 +75,17 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                @php
+                    $admin = auth('admin')->check() ? auth('admin')->user() : null;
+                    $user = Auth::check() ? Auth::user() : null;
+                @endphp
+
+                <div class="font-medium text-base text-gray-800">
+                    {{ $admin ? $admin->name : ($user ? $user->name : '') }}
+                </div>
+                <div class="font-medium text-sm text-gray-500">
+                    {{ $admin ? $admin->email : ($user ? $user->email : '') }}
+                </div>
             </div>
 
             <div class="mt-3 space-y-1">
