@@ -7,7 +7,7 @@ use App\Models\Document;
 
 class DokumenController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $query = Document::query();
 
