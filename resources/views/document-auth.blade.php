@@ -87,21 +87,28 @@
                 <a href="{{ route('dokumen.upload') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Upload</a>
                 
                 <div class="relative">
-                    <button class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                    <button id="popupBtn" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
                         <i class="ri-user-line text-xl text-gray-600"></i>
                     </button>
                 </div>
             </nav>
-            
-            <div class="flex items-center">
-                <a href="{{route('login')}}" class="text-primary border border-primary hover:border-none hover:bg-primary hover:text-white px-4 py-2 rounded-md transition-all duration-300 text-sm font-medium whitespace-nowrap">Masuk / Daftar</a>
-            </div>
         </div>
     </header>
+    <div id="popupProfil" class="bg-white p-4 rounded-lg shadow-md fixed hidden top-[72px] right-16 z-50 w-xl content-start">
+        <div id="profil" class="mb-4">
+            <i class="ri-user-3-fill text-lg text-gray-600 hover:text-primary"></i>
+            <a href="#" class="text-sm text-gray-600 hover:text-primary px-4">Profil</a>
+        </div>
+        <hr class="border-gray-200 my-2">
+        <div id="logout" class="mt-4">
+            <i class="ri-logout-box-r-line text-lg text-gray-600 hover:text-primary"></i>
+            <a href="#" class="text-sm text-gray-600 hover:text-primary px-4">Logout</a>
+        </div>
+    </div>
 
         <main class="container mx-auto px-4 py-8">
             <!-- Page Title -->
-            <div class="mb-8">
+            <div class="mb-8 mt-16">
                 <h1 class="text-3xl font-bold text-gray-900">Repository Dokumen Ekonomi</h1>
                 <p class="mt-2 text-gray-600">Temukan dan unduh dokumen riset, laporan keuangan, analisis pasar, dan e-book ekonomi digital.</p>
             </div>
@@ -124,10 +131,12 @@
                         <div class="relative">
                             <select id="category" class="custom-select w-full bg-white border border-gray-200 rounded-md py-2.5 px-4 pr-8 text-gray-700 focus:border-primary focus:outline-none">
                                 <option value="">Semua Kategori</option>
-                                <option value="research">Riset</option>
-                                <option value="financial">Laporan Keuangan</option>
-                                <option value="market">Analisis Pasar</option>
-                                <option value="ebook">E-Book</option>
+                                <option value="makro">Makroekonomi</option>
+                                <option value="mikro">Mikroekonomi</option>
+                                <option value="saham">Pasar Saham</option>
+                                <option value="digital">Ekonomi Digital</option>
+                                <option value="laporan">Laporan Keuangan</option>
+                                <option value="riset">Riset Ekonomi</option>
                             </select>
                         </div>
                     </div>
@@ -145,7 +154,7 @@
                         </div>
                     </div>
                     <div class="w-full md:w-1/3 md:self-end">
-                        <button id="applyFilter" class="w-full bg-primary text-white px-4 py-2.5 !rounded-button whitespace-nowrap hover:bg-blue-600 transition duration-150 ease-in-out mt-6 md:mt-0">
+                        <button id="applyFilter" class="w-full bg-primary text-white px-4 py-2.5 rounded-md whitespace-nowrap hover:bg-blue-600 transition duration-150 ease-in-out mt-6 md:mt-0">
                             Terapkan Filter
                         </button>
                     </div>
@@ -618,6 +627,20 @@
                     }, 3000);
                 });
             });
+        });
+    </script>
+    <script id="profil">
+        const popupBtn = document.getElementById('popupBtn');
+        const popupProfil = document.getElementById('popupProfil');
+
+        popupBtn.addEventListener('click', function(e) {
+            popupProfil.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!popupProfil.contains(e.target) && !popupBtn.contains(e.target)) {
+                popupProfil.classList.add('hidden');
+            }
         });
     </script>
 </body>
