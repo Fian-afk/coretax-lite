@@ -6,7 +6,7 @@
     <title>EconoDocs - Repositori Dokumen Ekonomi Terlengkap</title>
     <link rel="stylesheet" href="css/app.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script>tailwind.config={theme:{extend:{colors:{primary:'#3b82f6',secondary:'#64748b'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#4F46E5',secondary:'#10B981'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -204,8 +204,8 @@
             </div>
             
             <nav class="hidden md:flex items-center space-x-6">
-                <a href="#" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
-                <a href="{{ route('document') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
+                <a href="{{ route('dashboard') }}" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
+                <a href="{{ route('dokumen.index') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
                 <a href="{{ route('dokumen.upload') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Upload</a>
                 
                 <div class="relative">
@@ -216,7 +216,7 @@
             </nav>
         </div>
     </header>
-    <div id="popupProfil" class="bg-white p-4 rounded-lg shadow-md fixed hidden top-[72px] right-16 z-50 w-xl content-start">
+    <div id="popupProfil" class="bg-white p-4 rounded-lg shadow-md fixed top-[72px] right-16 z-100 w-xl content-start">
         <div id="profil" class="mb-4">
             <i class="ri-user-3-fill text-lg text-gray-600 hover:text-primary"></i>
             <a href="#" class="text-sm text-gray-600 hover:text-primary px-4">Profil</a>
@@ -227,7 +227,7 @@
             <a href="#" class="text-sm text-gray-600 hover:text-primary px-4">Logout</a>
         </div>
     </div>
-
+    
     <!-- Main Content -->
     <main class="pt-16">
         <!-- Hero Section -->
@@ -657,24 +657,6 @@
     </div>
 </footer>
 
-    <script id="notification-toggle">
-        document.addEventListener('DOMContentLoaded', function() {
-            const notificationBtn = document.getElementById('notification-btn');
-            const notificationPanel = document.getElementById('notification-panel');
-            
-            notificationBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                notificationPanel.style.display = notificationPanel.style.display === 'block' ? 'none' : 'block';
-            });
-            
-            document.addEventListener('click', function(e) {
-                if (!notificationPanel.contains(e.target) && e.target !== notificationBtn) {
-                    notificationPanel.style.display = 'none';
-                }
-            });
-        });
-    </script>
-
     <script id="custom-select">
         document.addEventListener('DOMContentLoaded', function() {
             const selectElements = document.querySelectorAll('.custom-select');
@@ -737,18 +719,21 @@
         });
     </script>
     <script id="profil">
-        const popupBtn = document.getElementById('popupBtn');
-        const popupProfil = document.getElementById('popupProfil');
+        document.addEventListener('DOMContentLoaded', function() {
+           const popupBtn = document.getElementById('popupBtn');
+            const popupProfil = document.getElementById('popupProfil');
 
-        popupBtn.addEventListener('click', function(e) {
-            popupProfil.classList.toggle('hidden');
-        });
+            popupBtn.addEventListener('click', function(e) {
+                popupProfil.classList.toggle('hidden');
+            });
 
-        document.addEventListener('click', function (e) {
-            if (!popupProfil.contains(e.target) && !popupBtn.contains(e.target)) {
-                popupProfil.classList.add('hidden');
-            }
+            document.addEventListener('click', function (e) {
+                if (!popupProfil.contains(e.target) && !popupBtn.contains(e.target)) {
+                    popupProfil.classList.add('hidden');
+                }
+            }); 
         });
+        
     </script>
 </body>
 </html>
