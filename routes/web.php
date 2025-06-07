@@ -12,6 +12,7 @@ use App\Http\Controllers\UploadController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ManajemenController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Models\Document;
 
 
 /*
@@ -46,11 +47,16 @@ Route::middleware(['auth:admin'])->group(function () {
         return view('index-admin');
     })->name('admin.dashboard');
     Route::get('admin/review', [AdminController::class, 'review'])->name('admin.review');
-    Route::get('admin/dokumen', [AdminController::class, 'dokumen'])->name('admin.dokumen.index');
+    Route::get('admin/dokumen', function() {
+        $documents = Document::where('status', 'disetujui')->latest()->get();
+        return view('document-admin', compact('documents'));
+    })->name('admin.dokumen.index');
     Route::get('admin/dokumen/{id}', [AdminController::class, 'show'])->name('admin.dokumen.show');
     Route::get('admin/manajemen', [ManajemenController::class, 'index'])->name('manajemen');
     Route::post('/manajemen/{id}/approve', [ManajemenController::class, 'approve'])->name('manajemen.approve');
     Route::post('/manajemen/{id}/reject', [ManajemenController::class, 'reject'])->name('manajemen.reject');
+    Route::delete('/manajemen/{id}', [ManajemenController::class, 'destroy'])->name('manajemen.destroy');
+    Route::post('/manajemen/bulk-action', [ManajemenController::class, 'bulkAction'])->name('manajemen.bulkAction');
 });
 
 Route::middleware('auth')->group(function () {//ini untuk middleware user biasa
@@ -77,7 +83,7 @@ Route::get('/econodocs', function () {
     return view('index');
 })->name('econodocs');
 
-Route::get('econodocs/dokumen', function () {
-    return view('document');
-})->name('econodocs.dokumen');
+// Route::post('/manajemen/bulk-action', [ManajemenController::class, 'bulkAction'])->name('manajemen.bulkAction');
+
+// Route::delete('/manajemen/{id}', [ManajemenController::class, 'destroy'])->name('manajemen.destroy');
 
