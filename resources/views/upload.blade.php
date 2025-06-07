@@ -55,17 +55,24 @@
                 <a href="{{ route('dokumen.upload') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Upload</a>
                 
                 <div class="relative">
-                    <button class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                    <button id="popupBtn" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
                         <i class="ri-user-line text-xl text-gray-600"></i>
                     </button>
                 </div>
             </nav>
-            
-            <div class="flex items-center">
-                <a href="#" class="text-primary border border-primary hover:border-none hover:bg-primary hover:text-white px-4 py-2 rounded-md transition-all duration-300 text-sm font-medium whitespace-nowrap">Masuk / Daftar</a>
-            </div>
         </div>
     </header>
+    <div id="popupProfil" class="bg-white p-4 rounded-lg shadow-md fixed hidden top-[72px] right-16 z-50 w-xl content-start">
+        <div id="profil" class="mb-4">
+            <i class="ri-user-3-fill text-lg text-gray-600 hover:text-primary"></i>
+            <a href="#" class="text-sm text-gray-600 hover:text-primary px-4">Profil</a>
+        </div>
+        <hr class="border-gray-200 my-2">
+        <div id="logout" class="mt-4">
+            <i class="ri-logout-box-r-line text-lg text-gray-600 hover:text-primary"></i>
+            <a href="#" class="text-sm text-gray-600 hover:text-primary px-4">Logout</a>
+        </div>
+    </div>
 
     <div class="mt-16 max-w-3xl mx-auto p-6 md:p-8">
         <div class="bg-white shadow-md rounded-lg p-6 md:p-8">
@@ -485,6 +492,20 @@
                     }
                 });
             });
+        });
+    </script>
+    <script id="profil">
+        const popupBtn = document.getElementById('popupBtn');
+        const popupProfil = document.getElementById('popupProfil');
+
+        popupBtn.addEventListener('click', function(e) {
+            popupProfil.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!popupProfil.contains(e.target) && !popupBtn.contains(e.target)) {
+                popupProfil.classList.add('hidden');
+            }
         });
     </script>
 </body>

@@ -92,10 +92,6 @@
                     </button>
                 </div>
             </nav>
-            
-            <div class="flex items-center">
-                <a href="{{route('login')}}" class="text-primary border border-primary hover:border-none hover:bg-primary hover:text-white px-4 py-2 rounded-md transition-all duration-300 text-sm font-medium whitespace-nowrap">Masuk / Daftar</a>
-            </div>
         </div>
     </header>
 
