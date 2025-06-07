@@ -47,7 +47,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/login');
-    }
+    } 
 
     public function showRegisterForm() {
         return view('auth.register');
