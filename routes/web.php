@@ -48,6 +48,8 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('admin/dokumen', [AdminController::class, 'dokumen'])->name('admin.dokumen.index');
     Route::get('admin/dokumen/{id}', [AdminController::class, 'show'])->name('admin.dokumen.show');
     Route::get('admin/manajemen', [ManajemenController::class, 'index'])->name('manajemen');
+    Route::post('/manajemen/{id}/approve', [ManajemenController::class, 'approve'])->name('manajemen.approve');
+    Route::post('/manajemen/{id}/reject', [ManajemenController::class, 'reject'])->name('manajemen.reject');
 });
 
 Route::middleware('auth')->group(function () {//ini untuk middleware user biasa
@@ -60,6 +62,10 @@ Route::middleware('auth')->group(function () {//ini untuk middleware user biasa
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profil', function () {
+        return view('profil');
+    })->name('profil');
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
 
 Route::get('/auth/login-admin', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');

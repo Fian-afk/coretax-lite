@@ -98,9 +98,9 @@
             </div>
             
             <nav class="hidden md:flex items-center space-x-6">
-                <a href="#" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
-                <a href="#" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
-                <a href="#" class="text-gray-600 hover:text-primary font-medium text-sm">Upload</a>
+                <a href="{{ route('dashboard')}}" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
+                <a href="{{ route('document') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
+                <a href="{{ route('dokumen.upload') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Upload</a>
                 
                 <div class="relative">
                     <button id="popupBtn" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
@@ -113,12 +113,15 @@
     <div id="popupProfil" class="bg-white p-4 rounded-lg shadow-md fixed hidden top-[72px] right-16 z-50 w-xl content-start">
         <div id="profil" class="mb-4">
             <i class="ri-user-3-fill text-lg text-gray-600 hover:text-primary"></i>
-            <a href="#" class="text-sm text-gray-600 hover:text-primary px-4">Profil</a>
+            <a href="{{ route('profil') }}" class="text-sm text-gray-600 hover:text-primary px-4">Profil</a>
         </div>
         <hr class="border-gray-200 my-2">
         <div id="logout" class="mt-4">
             <i class="ri-logout-box-r-line text-lg text-gray-600 hover:text-primary"></i>
-            <a href="#" class="text-sm text-gray-600 hover:text-primary px-4">Logout</a>
+            <form method="POST" action="{{ route('logout') }}" class="inline">
+        @csrf
+        <button type="submit" class="text-sm text-gray-600 hover:text-primary px-4 bg-transparent border-none cursor-pointer">Logout</button>
+    </form>
         </div>
     </div>
 

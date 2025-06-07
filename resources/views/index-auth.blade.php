@@ -219,12 +219,15 @@
     <div id="popupProfil" class="bg-white p-4 rounded-lg shadow-md fixed top-[72px] right-16 z-100 w-xl content-start">
         <div id="profil" class="mb-4">
             <i class="ri-user-3-fill text-lg text-gray-600 hover:text-primary"></i>
-            <a href="#" class="text-sm text-gray-600 hover:text-primary px-4">Profil</a>
+            <a href="{{ route('profil') }}" class="text-sm text-gray-600 hover:text-primary px-4">Profil</a>
         </div>
         <hr class="border-gray-200 my-2">
         <div id="logout" class="mt-4">
             <i class="ri-logout-box-r-line text-lg text-gray-600 hover:text-primary"></i>
-            <a href="#" class="text-sm text-gray-600 hover:text-primary px-4">Logout</a>
+            <form method="POST" action="{{ route('logout') }}" class="inline">
+        @csrf
+        <button type="submit" class="text-sm text-gray-600 hover:text-primary px-4 bg-transparent border-none cursor-pointer">Logout</button>
+    </form>
         </div>
     </div>
     

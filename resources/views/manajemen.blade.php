@@ -38,9 +38,9 @@
             </div>
             
             <nav class="hidden md:flex items-center space-x-6">
-                <a href="#" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
-                <a href="#" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
-                <a href="#" class="text-gray-600 hover:text-primary font-medium text-sm">Manajemen</a>
+                <a href="{{ route('admin.dashboard') }}" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
+                <a href="{{ route('admin.dokumen.show', ['id' => 1]) }}" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
+                <a href="{{ route('manajemen') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Manajemen</a>
                 
                 <div class="relative">
                     <button class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
@@ -123,124 +123,116 @@
       </div>
     </form>
 
-    <form method="POST" action="{{ url('/manajemen/bulk-action') }}">
-      @csrf
-      <div class="bg-white rounded-xl shadow overflow-x-auto">
-        <table class="min-w-full text-sm">
-          <thead class="bg-blue-600 text-white">
-            <tr>
-              <th class="p-3 text-left">
-                <input type="checkbox" id="select-all" />
-              </th>
-              <th class="p-3 text-left">Nama Dokumen</th>
-              <th class="p-3 text-left">Pengunggah</th>
-              <th class="p-3 text-left">Tanggal</th>
-              <th class="p-3 text-left">Status</th>
-              <th class="p-3 text-left">Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach ($documents as $doc)
-              <tr class="border-t">
-                <td class="p-3">
-                  <input type="checkbox" name="selected[]" value="{{ $doc->id }}" />
-                </td>
-                <td class="p-3 text-blue-600 font-medium">
-                  {{ $doc->title }}
-                  <span class="text-gray-400 block text-xs">-</span>
-                </td>
-                <td class="p-3">{{ $doc->user->username ?? '-' }}</td>
-                <td class="p-3">{{ $doc->created_at->format('d-m-Y') }}</td>
-                <td class="p-3">
-                  @php
-                    $statusColors = [
-                      'Menunggu' => 'bg-yellow-100 text-yellow-600',
-                      'Disetujui' => 'bg-green-100 text-green-600',
-                      'Ditolak' => 'bg-red-100 text-red-600',
-                    ];
-                    $colorClass = $statusColors[$doc->status ?? ''] ?? 'bg-gray-100 text-gray-600';
-                  @endphp
-                  <span class="{{ $colorClass }} px-2 py-1 rounded-full text-xs">{{ $doc->status ?? '-' }}</span>
-                </td>
-                <td class="p-3 flex gap-2">
-                  <a href="{{ url('/manajemen/' . $doc->id) }}" title="Lihat">
-                    <i class="fas fa-eye text-blue-600 cursor-pointer"></i>
-                  </a>
-
-                  @if ($doc->status == 'Menunggu')
-                    <form action="{{ url('/manajemen/' . $doc->id . '/approve') }}" method="POST" class="inline">
-                      @csrf
-                      <button type="submit" title="Setujui"
-                        class="text-green-600 hover:text-green-800 focus:outline-none">
-                        <i class="fas fa-check"></i>
-                      </button>
-                    </form>
-                    <form action="{{ url('/manajemen/' . $doc->id . '/reject') }}" method="POST" class="inline">
-                      @csrf
-                      <button type="submit" title="Tolak"
-                        class="text-red-600 hover:text-red-800 focus:outline-none">
-                        <i class="fas fa-times"></i>
-                      </button>
-                    </form>
-                  @endif
-
-                  <form action="{{ url('/manajemen/' . $doc->id) }}" method="POST" class="inline"
-                    onsubmit="return confirm('Yakin ingin hapus dokumen ini?')">
+    <div class="bg-white rounded-xl shadow overflow-x-auto">
+      <table class="min-w-full text-sm">
+        <thead class="bg-blue-600 text-white">
+          <tr>
+            <th class="p-3 text-left">
+              <input type="checkbox" id="select-all" />
+            </th>
+            <th class="p-3 text-left">Nama Dokumen</th>
+            <th class="p-3 text-left">Pengunggah</th>
+            <th class="p-3 text-left">Tanggal</th>
+            <th class="p-3 text-left">Status</th>
+            <th class="p-3 text-left">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($documents as $doc)
+            <tr class="border-t">
+              <td class="p-3">
+                <input type="checkbox" name="selected[]" value="{{ $doc->id }}" form="bulk-action-form" />
+              </td>
+              <td class="p-3 text-blue-600 font-medium">
+                {{ $doc->title }}
+                <span class="text-gray-400 block text-xs">-</span>
+              </td>
+              <td class="p-3">{{ $doc->user->username ?? '-' }}</td>
+              <td class="p-3">{{ $doc->created_at->format('d-m-Y') }}</td>
+              <td class="p-3">
+                @php
+                  $statusColors = [
+                    'Menunggu' => 'bg-yellow-100 text-yellow-600',
+                    'Disetujui' => 'bg-green-100 text-green-600',
+                    'Ditolak' => 'bg-red-100 text-red-600',
+                  ];
+                  $colorClass = $statusColors[$doc->status ?? ''] ?? 'bg-gray-100 text-gray-600';
+                @endphp
+                <span class="{{ $colorClass }} px-2 py-1 rounded-full text-xs">{{ $doc->status ?? '-' }}</span>
+              </td>
+              <td class="p-3 flex gap-2">
+                @if ($doc->status == 'Menunggu')
+                  <form action="{{ url('/manajemen/' . $doc->id . '/approve') }}" method="POST" class="inline">
                     @csrf
-                    @method('DELETE')
-                    <button type="submit" title="Hapus"
-                      class="text-gray-600 hover:text-gray-800 focus:outline-none">
-                      <i class="fas fa-trash"></i>
+                    <button type="submit" title="Setujui"
+                      class="text-green-600 hover:text-green-800 focus:outline-none">
+                      <i class="fas fa-check"></i>
                     </button>
                   </form>
-                </td>
-              </tr>
-            @endforeach
-            @if ($documents->isEmpty())
-              <tr>
-                <td colspan="6" class="text-center p-4 text-gray-500">Tidak ada data dokumen.</td>
-              </tr>
-            @endif
-          </tbody>
-        </table>
+                  <form action="{{ url('/manajemen/' . $doc->id . '/reject') }}" method="POST" class="inline">
+                    @csrf
+                    <button type="submit" title="Tolak"
+                      class="text-red-600 hover:text-red-800 focus:outline-none">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </form>
+                @endif
 
-        <!-- Pagination & Actions -->
-        <div class="px-4 py-2 border-t border-gray-200 flex justify-between items-center text-sm">
-          <div class="flex gap-2">
-            <button class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded flex items-center gap-2 hover:bg-gray-50">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7h6m2 0H7m3-3h4a1 1 0 011 1v1H8V5a1 1 0 011-1z" />
-              </svg>
-              Hapus Terpilih
-            </button>
-            <button class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded flex items-center gap-2 hover:bg-gray-50">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4" />
-              </svg>
-              Ekspor Data
-            </button>
-          </div>
+                <form action="{{ url('/manajemen/' . $doc->id) }}" method="POST" class="inline"
+                  onsubmit="return confirm('Yakin ingin hapus dokumen ini?')">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" title="Hapus"
+                    class="text-gray-600 hover:text-gray-800 focus:outline-none">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+          @endforeach
+          @if ($documents->isEmpty())
+            <tr>
+              <td colspan="6" class="text-center p-4 text-gray-500">Tidak ada data dokumen.</td>
+            </tr>
+          @endif
+        </tbody>
+      </table>
+      <!-- Pagination & Actions -->
+      <div class="px-4 py-2 border-t border-gray-200 flex justify-between items-center text-sm">
+        <form id="bulk-action-form" method="POST" action="{{ url('/manajemen/bulk-action') }}" class="flex gap-2">
+          @csrf
+          <button type="submit" name="action" value="delete" class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded flex items-center gap-2 hover:bg-gray-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7h6m2 0H7m3-3h4a1 1 0 011 1v1H8V5a1 1 0 011-1z" />
+            </svg>
+            Hapus Terpilih
+          </button>
+          <button type="submit" name="action" value="export" class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded flex items-center gap-2 hover:bg-gray-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4" />
+            </svg>
+            Ekspor Data
+          </button>
+        </form>
 
-          <div class="flex justify-end items-center gap-2 p-4">
-            <a href="{{ $page > 1 ? url('/manajemen?page=' . ($page - 1)) : '#' }}"
-               class="px-3 py-1 border rounded {{ $page <= 1 ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-200' }}">
-                &laquo;
-            </a>
-            @for ($i = 1; $i <= $totalPages; $i++)
-                <a href="{{ url('/manajemen?page=' . $i) }}"
-                   class="px-3 py-1 border rounded {{ $page == $i ? 'bg-blue-600 text-white' : 'hover:bg-gray-200' }}">
-                    {{ $i }}
-                </a>
-            @endfor
-            <a href="{{ $page < $totalPages ? url('/manajemen?page=' . ($page + 1)) : '#' }}"
-               class="px-3 py-1 border rounded {{ $page >= $totalPages ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-200' }}">
-                &raquo;
-            </a>
-          </div>
+        <div class="flex justify-end items-center gap-2 p-4">
+          <a href="{{ $page > 1 ? url('/manajemen?page=' . ($page - 1)) : '#' }}"
+             class="px-3 py-1 border rounded {{ $page <= 1 ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-200' }}">
+              &laquo;
+          </a>
+          @for ($i = 1; $i <= $totalPages; $i++)
+              <a href="{{ url('/manajemen?page=' . $i) }}"
+                 class="px-3 py-1 border rounded {{ $page == $i ? 'bg-blue-600 text-white' : 'hover:bg-gray-200' }}">
+                  {{ $i }}
+              </a>
+          @endfor
+          <a href="{{ $page < $totalPages ? url('/manajemen?page=' . ($page + 1)) : '#' }}"
+             class="px-3 py-1 border rounded {{ $page >= $totalPages ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-200' }}">
+              &raquo;
+          </a>
         </div>
-
       </div>
-    </form>
+    </div>
   </main>
 
   <!-- Footer -->
