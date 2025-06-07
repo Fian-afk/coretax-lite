@@ -77,3 +77,7 @@ Route::get('/econodocs', function () {
     return view('index');
 })->name('econodocs');
 
+Route::get('econodocs/dokumen', function () {
+    return view('document');
+})->name('econodocs.dokumen');
+
