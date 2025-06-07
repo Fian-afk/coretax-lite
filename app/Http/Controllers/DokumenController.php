@@ -11,7 +11,7 @@ class DokumenController extends Controller
     {
         $query = Document::query();
 
-        // // Pencarian berdasarkan judul atau deskripsi (kata kunci)
+        // Pencarian berdasarkan judul atau deskripsi (kata kunci)
         if ($request->filled('q')) {
             $q = $request->q;
             $query->where(function($sub) use ($q) {
@@ -20,14 +20,17 @@ class DokumenController extends Controller
             });
         }
 
-        // // Filter kategori jika ada
+        // Filter kategori jika ada
         if ($request->filled('category')) {
             $query->where('category', $request->category);
         }
 
+        // Filter hanya dokumen yang sudah disetujui
+        $query->where('status', 'disetujui');
+
         $documents = $query->latest()->paginate(10);
-        // // Tampilkan halaman daftar dokumen
-        return view('document-auth');
+        // Tampilkan halaman daftar dokumen
+        return view('document-auth', compact('documents'));
     }
     public function upload()
     {

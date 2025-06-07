@@ -60,7 +60,7 @@ class ManajemenController extends Controller
         $document = Document::findOrFail($id);
         $document->delete();
 
-        return back()->with('success', 'Dokumen dihapus.');
+        return redirect()->route('manajemen')->with('success', 'Dokumen dihapus.');
     }
 
     public function bulkAction(Request $request)
@@ -74,13 +74,13 @@ class ManajemenController extends Controller
 
         if ($action === 'delete') {
             Document::whereIn('id', $ids)->delete();
-            return back()->with('success', 'Dokumen terpilih berhasil dihapus.');
+            return redirect()->route('manajemen')->with('success', 'Dokumen berhasil dihapus.');
         }
 
         if ($action === 'export') {
             return back()->with('info', 'Fitur ekspor belum diimplementasikan.');
         }
 
-        return back()->with('error', 'Aksi tidak valid.');
+        return redirect()->back()->with('error', 'Gagal menghapus dokumen.');
     }
 }
