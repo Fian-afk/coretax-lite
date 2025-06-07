@@ -176,257 +176,38 @@
             </div>
             <!-- Document List -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Document 1 -->
-                <div class="document-card bg-white rounded-lg shadow-sm overflow-hidden">
-                    <div class="p-5">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="w-12 h-12 flex items-center justify-center bg-blue-50 rounded-md">
-                                <i class="ri-file-text-line ri-xl text-primary"></i>
+                @forelse($documents as $document)
+                    <div class="document-card bg-white rounded-lg shadow-sm overflow-hidden">
+                        <div class="p-5">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="w-12 h-12 flex items-center justify-center bg-blue-50 rounded-md">
+                                    <i class="ri-file-text-line ri-xl text-primary"></i>
+                                </div>
+                                <span class="badge badge-{{ strtolower($document->category) }}">{{ $document->category }}</span>
                             </div>
-                            <span class="badge badge-research">Riset</span>
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Analisis Dampak Ekonomi Digital pada Sektor UMKM Indonesia</h3>
-                        <div class="flex items-center text-sm text-gray-500 mb-4">
-                            <i class="ri-calendar-line mr-2"></i>
-                            <span>Mei 2025</span>
-                            <span class="mx-2">•</span>
-                            <i class="ri-file-pdf-line mr-2"></i>
-                            <span>PDF (4.2 MB)</span>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-4">Penelitian komprehensif tentang transformasi digital pada sektor UMKM di Indonesia dan dampaknya terhadap pertumbuhan ekonomi nasional.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-gray-500">Dilihat 1.245 kali</span>
-                            <button class="flex items-center bg-primary text-white px-3 py-1.5 !rounded-button whitespace-nowrap hover:bg-blue-600 transition duration-150 ease-in-out">
-                                <i class="ri-download-line mr-1"></i>
-                                Unduh
-                            </button>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ $document->title }}</h3>
+                            <div class="flex items-center text-sm text-gray-500 mb-4">
+                                <i class="ri-calendar-line mr-2"></i>
+                                <span>{{ $document->created_at->translatedFormat('F Y') }}</span>
+                                <span class="mx-2">•</span>
+                                <i class="ri-file-pdf-line mr-2"></i>
+                                <span>{{ strtoupper(pathinfo($document->file_path, PATHINFO_EXTENSION)) }}</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">{{ $document->description }}</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-500">{{ $document->instansi ?? '-' }}</span>
+                                <a href="{{ asset('storage/' . $document->file_path) }}" class="flex items-center bg-primary text-white px-3 py-1.5 rounded-sm whitespace-nowrap hover:bg-blue-600 transition duration-150 ease-in-out" download>
+                                    <i class="ri-download-line mr-1"></i>
+                                    Unduh
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Document 2 -->
-                <div class="document-card bg-white rounded-lg shadow-sm overflow-hidden">
-                    <div class="p-5">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="w-12 h-12 flex items-center justify-center bg-green-50 rounded-md">
-                                <i class="ri-file-chart-line ri-xl text-green-500"></i>
-                            </div>
-                            <span class="badge badge-financial">Laporan Keuangan</span>
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Laporan Keuangan Bank Indonesia Q1 2025</h3>
-                        <div class="flex items-center text-sm text-gray-500 mb-4">
-                            <i class="ri-calendar-line mr-2"></i>
-                            <span>April 2025</span>
-                            <span class="mx-2">•</span>
-                            <i class="ri-file-excel-line mr-2"></i>
-                            <span>XLSX (2.8 MB)</span>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-4">Laporan keuangan resmi Bank Indonesia untuk kuartal pertama tahun 2025, termasuk analisis tren moneter dan fiskal.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-gray-500">Dilihat 978 kali</span>
-                            <button class="flex items-center bg-primary text-white px-3 py-1.5 !rounded-button whitespace-nowrap hover:bg-blue-600 transition duration-150 ease-in-out">
-                                <i class="ri-download-line mr-1"></i>
-                                Unduh
-                            </button>
-                        </div>
+                @empty
+                    <div class="col-span-3 text-center text-gray-500 py-10">
+                        Tidak ada dokumen yang disetujui.
                     </div>
-                </div>
-
-                <!-- Document 3 -->
-                <div class="document-card bg-white rounded-lg shadow-sm overflow-hidden">
-                    <div class="p-5">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="w-12 h-12 flex items-center justify-center bg-yellow-50 rounded-md">
-                                <i class="ri-line-chart-line ri-xl text-yellow-500"></i>
-                            </div>
-                            <span class="badge badge-market">Analisis Pasar</span>
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Tren Pasar Cryptocurrency di Asia Tenggara 2025</h3>
-                        <div class="flex items-center text-sm text-gray-500 mb-4">
-                            <i class="ri-calendar-line mr-2"></i>
-                            <span>Mei 2025</span>
-                            <span class="mx-2">•</span>
-                            <i class="ri-file-pdf-line mr-2"></i>
-                            <span>PDF (6.1 MB)</span>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-4">Analisis mendalam tentang tren pasar cryptocurrency di kawasan Asia Tenggara, termasuk regulasi dan adopsi di Indonesia.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-gray-500">Dilihat 2.367 kali</span>
-                            <button class="flex items-center bg-primary text-white px-3 py-1.5 !rounded-button whitespace-nowrap hover:bg-blue-600 transition duration-150 ease-in-out">
-                                <i class="ri-download-line mr-1"></i>
-                                Unduh
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Document 4 -->
-                <div class="document-card bg-white rounded-lg shadow-sm overflow-hidden">
-                    <div class="p-5">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="w-12 h-12 flex items-center justify-center bg-red-50 rounded-md">
-                                <i class="ri-book-open-line ri-xl text-red-500"></i>
-                            </div>
-                            <span class="badge badge-ebook">E-Book</span>
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Panduan Lengkap Investasi Saham untuk Pemula</h3>
-                        <div class="flex items-center text-sm text-gray-500 mb-4">
-                            <i class="ri-calendar-line mr-2"></i>
-                            <span>Maret 2025</span>
-                            <span class="mx-2">•</span>
-                            <i class="ri-file-pdf-line mr-2"></i>
-                            <span>PDF (8.5 MB)</span>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-4">E-book komprehensif yang membahas dasar-dasar investasi saham untuk pemula, termasuk strategi dan analisis fundamental.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-gray-500">Dilihat 3.512 kali</span>
-                            <button class="flex items-center bg-primary text-white px-3 py-1.5 !rounded-button whitespace-nowrap hover:bg-blue-600 transition duration-150 ease-in-out">
-                                <i class="ri-download-line mr-1"></i>
-                                Unduh
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Document 5 -->
-                <div class="document-card bg-white rounded-lg shadow-sm overflow-hidden">
-                    <div class="p-5">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="w-12 h-12 flex items-center justify-center bg-blue-50 rounded-md">
-                                <i class="ri-file-text-line ri-xl text-primary"></i>
-                            </div>
-                            <span class="badge badge-research">Riset</span>
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Studi Komparatif Fintech di Indonesia dan Singapura</h3>
-                        <div class="flex items-center text-sm text-gray-500 mb-4">
-                            <i class="ri-calendar-line mr-2"></i>
-                            <span>Februari 2025</span>
-                            <span class="mx-2">•</span>
-                            <i class="ri-file-pdf-line mr-2"></i>
-                            <span>PDF (5.7 MB)</span>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-4">Penelitian yang membandingkan perkembangan industri fintech di Indonesia dan Singapura, termasuk regulasi dan inovasi.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-gray-500">Dilihat 1.876 kali</span>
-                            <button class="flex items-center bg-primary text-white px-3 py-1.5 !rounded-button whitespace-nowrap hover:bg-blue-600 transition duration-150 ease-in-out">
-                                <i class="ri-download-line mr-1"></i>
-                                Unduh
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Document 6 -->
-                <div class="document-card bg-white rounded-lg shadow-sm overflow-hidden">
-                    <div class="p-5">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="w-12 h-12 flex items-center justify-center bg-green-50 rounded-md">
-                                <i class="ri-file-chart-line ri-xl text-green-500"></i>
-                            </div>
-                            <span class="badge badge-financial">Laporan Keuangan</span>
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Laporan Tahunan Bursa Efek Indonesia 2024</h3>
-                        <div class="flex items-center text-sm text-gray-500 mb-4">
-                            <i class="ri-calendar-line mr-2"></i>
-                            <span>Januari 2025</span>
-                            <span class="mx-2">•</span>
-                            <i class="ri-file-pdf-line mr-2"></i>
-                            <span>PDF (12.3 MB)</span>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-4">Laporan tahunan resmi Bursa Efek Indonesia yang mencakup kinerja pasar modal, IPO, dan perkembangan investasi selama 2024.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-gray-500">Dilihat 2.145 kali</span>
-                            <button class="flex items-center bg-primary text-white px-3 py-1.5 !rounded-button whitespace-nowrap hover:bg-blue-600 transition duration-150 ease-in-out">
-                                <i class="ri-download-line mr-1"></i>
-                                Unduh
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Document 7 -->
-                <div class="document-card bg-white rounded-lg shadow-sm overflow-hidden">
-                    <div class="p-5">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="w-12 h-12 flex items-center justify-center bg-yellow-50 rounded-md">
-                                <i class="ri-line-chart-line ri-xl text-yellow-500"></i>
-                            </div>
-                            <span class="badge badge-market">Analisis Pasar</span>
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Prospek Ekonomi Indonesia 2025-2030</h3>
-                        <div class="flex items-center text-sm text-gray-500 mb-4">
-                            <i class="ri-calendar-line mr-2"></i>
-                            <span>April 2025</span>
-                            <span class="mx-2">•</span>
-                            <i class="ri-file-pdf-line mr-2"></i>
-                            <span>PDF (7.8 MB)</span>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-4">Analisis komprehensif tentang prospek ekonomi Indonesia untuk periode 2025-2030, termasuk proyeksi pertumbuhan sektor-sektor utama.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-gray-500">Dilihat 1.923 kali</span>
-                            <button class="flex items-center bg-primary text-white px-3 py-1.5 !rounded-button whitespace-nowrap hover:bg-blue-600 transition duration-150 ease-in-out">
-                                <i class="ri-download-line mr-1"></i>
-                                Unduh
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Document 8 -->
-                <div class="document-card bg-white rounded-lg shadow-sm overflow-hidden">
-                    <div class="p-5">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="w-12 h-12 flex items-center justify-center bg-red-50 rounded-md">
-                                <i class="ri-book-open-line ri-xl text-red-500"></i>
-                            </div>
-                            <span class="badge badge-ebook">E-Book</span>
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Ekonomi Digital: Transformasi Bisnis di Era Industri 4.0</h3>
-                        <div class="flex items-center text-sm text-gray-500 mb-4">
-                            <i class="ri-calendar-line mr-2"></i>
-                            <span>Maret 2025</span>
-                            <span class="mx-2">•</span>
-                            <i class="ri-file-pdf-line mr-2"></i>
-                            <span>PDF (9.2 MB)</span>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-4">E-book yang membahas transformasi bisnis dalam era ekonomi digital dan Industri 4.0, dengan studi kasus dari Indonesia.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-gray-500">Dilihat 2.789 kali</span>
-                            <button class="flex items-center bg-primary text-white px-3 py-1.5 !rounded-button whitespace-nowrap hover:bg-blue-600 transition duration-150 ease-in-out">
-                                <i class="ri-download-line mr-1"></i>
-                                Unduh
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Document 9 -->
-                <div class="document-card bg-white rounded-lg shadow-sm overflow-hidden">
-                    <div class="p-5">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="w-12 h-12 flex items-center justify-center bg-blue-50 rounded-md">
-                                <i class="ri-file-text-line ri-xl text-primary"></i>
-                            </div>
-                            <span class="badge badge-research">Riset</span>
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Dampak Kebijakan Moneter Terhadap Inflasi di Indonesia</h3>
-                        <div class="flex items-center text-sm text-gray-500 mb-4">
-                            <i class="ri-calendar-line mr-2"></i>
-                            <span>Januari 2025</span>
-                            <span class="mx-2">•</span>
-                            <i class="ri-file-pdf-line mr-2"></i>
-                            <span>PDF (3.9 MB)</span>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-4">Penelitian tentang efektivitas kebijakan moneter Bank Indonesia dalam mengendalikan inflasi selama periode 2020-2024.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-gray-500">Dilihat 1.456 kali</span>
-                            <button class="flex items-center bg-primary text-white px-3 py-1.5 !rounded-button whitespace-nowrap hover:bg-blue-600 transition duration-150 ease-in-out">
-                                <i class="ri-download-line mr-1"></i>
-                                Unduh
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                @endforelse
             </div>
 
             <!-- Pagination -->
@@ -499,7 +280,7 @@
 
         <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-20 md:h-28 text-blue-600 opacity-60"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+             viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave-2" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
@@ -510,7 +291,7 @@
 
         <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-24 md:h-32 text-primary opacity-40"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+             viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave-3" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
@@ -521,6 +302,7 @@
 
          <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-28 md:h-40 text-blue-800 opacity-90"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             viewBox="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
              viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave-4" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />

@@ -102,16 +102,16 @@
     <form method="GET" action="{{ url('/manajemen') }}"
       class="bg-white border border-gray-300 rounded-lg p-4 mb-4 flex justify-between items-center">
       <div class="flex gap-4">
-        <select name="status" class="border border-gray-300 rounded-md px-4 py-2 text-sm bg-white">
+        <select class="w-30" name="status" class="border border-gray-300 rounded-md px-4 py-2 text-sm bg-white">
           <option value="">Semua Status</option>
           <option value="Menunggu" {{ request('status') == 'Menunggu' ? 'selected' : '' }}>Menunggu</option>
           <option value="Disetujui" {{ request('status') == 'Disetujui' ? 'selected' : '' }}>Disetujui</option>
           <option value="Ditolak" {{ request('status') == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
         </select>
-        <select name="jenis" class="border border-gray-300 rounded-md px-4 py-2 text-sm bg-white">
+        <select class="w-30" name="jenis" class="border border-gray-300 rounded-md px-4 py-2 text-sm bg-white">
           <option value="">Semua Jenis</option>
         </select>
-        <select name="sort" class="border border-gray-300 rounded-md px-4 py-2 text-sm bg-white">
+        <select class="w-30" name="sort" class="border border-gray-300 rounded-md px-4 py-2 text-sm bg-white">
           <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>Terbaru</option>
           <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>Terlama</option>
         </select>
@@ -123,6 +123,19 @@
       </div>
     </form>
 
+    <!-- Flash Message -->
+    @if (session('success'))
+      <div class="mb-4 px-4 py-3 rounded bg-green-100 text-green-800 border border-green-200">
+        {{ session('success') }}
+      </div>
+    @endif
+    @if (session('error'))
+      <div class="mb-4 px-4 py-3 rounded bg-red-100 text-red-800 border border-red-200">
+        {{ session('error') }}
+      </div>
+    @endif
+    <!-- End Flash Message -->
+    
     <div class="bg-white rounded-xl shadow overflow-x-auto">
       <table class="min-w-full text-sm">
         <thead class="bg-blue-600 text-white">
@@ -178,7 +191,7 @@
                   </form>
                 @endif
 
-                <form action="{{ url('/manajemen/' . $doc->id) }}" method="POST" class="inline"
+                <form action="{{ route('manajemen.destroy', $doc->id) }}" method="POST" class="inline"
                   onsubmit="return confirm('Yakin ingin hapus dokumen ini?')">
                   @csrf
                   @method('DELETE')

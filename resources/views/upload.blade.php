@@ -229,7 +229,7 @@
     <div class="absolute bottom-0 left-0 w-full h-20 md:h-32 lg:h-40 overflow-hidden z-0">
         <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-16 md:h-24 text-blue-500 opacity-80"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+             viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
@@ -240,7 +240,7 @@
 
         <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-20 md:h-28 text-blue-600 opacity-60"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+             viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave-2" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
@@ -251,7 +251,7 @@
 
         <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-24 md:h-32 text-primary opacity-40"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+             viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave-3" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
@@ -262,7 +262,7 @@
 
          <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-28 md:h-40 text-blue-800 opacity-90"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+             viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave-4" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
@@ -275,6 +275,7 @@
 
     <script id="file-upload-handlers">
         document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('documentForm'); // Tambahkan deklarasi form
             const uploadArea = document.getElementById('uploadArea');
             const fileInput = document.getElementById('fileInput');
             const browseButton = document.getElementById('browseButton');
@@ -286,7 +287,7 @@
             const progressBar = document.getElementById('progressBar');
             const progressPercentage = document.getElementById('progressPercentage');
             const uploadError = document.getElementById('uploadError');
-            
+
             // Trigger file input when browse button is clicked
             browseButton.addEventListener('click', function() {
                 fileInput.click();
@@ -362,6 +363,19 @@
             
             // Remove selected file
             removeFile.addEventListener('click', function() {
+                fileInput.value = '';
+                filePreview.style.display = 'none';
+                uploadArea.style.display = 'block';
+                progressContainer.style.display = 'none';
+                progressBar.style.width = '0%';
+                progressPercentage.textContent = '0%';
+                hideError();
+            });
+            
+            // Tombol Batalkan
+            const cancelButton = document.getElementById('cancelButton');
+            cancelButton.addEventListener('click', function() {
+                form.reset();
                 fileInput.value = '';
                 filePreview.style.display = 'none';
                 uploadArea.style.display = 'block';

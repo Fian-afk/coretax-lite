@@ -188,7 +188,7 @@
     <header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
         <div class="container mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center">
-                <a href="{{ route('econodocs') }}" class="text-3xl font-['Pacifico'] text-primary">EconoDocs</a>
+                <a href="{{ route('dashboard') }}" class="text-3xl font-['Pacifico'] text-primary">EconoDocs</a>
             </div>
             
             <div class="relative mx-4 flex-grow max-w-xl">
@@ -204,9 +204,9 @@
             </div>
             
             <nav class="hidden md:flex items-center space-x-6">
-                <a href="{{ route('econodocs') }}" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
-                <a href="{{ route('econodocs.dokumen') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
-                <a href="{{ route('login') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Upload</a>
+                <a href="{{ route('dashboard') }}" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
+                <a href="{{ route('document') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
+                <a href="{{ route('dokumen.upload') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Upload</a>
                 
                 <div class="relative">
                     <button class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
@@ -215,11 +215,16 @@
                 </div>
             </nav>
             
-            
+            @php
+                $admin = auth('admin')->check() ? auth('admin')->user() : null;
+                $user = Auth::check() ? Auth::user() : null;
+            @endphp
 
+            @if(!$admin && !$user)
             <div class="flex items-center">
                 <a href="{{route('login')}}" class="text-primary border border-primary hover:border-none hover:bg-primary hover:text-white px-4 py-2 rounded-md transition-all duration-300 text-sm font-medium whitespace-nowrap">Masuk / Daftar</a>
             </div>
+            @endif
         </div>
     </header>
 
@@ -630,6 +635,7 @@
 
         <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-24 md:h-32 text-primary opacity-40"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             viewBox="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
              viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave-3" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />

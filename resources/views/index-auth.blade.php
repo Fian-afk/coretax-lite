@@ -216,7 +216,7 @@
             </nav>
         </div>
     </header>
-    <div id="popupProfil" class="bg-white p-4 rounded-lg shadow-md hidden fixed top-[72px] right-16 z-100 w-xl content-start">
+    <div id="popupProfil" class="bg-white p-4 rounded-lg shadow-md fixed top-[72px] right-16 z-100 w-xl content-start">
         <div id="profil" class="mb-4">
             <i class="ri-user-3-fill text-lg text-gray-600 hover:text-primary"></i>
             <a href="{{ route('profil') }}" class="text-sm text-gray-600 hover:text-primary px-4">Profil</a>
