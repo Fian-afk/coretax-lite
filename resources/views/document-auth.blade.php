@@ -97,12 +97,15 @@
     <div id="popupProfil" class="bg-white p-4 rounded-lg shadow-md fixed hidden top-[72px] right-16 z-50 w-xl content-start">
         <div id="profil" class="mb-4">
             <i class="ri-user-3-fill text-lg text-gray-600 hover:text-primary"></i>
-            <a href="#" class="text-sm text-gray-600 hover:text-primary px-4">Profil</a>
+            <a href="{{ route('profil') }}" class="text-sm text-gray-600 hover:text-primary px-4">Profil</a>
         </div>
         <hr class="border-gray-200 my-2">
         <div id="logout" class="mt-4">
             <i class="ri-logout-box-r-line text-lg text-gray-600 hover:text-primary"></i>
-            <a href="#" class="text-sm text-gray-600 hover:text-primary px-4">Logout</a>
+            <form method="POST" action="{{ route('logout') }}" class="inline">
+                @csrf
+                <button type="submit" class="text-sm text-gray-600 hover:text-primary px-4 bg-transparent border-none cursor-pointer">Logout</button>
+            </form>
         </div>
     </div>
 
@@ -518,7 +521,8 @@
 
          <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-28 md:h-40 text-blue-800 opacity-90"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+             viewBox="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave-4" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>

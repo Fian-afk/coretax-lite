@@ -204,7 +204,7 @@
             </div>
             
             <nav class="hidden md:flex items-center space-x-6">
-                <a href="#" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
+                <a href="{{ route('admin.dashboard') }}" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
                 <a href="{{ route('admin.dokumen.show', ['id' => 1]) }}" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
                 <a href="{{ route('manajemen') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Manajemen</a>
                 
