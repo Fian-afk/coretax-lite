@@ -11,6 +11,7 @@ use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ManajemenController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 
 /*
