@@ -226,7 +226,7 @@
             @endif
         </div>
     </header>
-    <div id="popupProfil" class="bg-white p-4 rounded-lg shadow-md hidden fixed top-[72px] right-16 z-50 w-xl content-start">
+        <div id="popupProfil" class="bg-white p-4 rounded-lg shadow-md hidden fixed top-[72px] right-16 z-50 w-xl content-start">Add commentMore actions
         <div id="logout" class="mt-4">
             <i class="ri-logout-box-r-line text-lg text-gray-600 hover:text-primary"></i>
             <form method="POST" action="{{ route('logout') }}" class="inline">
@@ -235,7 +235,6 @@
     </form>
         </div>
     </div>
-
     <!-- Main Content -->
     <main class="pt-16">
         <!-- Hero Section -->
@@ -741,7 +740,7 @@
             });
         });
     </script>
-    <script id="profil">
+    <script id="profil">Add commentMore actions
         const popupBtn = document.getElementById('popupBtn');
         const popupProfil = document.getElementById('popupProfil');
 

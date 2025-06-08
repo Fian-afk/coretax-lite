@@ -193,7 +193,9 @@
             
             <div class="relative mx-4 flex-grow max-w-xl">
                 <div class="relative">
-                    <input type="text" placeholder="Cari dokumen ekonomi..." class="w-full pl-10 pr-10 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+                    <form action="{{ route('dokumen.index') }}" method="GET">
+                        <input type="text" name="q" placeholder="Cari dokumen ekonomi..." class="w-full pl-10 pr-10 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+                    </form>
                     <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-400">
                         <i class="ri-search-line"></i>
                     </div>
@@ -241,8 +243,8 @@
                     <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Repository Dokumen Ekonomi Terlengkap</h1>
                     <p class="text-xl text-gray-700 mb-8">Akses ribuan dokumen riset, laporan keuangan, dan e-book ekonomi digital untuk kebutuhan akademis dan profesional Anda.</p>
                     <div class="flex flex-wrap gap-4">
-                        <a href="#" class="bg-primary text-white px-6 py-3 font-medium hover:bg-blue-600 transition-all duration-300 rounded-md whitespace-nowrap">Mulai Eksplorasi</a>
-                        <a href="#" class="bg-gray-50 border border-secondary text-secondary px-6 py-3 font-medium hover:bg-secondary hover:text-gray-300 transition-all duration-300 rounded-md whitespace-nowrap">Upload Dokumen</a>
+                        <a href="{{ route('dokumen.index') }}" class="bg-primary text-white px-6 py-3 font-medium hover:bg-blue-600 transition-all duration-300 rounded-md whitespace-nowrap">Mulai Eksplorasi</a>
+                        <a href="{{ route('dokumen.upload') }}" class="bg-gray-50 border border-secondary text-secondary px-6 py-3 font-medium hover:bg-secondary hover:text-gray-300 transition-all duration-300 rounded-md whitespace-nowrap">Upload Dokumen</a>
                     </div>
                 </div>
             </div>
@@ -371,12 +373,13 @@
                 <section class="mb-10">
                     <h2 class="text-2xl font-bold text-gray-900 mb-6">Kategori Dokumen</h2>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                        
                         <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
                             <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-4">
                                 <i class="ri-line-chart-line text-3xl text-primary"></i>
                             </div>
                             <h3 class="font-semibold text-gray-900 mb-1">Makroekonomi</h3>
-                            <span class="text-sm text-gray-500">1,245 dokumen</span>
+                            <span class="text-sm text-gray-500"></span>
                         </div>
                         
                         <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
@@ -384,7 +387,7 @@
                                 <i class="ri-store-2-line text-3xl text-green-500"></i>
                             </div>
                             <h3 class="font-semibold text-gray-900 mb-1">Mikroekonomi</h3>
-                            <span class="text-sm text-gray-500">876 dokumen</span>
+                            <span class="text-sm text-gray-500"></span>
                         </div>
                         
                         <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
@@ -392,7 +395,7 @@
                                 <i class="ri-stock-line text-3xl text-orange-500"></i>
                             </div>
                             <h3 class="font-semibold text-gray-900 mb-1">Pasar Saham</h3>
-                            <span class="text-sm text-gray-500">1,532 dokumen</span>
+                            <span class="text-sm text-gray-500"></span>
                         </div>
                         
                         <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
@@ -400,7 +403,7 @@
                                 <i class="ri-global-line text-3xl text-purple-500"></i>
                             </div>
                             <h3 class="font-semibold text-gray-900 mb-1">Ekonomi Digital</h3>
-                            <span class="text-sm text-gray-500">943 dokumen</span>
+                            <span class="text-sm text-gray-500"></span>
                         </div>
                         
                         <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
@@ -408,7 +411,7 @@
                                 <i class="ri-file-chart-line text-3xl text-red-500"></i>
                             </div>
                             <h3 class="font-semibold text-gray-900 mb-1">Laporan Keuangan</h3>
-                            <span class="text-sm text-gray-500">2,187 dokumen</span>
+                            <span class="text-sm text-gray-500"></span>
                         </div>
                         
                         <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
@@ -416,9 +419,10 @@
                                 <i class="ri-book-read-line text-3xl text-indigo-500"></i>
                             </div>
                             <h3 class="font-semibold text-gray-900 mb-1">Riset Ekonomi</h3>
-                            <span class="text-sm text-gray-500">1,078 dokumen</span>
+                            <span class="text-sm text-gray-500"></span>
                         </div>
                     </div>
+                    
                 </section>
 
                 <!-- Daftar Dokumen Terbaru -->
@@ -427,132 +431,46 @@
                         <h2 class="text-2xl font-bold text-gray-900">Dokumen Terbaru</h2>
                     </div>
                     
-                    <div class="space-y-4">
-                        <!-- Document Item 1 -->
-                        <div class="bg-white rounded-lg shadow-sm p-4 flex">
-                            <div class="w-24 h-32 bg-gray-100 rounded overflow-hidden shrink-0 mr-4">
-                                <img src="https://readdy.ai/api/search-image?query=A%20professional%20cover%20of%20an%20economic%20report%20with%20blue%20and%20white%20color%20scheme%2C%20showing%20charts%20and%20graphs%20related%20to%20Indonesian%20economy.%20The%20image%20has%20a%20clean%2C%20corporate%20design%20with%20subtle%20financial%20elements%20and%20data%20visualization.&width=240&height=320&seq=doc1&orientation=portrait" alt="Dokumen" class="w-full h-full object-cover object-top">
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex justify-between items-start">
-                                    <h3 class="font-semibold text-lg text-gray-900 mb-1">Laporan Ekonomi Digital Indonesia 2025</h3>
-                                    <span class="text-xs bg-blue-100 text-primary px-2 py-1 rounded-full">PDF</span>
-                                </div>
-                                <p class="text-sm text-gray-500 mb-2">Bank Indonesia</p>
-                                <p class="text-sm text-gray-600 mb-3 line-clamp-2">Laporan komprehensif tentang perkembangan ekonomi digital di Indonesia, termasuk e-commerce, fintech, dan startup digital.</p>
-                                <div class="flex flex-wrap gap-2 mb-3">
-                                    <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">Ekonomi Digital</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <div class="text-xs text-gray-500">Diunggah: 22 Mei 2025</div>
-                                    <div class="flex items-center text-xs text-gray-500">
-                                        <span class="flex items-center mr-3"><i class="ri-download-line mr-1"></i> 1,245</span>
-                                        <span class="flex items-center"><i class="ri-eye-line mr-1"></i> 3,782</span>
+                    @if($documents->count())
+                        <div class="space-y-4">
+                            @foreach($documents as $doc)
+                                <div class="bg-white rounded-lg shadow-sm p-4 flex">
+                                    <div class="w-24 h-32 bg-gray-100 rounded overflow-hidden shrink-0 mr-4">
+                                        <img src="{{ $doc->cover_url ?? asset('img/default-cover.png') }}" alt="Dokumen" class="w-full h-full object-cover object-top">
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-start">
+                                            <h3 class="font-semibold text-lg text-gray-900 mb-1">{{ $doc->judul }}</h3>
+                                            <span class="text-xs px-2 py-1 rounded-full
+                                                @if($doc->format == 'PDF') bg-blue-100 text-primary
+                                                @elseif($doc->format == 'XLSX') bg-green-100 text-green-700
+                                                @elseif($doc->format == 'DOCX') bg-gray-200 text-gray-700
+                                                @elseif($doc->format == 'PPT') bg-orange-100 text-orange-700
+                                                @else bg-gray-100 text-gray-700
+                                                @endif
+                                            ">{{ strtoupper($doc->format) }}</span>
+                                        </div>
+                                        <p class="text-sm text-gray-500 mb-2">{{ $doc->institusi }}</p>
+                                        <p class="text-sm text-gray-600 mb-3 line-clamp-2">{{ $doc->deskripsi }}</p>
+                                        <div class="flex flex-wrap gap-2 mb-3">
+                                            @foreach($doc->kategori ?? [] as $kategori)
+                                                <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">{{ $kategori }}</span>
+                                            @endforeach
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="text-xs text-gray-500">Diunggah: {{ \Carbon\Carbon::parse($doc->created_at)->format('d M Y') }}</div>
+                                            <div class="flex items-center text-xs text-gray-500">
+                                                <span class="flex items-center mr-3"><i class="ri-download-line mr-1"></i> {{ number_format($doc->downloads ?? 0) }}</span>
+                                                <span class="flex items-center"><i class="ri-eye-line mr-1"></i> {{ number_format($doc->views ?? 0) }}</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
-                        
-                        <!-- Document Item 2 -->
-                        <div class="bg-white rounded-lg shadow-sm p-4 flex">
-                            <div class="w-24 h-32 bg-gray-100 rounded overflow-hidden shrink-0 mr-4">
-                                <img src="https://readdy.ai/api/search-image?query=A%20professional%20cover%20of%20a%20financial%20report%20with%20green%20and%20white%20color%20scheme%2C%20showing%20stock%20market%20charts%20and%20financial%20data%20visualization.%20The%20image%20has%20a%20clean%2C%20corporate%20design%20focused%20on%20investment%20and%20stock%20market%20analysis.&width=240&height=320&seq=doc2&orientation=portrait" alt="Dokumen" class="w-full h-full object-cover object-top">
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex justify-between items-start">
-                                    <h3 class="font-semibold text-lg text-gray-900 mb-1">Analisis Pasar Saham Indonesia Q2 2025</h3>
-                                    <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">XLSX</span>
-                                </div>
-                                <p class="text-sm text-gray-500 mb-2">Otoritas Jasa Keuangan</p>
-                                <p class="text-sm text-gray-600 mb-3 line-clamp-2">Analisis mendalam tentang performa pasar saham Indonesia pada kuartal kedua 2025, termasuk tren, proyeksi, dan rekomendasi investasi.</p>
-                                <div class="flex flex-wrap gap-2 mb-3">
-                                    <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">Pasar Saham</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <div class="text-xs text-gray-500">Diunggah: 20 Mei 2025</div>
-                                    <div class="flex items-center text-xs text-gray-500">
-                                        <span class="flex items-center mr-3"><i class="ri-download-line mr-1"></i> 876</span>
-                                        <span class="flex items-center"><i class="ri-eye-line mr-1"></i> 2,143</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Document Item 3 -->
-                        <div class="bg-white rounded-lg shadow-sm p-4 flex">
-                            <div class="w-24 h-32 bg-gray-100 rounded overflow-hidden shrink-0 mr-4">
-                                <img src="https://readdy.ai/api/search-image?query=A%20professional%20cover%20of%20a%20macroeconomic%20research%20report%20with%20red%20and%20white%20color%20scheme%2C%20showing%20economic%20indicators%20and%20GDP%20growth%20charts%20for%20Indonesia.%20The%20image%20has%20a%20clean%2C%20academic%20design%20suitable%20for%20government%20publications.&width=240&height=320&seq=doc3&orientation=portrait" alt="Dokumen" class="w-full h-full object-cover object-top">
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex justify-between items-start">
-                                    <h3 class="font-semibold text-lg text-gray-900 mb-1">Proyeksi Pertumbuhan Ekonomi Indonesia 2025-2030</h3>
-                                    <span class="text-xs bg-blue-100 text-primary px-2 py-1 rounded-full">PDF</span>
-                                </div>
-                                <p class="text-sm text-gray-500 mb-2">Kementerian Keuangan RI</p>
-                                <p class="text-sm text-gray-600 mb-3 line-clamp-2">Laporan proyeksi pertumbuhan ekonomi Indonesia untuk periode 2025-2030, termasuk faktor-faktor pendorong dan tantangan yang dihadapi.</p>
-                                <div class="flex flex-wrap gap-2 mb-3">
-                                    <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">Makroekonomi</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <div class="text-xs text-gray-500">Diunggah: 18 Mei 2025</div>
-                                    <div class="flex items-center text-xs text-gray-500">
-                                        <span class="flex items-center mr-3"><i class="ri-download-line mr-1"></i> 1,532</span>
-                                        <span class="flex items-center"><i class="ri-eye-line mr-1"></i> 4,267</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Document Item 4 -->
-                        <div class="bg-white rounded-lg shadow-sm p-4 flex">
-                            <div class="w-24 h-32 bg-gray-100 rounded overflow-hidden shrink-0 mr-4">
-                                <img src="https://readdy.ai/api/search-image?query=A%20professional%20cover%20of%20a%20fintech%20research%20report%20with%20purple%20and%20white%20color%20scheme%2C%20showing%20mobile%20payment%20and%20digital%20banking%20illustrations.%20The%20image%20has%20a%20modern%20tech-focused%20design%20with%20financial%20technology%20elements.&width=240&height=320&seq=doc4&orientation=portrait" alt="Dokumen" class="w-full h-full object-cover object-top">
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex justify-between items-start">
-                                    <h3 class="font-semibold text-lg text-gray-900 mb-1">Perkembangan Fintech di Indonesia: Tren dan Regulasi</h3>
-                                    <span class="text-xs bg-blue-100 text-primary px-2 py-1 rounded-full">PDF</span>
-                                </div>
-                                <p class="text-sm text-gray-500 mb-2">Universitas Indonesia</p>
-                                <p class="text-sm text-gray-600 mb-3 line-clamp-2">Studi komprehensif tentang perkembangan fintech di Indonesia, termasuk tren terkini, tantangan regulasi, dan dampaknya terhadap inklusi keuangan.</p>
-                                <div class="flex flex-wrap gap-2 mb-3">
-                                    <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">Riset Ekonomi</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <div class="text-xs text-gray-500">Diunggah: 15 Mei 2025</div>
-                                    <div class="flex items-center text-xs text-gray-500">
-                                        <span class="flex items-center mr-3"><i class="ri-download-line mr-1"></i> 943</span>
-                                        <span class="flex items-center"><i class="ri-eye-line mr-1"></i> 2,876</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Document Item 5 -->
-                        <div class="bg-white rounded-lg shadow-sm p-4 flex">
-                            <div class="w-24 h-32 bg-gray-100 rounded overflow-hidden shrink-0 mr-4">
-                                <img src="https://readdy.ai/api/search-image?query=A%20professional%20cover%20of%20a%20microeconomic%20research%20report%20with%20orange%20and%20white%20color%20scheme%2C%20showing%20supply%20and%20demand%20curves%20and%20market%20analysis%20charts.%20The%20image%20has%20a%20clean%20academic%20design%20suitable%20for%20university%20publications.&width=240&height=320&seq=doc5&orientation=portrait" alt="Dokumen" class="w-full h-full object-cover object-top">
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex justify-between items-start">
-                                    <h3 class="font-semibold text-lg text-gray-900 mb-1">Dampak Ekonomi dari Transisi Energi di Indonesia</h3>
-                                    <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full">PPT</span>
-                                </div>
-                                <p class="text-sm text-gray-500 mb-2">Bappenas</p>
-                                <p class="text-sm text-gray-600 mb-3 line-clamp-2">Analisis tentang dampak ekonomi dari transisi energi di Indonesia, termasuk peluang investasi, dampak lapangan kerja, dan tantangan implementasi.</p>
-                                <div class="flex flex-wrap gap-2 mb-3">
-                                    <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">Ekonomi Digital</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <div class="text-xs text-gray-500">Diunggah: 12 Mei 2025</div>
-                                    <div class="flex items-center text-xs text-gray-500">
-                                        <span class="flex items-center mr-3"><i class="ri-download-line mr-1"></i> 765</span>
-                                        <span class="flex items-center"><i class="ri-eye-line mr-1"></i> 1,987</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @else
+                        <div class="text-center text-gray-500 py-12">Belum ada dokumen ditemukan.</div>
+                    @endif
                     
                     <!-- Pagination -->
                      <div class="flex justify-center mt-8">

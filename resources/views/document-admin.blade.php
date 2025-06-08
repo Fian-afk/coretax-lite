@@ -94,7 +94,7 @@
             </nav>
         </div>
     </header>
-    <div id="popupProfil" class="bg-white p-4 rounded-lg shadow-md hidden fixed top-[72px] right-16 z-50 w-xl content-start">
+        <div id="popupProfil" class="bg-white p-4 rounded-lg shadow-md hidden fixed top-[72px] right-16 z-50 w-xl content-start">Add commentMore actions
         <div id="logout" class="mt-4">
             <i class="ri-logout-box-r-line text-lg text-gray-600 hover:text-primary"></i>
             <form method="POST" action="{{ route('logout') }}" class="inline">
@@ -103,7 +103,6 @@
     </form>
         </div>
     </div>
-
         <main class="container mx-auto px-4 py-8">
             <!-- Page Title -->
             <div class="mb-8">
@@ -406,7 +405,7 @@
             });
         });
     </script>
-    <script id="profil">
+    <script id="profil">Add commentMore actions
         const popupBtn = document.getElementById('popupBtn');
         const popupProfil = document.getElementById('popupProfil');
 

@@ -205,7 +205,7 @@
             
             <nav class="hidden md:flex items-center space-x-6">
                 <a href="{{ route('dashboard') }}" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
-                <a href="{{ route('document') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
+                <a href="{{ route('dokumen.index') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
                 <a href="{{ route('dokumen.upload') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Upload</a>
                 
                 <div class="relative">
@@ -373,7 +373,7 @@
                                 <i class="ri-line-chart-line text-3xl text-primary"></i>
                             </div>
                             <h3 class="font-semibold text-gray-900 mb-1">Makroekonomi</h3>
-                            <span class="text-sm text-gray-500">1,245 dokumen</span>
+                            <!-- <span class="text-sm text-gray-500">1,245 dokumen</span> -->
                         </div>
                         
                         <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
@@ -381,7 +381,7 @@
                                 <i class="ri-store-2-line text-3xl text-green-500"></i>
                             </div>
                             <h3 class="font-semibold text-gray-900 mb-1">Mikroekonomi</h3>
-                            <span class="text-sm text-gray-500">876 dokumen</span>
+                            <!-- <span class="text-sm text-gray-500">876 dokumen</span> -->
                         </div>
                         
                         <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
@@ -389,7 +389,7 @@
                                 <i class="ri-stock-line text-3xl text-orange-500"></i>
                             </div>
                             <h3 class="font-semibold text-gray-900 mb-1">Pasar Saham</h3>
-                            <span class="text-sm text-gray-500">1,532 dokumen</span>
+                            <!-- <span class="text-sm text-gray-500">1,532 dokumen</span> -->
                         </div>
                         
                         <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
@@ -397,7 +397,7 @@
                                 <i class="ri-global-line text-3xl text-purple-500"></i>
                             </div>
                             <h3 class="font-semibold text-gray-900 mb-1">Ekonomi Digital</h3>
-                            <span class="text-sm text-gray-500">943 dokumen</span>
+                            <!-- <span class="text-sm text-gray-500">943 dokumen</span> -->
                         </div>
                         
                         <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
@@ -405,7 +405,7 @@
                                 <i class="ri-file-chart-line text-3xl text-red-500"></i>
                             </div>
                             <h3 class="font-semibold text-gray-900 mb-1">Laporan Keuangan</h3>
-                            <span class="text-sm text-gray-500">2,187 dokumen</span>
+                            <!-- <span class="text-sm text-gray-500">2,187 dokumen</span> -->
                         </div>
                         
                         <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
@@ -413,7 +413,7 @@
                                 <i class="ri-book-read-line text-3xl text-indigo-500"></i>
                             </div>
                             <h3 class="font-semibold text-gray-900 mb-1">Riset Ekonomi</h3>
-                            <span class="text-sm text-gray-500">1,078 dokumen</span>
+                            <!-- <span class="text-sm text-gray-500">1,078 dokumen</span> -->
                         </div>
                     </div>
                 </section>
