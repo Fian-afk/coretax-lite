@@ -16,8 +16,11 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $user = $request->user();
+        $profile = $user->profile;
         return view('profile.edit', [
-            'user' => $request->user(),
+            'user' => $user,
+            'profile' => $profile,
         ]);
     }
 
@@ -26,14 +29,30 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $user = $request->user();
+        $profile = $user->profile;
+        $profileData = $request->only([
+            'bio',
+            'address',
+            'location',
+            'phone_number',
+            'email',
+            'history-upload-document',
+            'instansi',
+        ]);
+        // Proses upload file foto profil
+        if ($request->hasFile('photo_profile')) {
+            $file = $request->file('photo_profile');
+            $filename = 'profile_' . $user->id . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('profile_photos', $filename, 'public');
+            $profileData['photo_profile'] = $path;
         }
-
-        $request->user()->save();
-
+        if ($profile) {
+            $profile->update($profileData);
+        } else {
+            $profileData['user_id'] = $user->id;
+            \App\Models\Profile::create($profileData);
+        }
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
