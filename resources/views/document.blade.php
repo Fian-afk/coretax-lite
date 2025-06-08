@@ -82,10 +82,10 @@
             </div>
             
             <nav class="hidden md:flex items-center space-x-6">
-                <a href="{{ route('dashboard') }}" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
-                <a href="{{ route('dokumen.index') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
-                <a href="{{ route('dokumen.upload') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Upload</a>
-                
+                <a href="{{ route('econodocs') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Beranda</a>
+                <a href="{{ route('econodocs.dokumen') }}" class="text-gray-900 hover:text-primary font-medium text-sm">Dokumen</a>
+                <a href="{{ route('login') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Upload</a>
+
                 <div class="relative">
                     <button class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
                         <i class="ri-user-line text-xl text-gray-600"></i>

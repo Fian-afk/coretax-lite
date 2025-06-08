@@ -185,7 +185,7 @@
 </head>
 <body class="bg-gray-50">
     <!-- Header & Navigation -->
-    <header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+    <header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-40">
         <div class="container mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center">
                 <a href="{{ route('dashboard') }}" class="text-3xl font-['Pacifico'] text-primary">EconoDocs</a>
@@ -216,7 +216,7 @@
             </nav>
         </div>
     </header>
-    <div id="popupProfil" class="bg-white p-4 rounded-lg shadow-md hidden fixed top-[72px] right-16 z-100 w-xl content-start">
+    <div id="popupProfil" class="bg-white p-4 rounded-lg shadow-md hidden fixed top-[72px] right-16 z-50 w-xl content-start">
         <div id="profil" class="mb-4">
             <i class="ri-user-3-fill text-lg text-gray-600 hover:text-primary"></i>
             <a href="{{ route('profil') }}" class="text-sm text-gray-600 hover:text-primary px-4">Profil</a>

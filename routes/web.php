@@ -38,7 +38,7 @@ Route::get('/profil/edit', function () {
 })-> name('profil.edit');
 
 Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
-    return view('index');
+    return view('index-auth');
 })->name('dashboard');
 
 Route::middleware(['auth:admin'])->group(function () {
