@@ -1,3 +1,8 @@
+@php
+    use Carbon\Carbon;
+    use App\Models\Download;
+@endphp
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -132,10 +137,10 @@
                     <img src="https://readdy.ai/api/search-image?query=professional%20portrait%20photo%20of%20Indonesian%20man%20with%20glasses%2C%20business%20casual%20attire%2C%20neutral%20background%2C%20professional%20headshot&width=200&height=200&seq=1&orientation=squarish" alt="Foto Profil" class="w-full h-full rounded-full object-cover">
                 </div>
                 <div class="flex-1">
-                    <h1 class="text-2xl font-semibold text-gray-800">Luthfian Afif</h1>
-                    <p class="text-gray-500">luthfian.afif@gmail.com</p>
+                    <h1 class="text-2xl font-semibold text-gray-800">{{ Auth::user()->username }}</h1>
+                    <p class="text-gray-500">{{ Auth::user()->email }}</p>
                     <div class="flex items-center mt-2">
-                        <span class=" text-sm text-gray-500">Bergabung sejak 26 Mei 2025</span>
+                        <span class=" text-sm text-gray-500">Bergabung sejak {{ Auth::user()->created_at }}</span>
                     </div>
                 </div>
                 <a href="{{ route('profile.edit') }}">
@@ -169,8 +174,13 @@
                                 <i class="ri-upload-cloud-2-line ri-2x block"></i>
                             </div>
                         </div>
-                        <p class="text-2xl font-semibold text-gray-800">32</p>
-                        <p class="text-sm text-gray-500">5 unggahan dalam 1 bulan terakhir</p>
+                        <p class="text-2xl font-semibold text-gray-800">{{ \App\Models\Document::where('user_id', Auth::id())->count() }}</p>
+                        @php
+                            $unggahanBulanIni = \App\Models\Document::where('user_id', Auth::id())
+                                ->where('created_at', '>=', Carbon::now()->subMonth())
+                                ->count();
+                        @endphp
+                        <p class="text-sm text-gray-500">{{ $unggahanBulanIni }} unggahan dalam 1 bulan terakhir</p>
                     </div>
                     <div class="bg-gray-50 p-4 rounded">
                         <div class="flex items-center justify-between mb-2">
@@ -179,8 +189,10 @@
                                 <i class="ri-download-cloud-2-line ri-2x block"></i>
                             </div>
                         </div>
-                        <p class="text-2xl font-semibold text-gray-800">128</p>
-                        <p class="text-sm text-gray-500">12 unduhan dalam 1 bulan terakhir</p>
+                        <p class="text-2xl font-semibold text-gray-800">
+                            {{ \App\Models\Download::where('user_id', Auth::id())->count() }}
+                        </p>
+                        <p class="text-sm text-gray-500">{{ \App\Models\Download::where('user_id', Auth::id())->count() }} unduhan dalam 1 bulan terakhir</p>
                     </div>
                     <div class="bg-gray-50 p-4 rounded">
                         
@@ -193,27 +205,27 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <p class="text-sm text-gray-500 mb-1">Nama Lengkap</p>
-                            <p class="font-medium">Luthfian Afif</p>
+                            <p class="font-medium">{{ Auth::user()->username ?? '-'}}</p>
                         </div>
                         <div>
                             <p class="text-sm text-gray-500 mb-1">Bio</p>
-                            <p class="font-medium">Guwa Engineering</p>
+                            <p class="font-medium">{{ Auth::user()->profile->bio ?? '-' }}</p>
                         </div>
                         <div>
                             <p class="text-sm text-gray-500 mb-1">Asal Instansi</p>
-                            <p class="font-medium">Universitas Gang Mrican</p>
+                            <p class="font-medium">{{ Auth::user()->profile->instansi ?? '-' }}</p>
                         </div>
                         <div>
                             <p class="text-sm text-gray-500 mb-1">Email</p>
-                            <p class="font-medium">luthfian.afif@gmail.com</p>
+                            <p class="font-medium">{{ Auth::user()->email ?? '-'}}</p>
                         </div>
                         <div>
                             <p class="text-sm text-gray-500 mb-1">Nomor Telepon</p>
-                            <p class="font-medium">+62 812 3456 7890</p>
+                            <p class="font-medium">{{ Auth::user()->telp ?? '-'}}</p>
                         </div>
                         <div>
                             <p class="text-sm text-gray-500 mb-1">Alamat</p>
-                            <p class="font-medium">Jl. Jendral Sudirman No. 123, Jakarta Selatan</p>
+                            <p class="font-medium">{{ Auth::user()->profile->address ?? '-' }}</p>
                         </div>
                     </div>
                 </div>
@@ -221,7 +233,7 @@
 
             <div id="content-upload" class="hidden">
                 <div class="flex flex-col md:flex-row items-center justify-between mb-6">
-                    <h2 class="text-xl font-semibold text-gray-800">Riwayat Unggahan</h2>
+                    <h2 class="text-xl font-semibold text-gray-800">Riwayat Unggahan (Statis)</h2>
                     <div class="flex items-center space-x-2 mt-4 md:mt-0">
                         <div class="relative">
                             <input type="search" placeholder="Cari file..." id="search" class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 w-full md:w-64">
@@ -257,7 +269,7 @@
                                             <i class="ri-file-word-line"></i>
                                         </div>
                                         <div class="ml-3">
-                                            <div class="text-sm font-medium text-gray-900">Laporan_Keuangan_Q2_2025.docx</div>
+                                            <div class="text-sm font-medium text-gray-900">{{ Auth::user()->documents->title ?? '-'}}</div>
                                         </div>
                                     </div>
                                 </td>
@@ -435,7 +447,7 @@
 
             <div id="content-download" class="hidden">
                 <div class="flex flex-col md:flex-row items-center justify-between mb-6">
-                    <h2 class="text-xl font-semibold text-gray-800">Riwayat Unduhan</h2>
+                    <h2 class="text-xl font-semibold text-gray-800">Riwayat Unduhan (Statis)</h2>
                     <div class="flex items-center space-x-2 mt-4 md:mt-0">
                         <div class="relative">
                             <input type="search" placeholder="Cari file..." id="search2" class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 w-full md:w-64">

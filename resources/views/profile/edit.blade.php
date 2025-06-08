@@ -68,7 +68,7 @@
             <hr class="border-gray-200 mb-4">
             <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
+                @method('PATCH')
                 <div class="flex flex-col items-center mb-8">
                     <div class="relative items-center text-center">
                         <div class="w-32 h-32 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
@@ -77,7 +77,7 @@
                         <label for="photoInput" class="absolute bottom-0 right-0 w-8 h-8 bg-primary text-white rounded-full cursor-pointer flex items-center justify-center hover:bg-primary/90 transition">
                             <i class="ri-camera-line"></i>
                         </label>
-                        <input type="file" id="photoInput" accept="image/*" class="hidden"/>
+                        <input type="file" id="photoInput" name="photo_profile" accept="image/*" class="hidden"/>
                     </div>
                     <p class="text-sm text-gray-500 mt-2">Unggah foto profil (Maks. 5MB)</p>
 
@@ -100,8 +100,8 @@
                     </div>
                     
                     <div class="mb-4">
-                        <label for="uploader" class="block text-sm font-medium text-gray-700">Asal Instansi</label>
-                        <input type="text" id="uploader" name="uploader" value="{{ auth()->user()->uploader }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary">
+                        <label for="instansi" class="block text-sm font-medium text-gray-700">Asal Instansi</label>
+                        <input type="text" id="instansi" name="instansi" value="{{ $profile->instansi ?? '' }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary">
                     </div>
                     <div class="mb-4">
                         <label for="bio" class="block text-sm font-medium text-gray-700">Bio</label>
@@ -109,13 +109,14 @@
                     </div>
                     <div class="mb-4">
                         <label for="location" class="block text-sm font-medium text-gray-700">Alamat</label>
-                        <input type="text" id="location" name="location" value="{{ auth()->user()->location }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary">
+                        <input type="text" id="location" name="address" value="{{ $profile->address ?? '' }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary">
                     </div>
 
                 </div>
 
 
                 <button type="submit" class="px-4 py-2 mr-2 bg-primary text-white rounded-md hover:bg-primary-dark">Simpan Perubahan</button>
+                <input type="hidden" name="history-upload-document" value="{{ \App\Models\Document::where('user_id', Auth::id())->count() }}">
                 <a href="{{ route('profil') }}" class=" px-4 py-[10px] mb-4 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">Batal</a>
                 <hr class="border-gray-200 my-4 mb-4">
                 <a href="#" class="px-4 py-[10px] bg-red-500 text-white rounded-md hover:bg-red-600"><i class="ri-delete-bin-5-line"></i> Hapus Akun</a>
