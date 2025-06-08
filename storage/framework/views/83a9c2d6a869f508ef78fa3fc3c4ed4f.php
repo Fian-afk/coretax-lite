@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EconoDocs - Repository Dokumen Ekonomi Terlengkap</title>
     <link rel="stylesheet" href="css/app.css">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
     <script>tailwind.config={theme:{extend:{colors:{primary:'#3b82f6',secondary:'#10b981'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,7 +66,7 @@
     <header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
         <div class="container mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center">
-                <a href="{{ route('dashboard') }}" class="text-3xl font-['Pacifico'] text-primary">EconoDocs</a>
+                <a href="<?php echo e(route('dashboard')); ?>" class="text-3xl font-['Pacifico'] text-primary">EconoDocs</a>
             </div>
             
             <div class="relative mx-4 flex-grow max-w-xl">
@@ -82,32 +82,18 @@
             </div>
             
             <nav class="hidden md:flex items-center space-x-6">
-                <a href="{{ route('dashboard') }}" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
-                <a href="{{ route('dokumen.index') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
-                <a href="{{ route('dokumen.upload') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Upload</a>
+                <a href="<?php echo e(route('admin.dashboard')); ?>" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
+                <a href="<?php echo e(route('dokumen.index')); ?>" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
+                <a href="<?php echo e(route('manajemen')); ?>" class="text-gray-600 hover:text-primary font-medium text-sm">Manajemen</a>
                 
                 <div class="relative">
-                    <button id="popupBtn" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                    <button class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
                         <i class="ri-user-line text-xl text-gray-600"></i>
                     </button>
                 </div>
             </nav>
         </div>
     </header>
-    <div id="popupProfil" class="bg-white p-4 rounded-lg shadow-md fixed hidden top-[72px] right-16 z-50 w-xl content-start">
-        <div id="profil" class="mb-4">
-            <i class="ri-user-3-fill text-lg text-gray-600 hover:text-primary"></i>
-            <a href="{{ route('profil') }}" class="text-sm text-gray-600 hover:text-primary px-4">Profil</a>
-        </div>
-        <hr class="border-gray-200 my-2">
-        <div id="logout" class="mt-4">
-            <i class="ri-logout-box-r-line text-lg text-gray-600 hover:text-primary"></i>
-            <form method="POST" action="{{ route('logout') }}" class="inline">
-                @csrf
-                <button type="submit" class="text-sm text-gray-600 hover:text-primary px-4 bg-transparent border-none cursor-pointer">Logout</button>
-            </form>
-        </div>
-    </div>
 
         <main class="container mx-auto px-4 py-8">
             <!-- Page Title -->
@@ -176,38 +162,38 @@
             </div>
             <!-- Document List -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                @forelse($documents as $document)
+                <?php $__empty_1 = true; $__currentLoopData = $documents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $document): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <div class="document-card bg-white rounded-lg shadow-sm overflow-hidden">
                         <div class="p-5">
                             <div class="flex items-start justify-between mb-4">
                                 <div class="w-12 h-12 flex items-center justify-center bg-blue-50 rounded-md">
                                     <i class="ri-file-text-line ri-xl text-primary"></i>
                                 </div>
-                                <span class="badge badge-{{ strtolower($document->category) }}">{{ $document->category }}</span>
+                                <span class="badge badge-<?php echo e(strtolower($document->category)); ?>"><?php echo e($document->category); ?></span>
                             </div>
-                            <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ $document->title }}</h3>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2"><?php echo e($document->title); ?></h3>
                             <div class="flex items-center text-sm text-gray-500 mb-4">
                                 <i class="ri-calendar-line mr-2"></i>
-                                <span>{{ $document->created_at->translatedFormat('F Y') }}</span>
+                                <span><?php echo e($document->created_at->translatedFormat('F Y')); ?></span>
                                 <span class="mx-2">•</span>
                                 <i class="ri-file-pdf-line mr-2"></i>
-                                <span>{{ strtoupper(pathinfo($document->file_path, PATHINFO_EXTENSION)) }}</span>
+                                <span><?php echo e(strtoupper(pathinfo($document->file_path, PATHINFO_EXTENSION))); ?></span>
                             </div>
-                            <p class="text-gray-600 text-sm mb-4">{{ $document->description }}</p>
+                            <p class="text-gray-600 text-sm mb-4"><?php echo e($document->description); ?></p>
                             <div class="flex justify-between items-center">
-                                <span class="text-xs text-gray-500">{{ $document->instansi ?? '-' }}</span>
-                                <a href="{{ asset('storage/' . $document->file_path) }}" class="flex items-center bg-primary text-white px-3 py-1.5 rounded-sm whitespace-nowrap hover:bg-blue-600 transition duration-150 ease-in-out" download>
+                                <span class="text-xs text-gray-500"><?php echo e($document->instansi ?? '-'); ?></span>
+                                <a href="<?php echo e(asset('storage/' . $document->file_path)); ?>" class="flex items-center bg-primary text-white px-3 py-1.5 !rounded-button whitespace-nowrap hover:bg-blue-600 transition duration-150 ease-in-out" download>
                                     <i class="ri-download-line mr-1"></i>
                                     Unduh
                                 </a>
                             </div>
                         </div>
                     </div>
-                @empty
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <div class="col-span-3 text-center text-gray-500 py-10">
                         Tidak ada dokumen yang disetujui.
                     </div>
-                @endforelse
+                <?php endif; ?>
             </div>
 
             <!-- Pagination -->
@@ -280,7 +266,7 @@
 
         <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-20 md:h-28 text-blue-600 opacity-60"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave-2" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
@@ -291,7 +277,7 @@
 
         <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-24 md:h-32 text-primary opacity-40"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave-3" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
@@ -302,8 +288,7 @@
 
          <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-28 md:h-40 text-blue-800 opacity-90"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave-4" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
@@ -412,19 +397,5 @@
             });
         });
     </script>
-    <script id="profil">
-        const popupBtn = document.getElementById('popupBtn');
-        const popupProfil = document.getElementById('popupProfil');
-
-        popupBtn.addEventListener('click', function(e) {
-            popupProfil.classList.toggle('hidden');
-        });
-
-        document.addEventListener('click', function (e) {
-            if (!popupProfil.contains(e.target) && !popupBtn.contains(e.target)) {
-                popupProfil.classList.add('hidden');
-            }
-        });
-    </script>
 </body>
-</html>
+</html><?php /**PATH C:\xampp\htdocs\Pemrograman Web\coretax-lite-restore-laravel10\coretax-lite-restore-laravel10\resources\views/document-admin.blade.php ENDPATH**/ ?>

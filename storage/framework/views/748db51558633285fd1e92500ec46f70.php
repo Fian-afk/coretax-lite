@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EconoDocs - Repositori Dokumen</title>
     <link rel="stylesheet" href="css/app.css">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -50,9 +50,9 @@
             </div>
             
             <nav class="hidden md:flex items-center space-x-6">
-                <a href="{{ route('dashboard')}}" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
-                <a href="{{ route('document') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
-                <a href="{{ route('dokumen.upload') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Upload</a>
+                <a href="<?php echo e(route('dashboard')); ?>" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
+                <a href="<?php echo e(route('document')); ?>" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
+                <a href="<?php echo e(route('dokumen.upload')); ?>" class="text-gray-600 hover:text-primary font-medium text-sm">Upload</a>
                 
                 <div class="relative">
                     <button id="popupBtn" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
@@ -65,13 +65,13 @@
     <div id="popupProfil" class="bg-white p-4 rounded-lg shadow-md fixed hidden top-[72px] right-16 z-50 w-xl content-start">
         <div id="profil" class="mb-4">
             <i class="ri-user-3-fill text-lg text-gray-600 hover:text-primary"></i>
-            <a href="{{ route('profil') }}" class="text-sm text-gray-600 hover:text-primary px-4">Profil</a>
+            <a href="<?php echo e(route('profil')); ?>" class="text-sm text-gray-600 hover:text-primary px-4">Profil</a>
         </div>
         <hr class="border-gray-200 my-2">
         <div id="logout" class="mt-4">
             <i class="ri-logout-box-r-line text-lg text-gray-600 hover:text-primary"></i>
-            <form method="POST" action="{{ route('logout') }}" class="inline">
-                @csrf
+            <form method="POST" action="<?php echo e(route('logout')); ?>" class="inline">
+                <?php echo csrf_field(); ?>
                 <button type="submit" class="text-sm text-gray-600 hover:text-primary px-4 bg-transparent border-none cursor-pointer">Logout</button>
             </form>
         </div>
@@ -84,7 +84,7 @@
                 <p class="text-gray-600 mt-2">Silakan isi informasi dokumen dan unggah file Anda</p>
             </div>
 
-            <form id="documentForm" class="space-y-6" method="POST" action="{{ route('dokumen.upload.store') }}" enctype="multipart/form-data">
+            <form id="documentForm" class="space-y-6" method="POST" action="<?php echo e(route('dokumen.upload.store')); ?>" enctype="multipart/form-data">
                 <!-- Judul -->
                 <div>
                     <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Judul <span class="text-red-500">*</span></label>
@@ -177,7 +177,7 @@
 
                 <!-- Submit Button -->
                 <div class="pt-4">
-                    @csrf
+                    <?php echo csrf_field(); ?>
                     <button type="submit" id="submitButton" class="w-full py-3 bg-primary text-white font-medium rounded-lg hover:bg-opacity-90 transition-all whitespace-nowrap">
                         Upload Dokumen
                     </button>
@@ -526,4 +526,4 @@
         });
     </script>
 </body>
-</html>
+</html><?php /**PATH C:\xampp\htdocs\Pemrograman Web\coretax-lite-restore-laravel10\coretax-lite-restore-laravel10\resources\views/upload.blade.php ENDPATH**/ ?>

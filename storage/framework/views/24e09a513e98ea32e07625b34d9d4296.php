@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EconoDocs - Repositori Dokumen Ekonomi Terlengkap</title>
     <link rel="stylesheet" href="css/app.css">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
     <script>tailwind.config={theme:{extend:{colors:{primary:'#3b82f6',secondary:'#64748b'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -188,7 +188,7 @@
     <header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
         <div class="container mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center">
-                <a href="{{ route('dashboard') }}" class="text-3xl font-['Pacifico'] text-primary">EconoDocs</a>
+                <a href="<?php echo e(route('dashboard')); ?>" class="text-3xl font-['Pacifico'] text-primary">EconoDocs</a>
             </div>
             
             <div class="relative mx-4 flex-grow max-w-xl">
@@ -204,9 +204,9 @@
             </div>
             
             <nav class="hidden md:flex items-center space-x-6">
-                <a href="{{ route('dashboard') }}" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
-                <a href="{{ route('document') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
-                <a href="{{ route('dokumen.upload') }}" class="text-gray-600 hover:text-primary font-medium text-sm">Upload</a>
+                <a href="<?php echo e(route('admin.dashboard')); ?>" class="text-gray-900 hover:text-primary font-medium text-sm">Beranda</a>
+                <a href="<?php echo e(route('admin.dokumen.show', ['id' => 1])); ?>" class="text-gray-600 hover:text-primary font-medium text-sm">Dokumen</a>
+                <a href="<?php echo e(route('manajemen')); ?>" class="text-gray-600 hover:text-primary font-medium text-sm">Manajemen</a>
                 
                 <div class="relative">
                     <button class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
@@ -215,16 +215,15 @@
                 </div>
             </nav>
             
-            @php
+            <?php
                 $admin = auth('admin')->check() ? auth('admin')->user() : null;
-                $user = Auth::check() ? Auth::user() : null;
-            @endphp
+            ?>
 
-            @if(!$admin && !$user)
+            <?php if(!$admin): ?>
             <div class="flex items-center">
-                <a href="{{route('login')}}" class="text-primary border border-primary hover:border-none hover:bg-primary hover:text-white px-4 py-2 rounded-md transition-all duration-300 text-sm font-medium whitespace-nowrap">Masuk / Daftar</a>
+                <a href="<?php echo e(route('login')); ?>" class="text-primary border border-primary hover:border-none hover:bg-primary hover:text-white px-4 py-2 rounded-md transition-all duration-300 text-sm font-medium whitespace-nowrap">Masuk / Daftar</a>
             </div>
-            @endif
+            <?php endif; ?>
         </div>
     </header>
 
@@ -239,7 +238,7 @@
                     <p class="text-xl text-gray-700 mb-8">Akses ribuan dokumen riset, laporan keuangan, dan e-book ekonomi digital untuk kebutuhan akademis dan profesional Anda.</p>
                     <div class="flex flex-wrap gap-4">
                         <a href="#" class="bg-primary text-white px-6 py-3 font-medium hover:bg-blue-600 transition-all duration-300 rounded-md whitespace-nowrap">Mulai Eksplorasi</a>
-                        <a href="{{ route('dokumen.upload') }}" class="bg-gray-50 border border-secondary text-secondary px-6 py-3 font-medium hover:bg-secondary hover:text-gray-300 transition-all duration-300 rounded-md whitespace-nowrap">Upload Dokumen</a>
+                        <a href="#" class="bg-gray-50 border border-secondary text-secondary px-6 py-3 font-medium hover:bg-secondary hover:text-gray-300 transition-all duration-300 rounded-md whitespace-nowrap">Upload Dokumen</a>
                     </div>
                 </div>
             </div>
@@ -624,9 +623,7 @@
 
         <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-20 md:h-28 text-blue-600 opacity-60"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-            <defs>
-                <path id="gentle-wave-2" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+             viewBox="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
             <g class="wave-animation-2">
                 <use xlink:href="#gentle-wave-2" x="48" y="3" fill="currentColor"/>
@@ -636,9 +633,8 @@
         <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-24 md:h-32 text-primary opacity-40"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
              viewBox="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-            <defs>
-                <path id="gentle-wave-3" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+             viewBox="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             viewBox="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
             <g class="wave-animation-3">
                 <use xlink:href="#gentle-wave-3" x="48" y="5" fill="currentColor"/>
@@ -647,9 +643,8 @@
 
          <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-28 md:h-40 text-blue-800 opacity-90"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-            <defs>
-                <path id="gentle-wave-4" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+             viewBox="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             viewBox="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
             <g class="wave-animation-4">
                 <use xlink:href="#gentle-wave-4" x="48" y="7" fill="currentColor"/>
@@ -738,4 +733,4 @@
         });
     </script>
 </body>
-</html>
+</html><?php /**PATH C:\xampp\htdocs\Pemrograman Web\coretax-lite-restore-laravel10\coretax-lite-restore-laravel10\resources\views/index-admin.blade.php ENDPATH**/ ?>
