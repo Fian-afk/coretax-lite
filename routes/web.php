@@ -39,7 +39,20 @@ Route::get('/profil/edit', function () {
 })-> name('profil.edit');
 
 Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
-    return view('index-auth');
+    $documents = \App\Models\Document::where('status', 'disetujui')->latest()->take(10)->get();
+    // Ambil kategori beserta jumlah dokumen per kategori
+    $categories = \App\Models\Document::select('category as nama')
+        ->selectRaw('count(*) as documents_count')
+        ->groupBy('category')
+        ->get()
+        ->map(function($cat) {
+            // Tambahkan icon dan warna default jika ingin
+            $cat->icon = 'ri-folder-line';
+            $cat->icon_color = 'text-primary';
+            $cat->bg_color = 'bg-blue-50';
+            return $cat;
+        });
+    return view('index-auth', compact('documents', 'categories'));
 })->name('dashboard');
 
 Route::middleware(['auth:admin'])->group(function () {
@@ -82,7 +95,8 @@ require __DIR__.'/auth.php';
 Route::get('/econodocs', function () {
     return view('index');
 })->name('econodocs');
-
+// Route::get('/document', [DokumenController::class, 'index'])->name('document');
+Route::get('/dokumen', [DokumenController::class, 'index'])->name('dokumen.index'); 
 // Route::post('/manajemen/bulk-action', [ManajemenController::class, 'bulkAction'])->name('manajemen.bulkAction');
 
 // Route::delete('/manajemen/{id}', [ManajemenController::class, 'destroy'])->name('manajemen.destroy');
