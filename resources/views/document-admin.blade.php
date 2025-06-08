@@ -63,7 +63,7 @@
 </head>
 <body>
     <!-- Header & Navigation -->
-    <header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+    <header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-40">
         <div class="container mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center">
                 <a href="{{ route('dashboard') }}" class="text-3xl font-['Pacifico'] text-primary">EconoDocs</a>
