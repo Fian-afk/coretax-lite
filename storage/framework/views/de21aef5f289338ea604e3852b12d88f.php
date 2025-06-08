@@ -128,38 +128,40 @@
 
             <!-- Filters -->
             <div class="bg-white p-4 rounded-md shadow-sm mb-8">
-                <div class="flex flex-col md:flex-row md:items-center gap-4">
-                    <div class="w-full md:w-1/3">
-                        <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
-                        <div class="relative">
-                            <select id="category" class="custom-select w-full bg-white border border-gray-200 rounded-md py-2.5 px-4 pr-8 text-gray-700 focus:border-primary focus:outline-none">
-                                <option value="">Semua Kategori</option>
-                                <option value="research">Riset</option>
-                                <option value="financial">Laporan Keuangan</option>
-                                <option value="market">Analisis Pasar</option>
-                                <option value="ebook">E-Book</option>
-                            </select>
+                <form method="GET" action="<?php echo e(route('dokumen.index')); ?>">
+                    <div class="flex flex-col md:flex-row md:items-center gap-4">
+                        <div class="w-full md:w-1/3">
+                            <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
+                            <div class="relative">
+                                <select id="category" name="category" class="custom-select w-full bg-white border border-gray-200 rounded-md py-2.5 px-4 pr-8 text-gray-700 focus:border-primary focus:outline-none">
+                                    <option value="">Semua Kategori</option>
+                                    <option value="research" <?php echo e(request('category') == 'reset' ? 'selected' : ''); ?>>Riset</option>
+                                    <option value="financial" <?php echo e(request('category') == 'laporan' ? 'selected' : ''); ?>>Laporan Keuangan</option>
+                                    <option value="market" <?php echo e(request('category') == 'makro', 'mikro' ? 'selected' : ''); ?>>Analisis Pasar</option>
+                                    <option value="ebook" <?php echo e(request('category') == 'ebook' ? 'selected' : ''); ?>>E-Book</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/3">
+                            <label for="year" class="block text-sm font-medium text-gray-700 mb-1">Tahun</label>
+                            <div class="relative">
+                                <select id="year" name="year" class="custom-select w-full bg-white border border-gray-200 rounded-md py-2.5 px-4 pr-8 text-gray-700 focus:border-primary focus:outline-none">
+                                    <option value="">Semua Tahun</option>
+                                    <option value="2025" <?php echo e(request('created_at') == '2025' ? 'selected' : ''); ?>>2025</option>
+                                    <option value="2024" <?php echo e(request('created_at') == '2024' ? 'selected' : ''); ?>>2024</option>
+                                    <option value="2023" <?php echo e(request('created_at') == '2023' ? 'selected' : ''); ?>>2023</option>
+                                    <option value="2022" <?php echo e(request('created_at') == '2022' ? 'selected' : ''); ?>>2022</option>
+                                    <option value="2021" <?php echo e(request('created_at') == '2021' ? 'selected' : ''); ?>>2021</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/3 md:self-end">
+                            <button type="submit" id="applyFilter" class="w-full bg-primary text-white px-4 py-2.5 !rounded-button whitespace-nowrap hover:bg-blue-600 transition duration-150 ease-in-out mt-6 md:mt-0">
+                                Terapkan Filter
+                            </button>
                         </div>
                     </div>
-                    <div class="w-full md:w-1/3">
-                        <label for="year" class="block text-sm font-medium text-gray-700 mb-1">Tahun</label>
-                        <div class="relative">
-                            <select id="year" class="custom-select w-full bg-white border border-gray-200 rounded-md py-2.5 px-4 pr-8 text-gray-700 focus:border-primary focus:outline-none">
-                                <option value="">Semua Tahun</option>
-                                <option value="2025">2025</option>
-                                <option value="2024">2024</option>
-                                <option value="2023">2023</option>
-                                <option value="2022">2022</option>
-                                <option value="2021">2021</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="w-full md:w-1/3 md:self-end">
-                        <button id="applyFilter" class="w-full bg-primary text-white px-4 py-2.5 !rounded-button whitespace-nowrap hover:bg-blue-600 transition duration-150 ease-in-out mt-6 md:mt-0">
-                            Terapkan Filter
-                        </button>
-                    </div>
-                </div>
+                </form>
             </div>
             <!-- Results Count -->
             <div class="flex justify-between items-center mb-6">
@@ -196,10 +198,17 @@
                             <p class="text-gray-600 text-sm mb-4"><?php echo e($document->description); ?></p>
                             <div class="flex justify-between items-center">
                                 <span class="text-xs text-gray-500"><?php echo e($document->instansi ?? '-'); ?></span>
-                                <a href="<?php echo e(asset('storage/' . $document->file_path)); ?>" class="flex items-center bg-primary text-white px-3 py-1.5 rounded-sm whitespace-nowrap hover:bg-blue-600 transition duration-150 ease-in-out" download>
-                                    <i class="ri-download-line mr-1"></i>
-                                    Unduh
-                                </a>
+                                <?php if(auth()->guard()->check()): ?>
+                                    <a href="<?php echo e(asset('storage/' . $document->file_path)); ?>" class="flex items-center bg-primary text-white px-3 py-1.5 rounded-sm whitespace-nowrap hover:bg-blue-600 transition duration-150 ease-in-out" download>
+                                        <i class="ri-download-line mr-1"></i>
+                                        Unduh
+                                    </a>
+                                <?php else: ?>
+                                    <a href="<?php echo e(route('login')); ?>" class="flex items-center bg-primary text-white px-3 py-1.5 rounded-sm whitespace-nowrap hover:bg-blue-600 transition duration-150 ease-in-out">
+                                        <i class="ri-login-box-line mr-1"></i>
+                                        Login untuk Unduh
+                                    </a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>

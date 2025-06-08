@@ -6,7 +6,7 @@
     <title>EconoDocs - Repositori Dokumen Ekonomi Terlengkap</title>
     <link rel="stylesheet" href="css/app.css">
     <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
-    <script>tailwind.config={theme:{extend:{colors:{primary:'#3b82f6',secondary:'#64748b'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#4F46E5',secondary:'#10B981'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -185,7 +185,7 @@
 </head>
 <body class="bg-gray-50">
     <!-- Header & Navigation -->
-    <header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+    <header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-40">
         <div class="container mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center">
                 <a href="<?php echo e(route('dashboard')); ?>" class="text-3xl font-['Pacifico'] text-primary">EconoDocs</a>
@@ -193,7 +193,9 @@
             
             <div class="relative mx-4 flex-grow max-w-xl">
                 <div class="relative">
-                    <input type="text" placeholder="Cari dokumen ekonomi..." class="w-full pl-10 pr-10 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+                    <form action="<?php echo e(route('dokumen.index')); ?>" method="GET">
+                        <input type="text" name="q" placeholder="Cari dokumen ekonomi..." class="w-full pl-10 pr-10 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+                    </form>
                     <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-400">
                         <i class="ri-search-line"></i>
                     </div>
@@ -209,25 +211,28 @@
                 <a href="<?php echo e(route('dokumen.upload')); ?>" class="text-gray-600 hover:text-primary font-medium text-sm">Upload</a>
                 
                 <div class="relative">
-                    <button class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                    <button id="popupBtn" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
                         <i class="ri-user-line text-xl text-gray-600"></i>
                     </button>
                 </div>
             </nav>
-            
-            <?php
-                $admin = auth('admin')->check() ? auth('admin')->user() : null;
-                $user = Auth::check() ? Auth::user() : null;
-            ?>
-
-            <?php if(!$admin && !$user): ?>
-            <div class="flex items-center">
-                <a href="<?php echo e(route('login')); ?>" class="text-primary border border-primary hover:border-none hover:bg-primary hover:text-white px-4 py-2 rounded-md transition-all duration-300 text-sm font-medium whitespace-nowrap">Masuk / Daftar</a>
-            </div>
-            <?php endif; ?>
         </div>
     </header>
-
+    <div id="popupProfil" class="bg-white p-4 rounded-lg shadow-md hidden fixed top-[72px] right-16 z-50 w-xl content-start">
+        <div id="profil" class="mb-4">
+            <i class="ri-user-3-fill text-lg text-gray-600 hover:text-primary"></i>
+            <a href="<?php echo e(route('profil')); ?>" class="text-sm text-gray-600 hover:text-primary px-4">Profil</a>
+        </div>
+        <hr class="border-gray-200 my-2">
+        <div id="logout" class="mt-4">
+            <i class="ri-logout-box-r-line text-lg text-gray-600 hover:text-primary"></i>
+            <form method="POST" action="<?php echo e(route('logout')); ?>" class="inline">
+        <?php echo csrf_field(); ?>
+        <button type="submit" class="text-sm text-gray-600 hover:text-primary px-4 bg-transparent border-none cursor-pointer">Logout</button>
+    </form>
+        </div>
+    </div>
+    
     <!-- Main Content -->
     <main class="pt-16">
         <!-- Hero Section -->
@@ -238,7 +243,7 @@
                     <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Repository Dokumen Ekonomi Terlengkap</h1>
                     <p class="text-xl text-gray-700 mb-8">Akses ribuan dokumen riset, laporan keuangan, dan e-book ekonomi digital untuk kebutuhan akademis dan profesional Anda.</p>
                     <div class="flex flex-wrap gap-4">
-                        <a href="#" class="bg-primary text-white px-6 py-3 font-medium hover:bg-blue-600 transition-all duration-300 rounded-md whitespace-nowrap">Mulai Eksplorasi</a>
+                        <a href="<?php echo e(route('dokumen.index')); ?>" class="bg-primary text-white px-6 py-3 font-medium hover:bg-blue-600 transition-all duration-300 rounded-md whitespace-nowrap">Mulai Eksplorasi</a>
                         <a href="<?php echo e(route('dokumen.upload')); ?>" class="bg-gray-50 border border-secondary text-secondary px-6 py-3 font-medium hover:bg-secondary hover:text-gray-300 transition-all duration-300 rounded-md whitespace-nowrap">Upload Dokumen</a>
                     </div>
                 </div>
@@ -368,12 +373,13 @@
                 <section class="mb-10">
                     <h2 class="text-2xl font-bold text-gray-900 mb-6">Kategori Dokumen</h2>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                        
                         <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
                             <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-4">
                                 <i class="ri-line-chart-line text-3xl text-primary"></i>
                             </div>
                             <h3 class="font-semibold text-gray-900 mb-1">Makroekonomi</h3>
-                            <!-- <span class="text-sm text-gray-500">1,245 dokumen</span> -->
+                            <span class="text-sm text-gray-500"></span>
                         </div>
                         
                         <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
@@ -381,7 +387,7 @@
                                 <i class="ri-store-2-line text-3xl text-green-500"></i>
                             </div>
                             <h3 class="font-semibold text-gray-900 mb-1">Mikroekonomi</h3>
-                            <!-- <span class="text-sm text-gray-500">876 dokumen</span> -->
+                            <span class="text-sm text-gray-500"></span>
                         </div>
                         
                         <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
@@ -389,7 +395,7 @@
                                 <i class="ri-stock-line text-3xl text-orange-500"></i>
                             </div>
                             <h3 class="font-semibold text-gray-900 mb-1">Pasar Saham</h3>
-                            <!-- <span class="text-sm text-gray-500">1,532 dokumen</span> -->
+                            <span class="text-sm text-gray-500"></span>
                         </div>
                         
                         <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
@@ -397,7 +403,7 @@
                                 <i class="ri-global-line text-3xl text-purple-500"></i>
                             </div>
                             <h3 class="font-semibold text-gray-900 mb-1">Ekonomi Digital</h3>
-                            <!-- <span class="text-sm text-gray-500">943 dokumen</span> -->
+                            <span class="text-sm text-gray-500"></span>
                         </div>
                         
                         <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
@@ -405,7 +411,7 @@
                                 <i class="ri-file-chart-line text-3xl text-red-500"></i>
                             </div>
                             <h3 class="font-semibold text-gray-900 mb-1">Laporan Keuangan</h3>
-                            <!-- <span class="text-sm text-gray-500">2,187 dokumen</span> -->
+                            <span class="text-sm text-gray-500"></span>
                         </div>
                         
                         <div class="category-card bg-white p-6 rounded-lg shadow-sm flex flex-col items-center">
@@ -413,9 +419,10 @@
                                 <i class="ri-book-read-line text-3xl text-indigo-500"></i>
                             </div>
                             <h3 class="font-semibold text-gray-900 mb-1">Riset Ekonomi</h3>
-                            <!-- <span class="text-sm text-gray-500">1,078 dokumen</span> -->
+                            <span class="text-sm text-gray-500"></span>
                         </div>
                     </div>
+                    
                 </section>
 
                 <!-- Daftar Dokumen Terbaru -->
@@ -424,132 +431,46 @@
                         <h2 class="text-2xl font-bold text-gray-900">Dokumen Terbaru</h2>
                     </div>
                     
-                    <div class="space-y-4">
-                        <!-- Document Item 1 -->
-                        <div class="bg-white rounded-lg shadow-sm p-4 flex">
-                            <div class="w-24 h-32 bg-gray-100 rounded overflow-hidden shrink-0 mr-4">
-                                <img src="https://readdy.ai/api/search-image?query=A%20professional%20cover%20of%20an%20economic%20report%20with%20blue%20and%20white%20color%20scheme%2C%20showing%20charts%20and%20graphs%20related%20to%20Indonesian%20economy.%20The%20image%20has%20a%20clean%2C%20corporate%20design%20with%20subtle%20financial%20elements%20and%20data%20visualization.&width=240&height=320&seq=doc1&orientation=portrait" alt="Dokumen" class="w-full h-full object-cover object-top">
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex justify-between items-start">
-                                    <h3 class="font-semibold text-lg text-gray-900 mb-1">Laporan Ekonomi Digital Indonesia 2025</h3>
-                                    <span class="text-xs bg-blue-100 text-primary px-2 py-1 rounded-full">PDF</span>
-                                </div>
-                                <p class="text-sm text-gray-500 mb-2">Bank Indonesia</p>
-                                <p class="text-sm text-gray-600 mb-3 line-clamp-2">Laporan komprehensif tentang perkembangan ekonomi digital di Indonesia, termasuk e-commerce, fintech, dan startup digital.</p>
-                                <div class="flex flex-wrap gap-2 mb-3">
-                                    <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">Ekonomi Digital</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <div class="text-xs text-gray-500">Diunggah: 22 Mei 2025</div>
-                                    <div class="flex items-center text-xs text-gray-500">
-                                        <span class="flex items-center mr-3"><i class="ri-download-line mr-1"></i> 1,245</span>
-                                        <span class="flex items-center"><i class="ri-eye-line mr-1"></i> 3,782</span>
+                    <?php if($documents->count()): ?>
+                        <div class="space-y-4">
+                            <?php $__currentLoopData = $documents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $doc): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <div class="bg-white rounded-lg shadow-sm p-4 flex">
+                                    <div class="w-24 h-32 bg-gray-100 rounded overflow-hidden shrink-0 mr-4">
+                                        <img src="<?php echo e($doc->cover_url ?? asset('img/default-cover.png')); ?>" alt="Dokumen" class="w-full h-full object-cover object-top">
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-start">
+                                            <h3 class="font-semibold text-lg text-gray-900 mb-1"><?php echo e($doc->judul); ?></h3>
+                                            <span class="text-xs px-2 py-1 rounded-full
+                                                <?php if($doc->format == 'PDF'): ?> bg-blue-100 text-primary
+                                                <?php elseif($doc->format == 'XLSX'): ?> bg-green-100 text-green-700
+                                                <?php elseif($doc->format == 'DOCX'): ?> bg-gray-200 text-gray-700
+                                                <?php elseif($doc->format == 'PPT'): ?> bg-orange-100 text-orange-700
+                                                <?php else: ?> bg-gray-100 text-gray-700
+                                                <?php endif; ?>
+                                            "><?php echo e(strtoupper($doc->format)); ?></span>
+                                        </div>
+                                        <p class="text-sm text-gray-500 mb-2"><?php echo e($doc->institusi); ?></p>
+                                        <p class="text-sm text-gray-600 mb-3 line-clamp-2"><?php echo e($doc->deskripsi); ?></p>
+                                        <div class="flex flex-wrap gap-2 mb-3">
+                                            <?php $__currentLoopData = $doc->kategori ?? []; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $kategori): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full"><?php echo e($kategori); ?></span>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="text-xs text-gray-500">Diunggah: <?php echo e(\Carbon\Carbon::parse($doc->created_at)->format('d M Y')); ?></div>
+                                            <div class="flex items-center text-xs text-gray-500">
+                                                <span class="flex items-center mr-3"><i class="ri-download-line mr-1"></i> <?php echo e(number_format($doc->downloads ?? 0)); ?></span>
+                                                <span class="flex items-center"><i class="ri-eye-line mr-1"></i> <?php echo e(number_format($doc->views ?? 0)); ?></span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
-                        
-                        <!-- Document Item 2 -->
-                        <div class="bg-white rounded-lg shadow-sm p-4 flex">
-                            <div class="w-24 h-32 bg-gray-100 rounded overflow-hidden shrink-0 mr-4">
-                                <img src="https://readdy.ai/api/search-image?query=A%20professional%20cover%20of%20a%20financial%20report%20with%20green%20and%20white%20color%20scheme%2C%20showing%20stock%20market%20charts%20and%20financial%20data%20visualization.%20The%20image%20has%20a%20clean%2C%20corporate%20design%20focused%20on%20investment%20and%20stock%20market%20analysis.&width=240&height=320&seq=doc2&orientation=portrait" alt="Dokumen" class="w-full h-full object-cover object-top">
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex justify-between items-start">
-                                    <h3 class="font-semibold text-lg text-gray-900 mb-1">Analisis Pasar Saham Indonesia Q2 2025</h3>
-                                    <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">XLSX</span>
-                                </div>
-                                <p class="text-sm text-gray-500 mb-2">Otoritas Jasa Keuangan</p>
-                                <p class="text-sm text-gray-600 mb-3 line-clamp-2">Analisis mendalam tentang performa pasar saham Indonesia pada kuartal kedua 2025, termasuk tren, proyeksi, dan rekomendasi investasi.</p>
-                                <div class="flex flex-wrap gap-2 mb-3">
-                                    <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">Pasar Saham</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <div class="text-xs text-gray-500">Diunggah: 20 Mei 2025</div>
-                                    <div class="flex items-center text-xs text-gray-500">
-                                        <span class="flex items-center mr-3"><i class="ri-download-line mr-1"></i> 876</span>
-                                        <span class="flex items-center"><i class="ri-eye-line mr-1"></i> 2,143</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Document Item 3 -->
-                        <div class="bg-white rounded-lg shadow-sm p-4 flex">
-                            <div class="w-24 h-32 bg-gray-100 rounded overflow-hidden shrink-0 mr-4">
-                                <img src="https://readdy.ai/api/search-image?query=A%20professional%20cover%20of%20a%20macroeconomic%20research%20report%20with%20red%20and%20white%20color%20scheme%2C%20showing%20economic%20indicators%20and%20GDP%20growth%20charts%20for%20Indonesia.%20The%20image%20has%20a%20clean%2C%20academic%20design%20suitable%20for%20government%20publications.&width=240&height=320&seq=doc3&orientation=portrait" alt="Dokumen" class="w-full h-full object-cover object-top">
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex justify-between items-start">
-                                    <h3 class="font-semibold text-lg text-gray-900 mb-1">Proyeksi Pertumbuhan Ekonomi Indonesia 2025-2030</h3>
-                                    <span class="text-xs bg-blue-100 text-primary px-2 py-1 rounded-full">PDF</span>
-                                </div>
-                                <p class="text-sm text-gray-500 mb-2">Kementerian Keuangan RI</p>
-                                <p class="text-sm text-gray-600 mb-3 line-clamp-2">Laporan proyeksi pertumbuhan ekonomi Indonesia untuk periode 2025-2030, termasuk faktor-faktor pendorong dan tantangan yang dihadapi.</p>
-                                <div class="flex flex-wrap gap-2 mb-3">
-                                    <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">Makroekonomi</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <div class="text-xs text-gray-500">Diunggah: 18 Mei 2025</div>
-                                    <div class="flex items-center text-xs text-gray-500">
-                                        <span class="flex items-center mr-3"><i class="ri-download-line mr-1"></i> 1,532</span>
-                                        <span class="flex items-center"><i class="ri-eye-line mr-1"></i> 4,267</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Document Item 4 -->
-                        <div class="bg-white rounded-lg shadow-sm p-4 flex">
-                            <div class="w-24 h-32 bg-gray-100 rounded overflow-hidden shrink-0 mr-4">
-                                <img src="https://readdy.ai/api/search-image?query=A%20professional%20cover%20of%20a%20fintech%20research%20report%20with%20purple%20and%20white%20color%20scheme%2C%20showing%20mobile%20payment%20and%20digital%20banking%20illustrations.%20The%20image%20has%20a%20modern%20tech-focused%20design%20with%20financial%20technology%20elements.&width=240&height=320&seq=doc4&orientation=portrait" alt="Dokumen" class="w-full h-full object-cover object-top">
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex justify-between items-start">
-                                    <h3 class="font-semibold text-lg text-gray-900 mb-1">Perkembangan Fintech di Indonesia: Tren dan Regulasi</h3>
-                                    <span class="text-xs bg-blue-100 text-primary px-2 py-1 rounded-full">PDF</span>
-                                </div>
-                                <p class="text-sm text-gray-500 mb-2">Universitas Indonesia</p>
-                                <p class="text-sm text-gray-600 mb-3 line-clamp-2">Studi komprehensif tentang perkembangan fintech di Indonesia, termasuk tren terkini, tantangan regulasi, dan dampaknya terhadap inklusi keuangan.</p>
-                                <div class="flex flex-wrap gap-2 mb-3">
-                                    <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">Riset Ekonomi</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <div class="text-xs text-gray-500">Diunggah: 15 Mei 2025</div>
-                                    <div class="flex items-center text-xs text-gray-500">
-                                        <span class="flex items-center mr-3"><i class="ri-download-line mr-1"></i> 943</span>
-                                        <span class="flex items-center"><i class="ri-eye-line mr-1"></i> 2,876</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Document Item 5 -->
-                        <div class="bg-white rounded-lg shadow-sm p-4 flex">
-                            <div class="w-24 h-32 bg-gray-100 rounded overflow-hidden shrink-0 mr-4">
-                                <img src="https://readdy.ai/api/search-image?query=A%20professional%20cover%20of%20a%20microeconomic%20research%20report%20with%20orange%20and%20white%20color%20scheme%2C%20showing%20supply%20and%20demand%20curves%20and%20market%20analysis%20charts.%20The%20image%20has%20a%20clean%20academic%20design%20suitable%20for%20university%20publications.&width=240&height=320&seq=doc5&orientation=portrait" alt="Dokumen" class="w-full h-full object-cover object-top">
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex justify-between items-start">
-                                    <h3 class="font-semibold text-lg text-gray-900 mb-1">Dampak Ekonomi dari Transisi Energi di Indonesia</h3>
-                                    <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full">PPT</span>
-                                </div>
-                                <p class="text-sm text-gray-500 mb-2">Bappenas</p>
-                                <p class="text-sm text-gray-600 mb-3 line-clamp-2">Analisis tentang dampak ekonomi dari transisi energi di Indonesia, termasuk peluang investasi, dampak lapangan kerja, dan tantangan implementasi.</p>
-                                <div class="flex flex-wrap gap-2 mb-3">
-                                    <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">Ekonomi Digital</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <div class="text-xs text-gray-500">Diunggah: 12 Mei 2025</div>
-                                    <div class="flex items-center text-xs text-gray-500">
-                                        <span class="flex items-center mr-3"><i class="ri-download-line mr-1"></i> 765</span>
-                                        <span class="flex items-center"><i class="ri-eye-line mr-1"></i> 1,987</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php else: ?>
+                        <div class="text-center text-gray-500 py-12">Belum ada dokumen ditemukan.</div>
+                    <?php endif; ?>
                     
                     <!-- Pagination -->
                      <div class="flex justify-center mt-8">
@@ -624,7 +545,7 @@
 
         <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-20 md:h-28 text-blue-600 opacity-60"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave-2" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
@@ -635,8 +556,7 @@
 
         <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-24 md:h-32 text-primary opacity-40"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave-3" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
@@ -647,7 +567,7 @@
 
          <svg class="waves-svg absolute bottom-0 left-0 w-[200%] h-28 md:h-40 text-blue-800 opacity-90"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="24 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave-4" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
@@ -657,24 +577,6 @@
         </svg>
     </div>
 </footer>
-
-    <script id="notification-toggle">
-        document.addEventListener('DOMContentLoaded', function() {
-            const notificationBtn = document.getElementById('notification-btn');
-            const notificationPanel = document.getElementById('notification-panel');
-            
-            notificationBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                notificationPanel.style.display = notificationPanel.style.display === 'block' ? 'none' : 'block';
-            });
-            
-            document.addEventListener('click', function(e) {
-                if (!notificationPanel.contains(e.target) && e.target !== notificationBtn) {
-                    notificationPanel.style.display = 'none';
-                }
-            });
-        });
-    </script>
 
     <script id="custom-select">
         document.addEventListener('DOMContentLoaded', function() {
@@ -737,5 +639,22 @@
             });
         });
     </script>
+    <script id="profil">
+        document.addEventListener('DOMContentLoaded', function() {
+           const popupBtn = document.getElementById('popupBtn');
+            const popupProfil = document.getElementById('popupProfil');
+
+            popupBtn.addEventListener('click', function(e) {
+                popupProfil.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', function (e) {
+                if (!popupProfil.contains(e.target) && !popupBtn.contains(e.target)) {
+                    popupProfil.classList.add('hidden');
+                }
+            }); 
+        });
+        
+    </script>
 </body>
-</html><?php /**PATH C:\xampp\htdocs\Pemrograman Web\coretax-lite-restore-laravel10\coretax-lite-restore-laravel10\resources\views/index.blade.php ENDPATH**/ ?>
+</html><?php /**PATH C:\xampp\htdocs\Pemrograman Web\coretax-lite-restore-laravel10\coretax-lite-restore-laravel10\resources\views/index-auth.blade.php ENDPATH**/ ?>

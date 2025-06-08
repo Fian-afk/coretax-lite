@@ -87,14 +87,22 @@
                 <a href="<?php echo e(route('manajemen')); ?>" class="text-gray-600 hover:text-primary font-medium text-sm">Manajemen</a>
                 
                 <div class="relative">
-                    <button class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                    <button id="popupBtn" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
                         <i class="ri-user-line text-xl text-gray-600"></i>
                     </button>
                 </div>
             </nav>
         </div>
     </header>
-
+        <div id="popupProfil" class="bg-white p-4 rounded-lg shadow-md hidden fixed top-[72px] right-16 z-50 w-xl content-start">Add commentMore actions
+        <div id="logout" class="mt-4">
+            <i class="ri-logout-box-r-line text-lg text-gray-600 hover:text-primary"></i>
+            <form method="POST" action="<?php echo e(route('logout')); ?>" class="inline">
+        <?php echo csrf_field(); ?>
+        <button type="submit" class="text-sm text-gray-600 hover:text-primary px-4 bg-transparent border-none cursor-pointer">Logout</button>
+    </form>
+        </div>
+    </div>
         <main class="container mx-auto px-4 py-8">
             <!-- Page Title -->
             <div class="mb-8">
@@ -395,6 +403,20 @@
                     }, 3000);
                 });
             });
+        });
+    </script>
+    <script id="profil">Add commentMore actions
+        const popupBtn = document.getElementById('popupBtn');
+        const popupProfil = document.getElementById('popupProfil');
+
+        popupBtn.addEventListener('click', function(e) {
+            popupProfil.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!popupProfil.contains(e.target) && !popupBtn.contains(e.target)) {
+                popupProfil.classList.add('hidden');
+            }
         });
     </script>
 </body>
