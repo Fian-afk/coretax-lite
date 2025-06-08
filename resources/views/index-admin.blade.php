@@ -661,24 +661,6 @@
     </div>
 </footer>
 
-    <script id="notification-toggle">
-        document.addEventListener('DOMContentLoaded', function() {
-            const notificationBtn = document.getElementById('notification-btn');
-            const notificationPanel = document.getElementById('notification-panel');
-            
-            notificationBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                notificationPanel.style.display = notificationPanel.style.display === 'block' ? 'none' : 'block';
-            });
-            
-            document.addEventListener('click', function(e) {
-                if (!notificationPanel.contains(e.target) && e.target !== notificationBtn) {
-                    notificationPanel.style.display = 'none';
-                }
-            });
-        });
-    </script>
-
     <script id="custom-select">
         document.addEventListener('DOMContentLoaded', function() {
             const selectElements = document.querySelectorAll('.custom-select');
