@@ -11,6 +11,7 @@ class DokumenController extends Controller
     {
         $query = Document::query();
 
+        
         // Pencarian berdasarkan judul atau deskripsi (kata kunci)
         if ($request->filled('q')) {
             $q = $request->q;
